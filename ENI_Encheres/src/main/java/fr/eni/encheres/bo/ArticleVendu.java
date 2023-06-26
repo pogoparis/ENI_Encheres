@@ -10,8 +10,7 @@ public class ArticleVendu {
 	private final static int EN_COURS = 1;
 	private final static int ENCHERES_TERMINEES = 2;
 	private final static int RETRAIT_EFFECTUE = 3;
-	
-	
+
 	
 	
 	private Integer no_article;
