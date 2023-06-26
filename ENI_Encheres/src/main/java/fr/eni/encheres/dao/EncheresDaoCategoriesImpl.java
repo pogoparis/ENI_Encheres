@@ -12,10 +12,17 @@ import fr.eni.encheres.bo.Categorie;
 @Repository
 public class EncheresDaoCategoriesImpl implements EncheresDaoCategories {
 
-	public final static String SELECT_ALL_CATEGORIE = "SELECT libelle FROM CATEGORIES";
-	public final static String SELECT_CATEGORIE_BY_ID = "SELECT libelle FROM CATEGEORIES WHERE no_categorie = :id";
+	public final static String SELECT_ALL_CATEGORIE = "SELECT * FROM CATEGORIES";
+	public final static String SELECT_CATEGORIE_BY_ID = "SELECT * FROM CATEGORIES WHERE no_categorie = :no_categorie";
+	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
+	
+	
+	public EncheresDaoCategoriesImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+	}
+
 	@Override
 	public List<Categorie> getAllCategories() {
 		
@@ -27,7 +34,7 @@ public class EncheresDaoCategoriesImpl implements EncheresDaoCategories {
 
 	@Override
 	public Categorie getCategorieById(Integer idCategorie) {
-		Categorie src = new Categorie();
+		Categorie src = new Categorie(idCategorie);
 		Categorie categorie = namedParameterJdbcTemplate.queryForObject(SELECT_CATEGORIE_BY_ID, 
 				new BeanPropertySqlParameterSource(src),  
 				new BeanPropertyRowMapper<>(Categorie.class) );

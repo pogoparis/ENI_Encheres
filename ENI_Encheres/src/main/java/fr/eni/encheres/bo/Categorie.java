@@ -2,27 +2,31 @@ package fr.eni.encheres.bo;
 
 public class Categorie {
 
-	private Integer noCategorie;
+	private Integer no_categorie;
 	private String libelle;
 	
 	
 	//CONSTRUCTEUR
-	public Categorie(Integer noCategorie, String libelle) {
-		this.noCategorie = noCategorie;
-		this.libelle = libelle;
-	}
+//	public Categorie(Integer noCategorie, String libelle) {
+//		this.no_categorie = noCategorie;
+//		this.libelle = libelle;
+//	}
 
 	public Categorie() {
 		// COnstructeur vide
 	}
 	
-	//GETTER SETTER
-	public Integer getNoCategorie() {
-		return noCategorie;
+	public Categorie(Integer idCategorie) {
+		this.no_categorie = idCategorie;
 	}
 
-	public void setNoCategorie(Integer noCategorie) {
-		this.noCategorie = noCategorie;
+	//GETTER SETTER
+	public Integer getNo_categorie() {
+		return no_categorie;
+	}
+
+	public void setNo_categorie(Integer no_categorie) {
+		this.no_categorie = no_categorie;
 	}
 
 	public String getLibelle() {
@@ -35,7 +39,7 @@ public class Categorie {
 
 	@Override
 	public String toString() {
-		return "Categorie [noCategorie=" + noCategorie + ", libelle=" + libelle + "]";
+		return "N°" + no_categorie + " : " + libelle;
 	}
 	
 	
