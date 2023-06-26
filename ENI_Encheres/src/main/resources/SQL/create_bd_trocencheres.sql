@@ -1,7 +1,7 @@
 -- Script de création de la base de données ENCHERES
 --   type :      SQL Server 2012
 --
-ENCHERES_DB
+USE ENCHERES_DB
 
 
 CREATE TABLE CATEGORIES (
