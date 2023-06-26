@@ -23,12 +23,12 @@ public class Utilisateur {
 	private List<Enchere> listeEncheres;
 	
 	
-	
+	// constructeur vide
 	public Utilisateur() {
 	}
 	
 
-	
+	// getters and setters
 	public Integer getNo_Utilisateur() {
 		return no_Utilisateur;
 	}

@@ -22,6 +22,8 @@ public class ArticleVendu {
 	private Integer prix_initial;
 	private Integer prix_vente;
 	private String etatVente;
+	private Categorie categorie;
+	private Utilisateur utilisateur;
 	
 	
 	//Constructeur vide
@@ -95,6 +97,26 @@ public class ArticleVendu {
 		this.etatVente = etatVente;
 	}
 //Fin getter setter
+
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
 
 	
 	

@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Enchere {
 
 	private LocalDate date_enchere ;
-	private  Integer montant_enchere;
+	private Integer montant_enchere;
 	private Utilisateur utilisateur;
 	private ArticleVendu article;
 	
