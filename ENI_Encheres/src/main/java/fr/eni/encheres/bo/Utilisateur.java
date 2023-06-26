@@ -157,6 +157,16 @@ public class Utilisateur {
 	public void setListeEncheres(List<Enchere> listeEncheres) {
 		this.listeEncheres = listeEncheres;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Utilisateur [no_Utilisateur=" + no_Utilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
+				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
+				+ ", administrateur=" + administrateur + ", listeArticlesAchetes=" + listeArticlesAchetes
+				+ ", listeArticlesVendus=" + listeArticlesVendus + ", listeEncheres=" + listeEncheres + "]";
+	}
 	
 	
 	
