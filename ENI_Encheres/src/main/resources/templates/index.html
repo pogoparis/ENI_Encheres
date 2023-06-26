@@ -22,7 +22,6 @@
         </ul>
       </nav>
     </div>
-    
     <div class="container border">
     	<div class="col-6">
        		<div class="row" th:each="article:${listeArticles}">
@@ -33,10 +32,10 @@
     			<p> Prix de départ : <span th:text="${article.getPrix_initial()}"></span> pts</p>
     			<p> Prix de vente : <span th:text="${article.getPrix_vente()}"></span> pts</p>
     			<p> Categorie : <span th:text="${article.getCategorie()}"></span></p>
+    			<p> Utilisateur : <span th:text="${article.getUtilisateur().getPseudo()}"></span></p>
     		</div>
     	</div>
     </div>
-  
   </header>
 
 </body>
