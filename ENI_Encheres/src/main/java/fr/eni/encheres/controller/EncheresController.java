@@ -10,7 +10,7 @@ public class EncheresController {
 
 	
 	
-	@GetMapping({"/","encheres"})
+	@GetMapping("/encheres")
 	public String afficherAccueil() {
 		
 		
@@ -18,5 +18,14 @@ public class EncheresController {
 		return "index";
 		
 	}
+	
+	@GetMapping("/")
+	public String afficherRien() {
+		
+		
+		
+		return "redirect:/encheres";
+	
+}
 	
 }
