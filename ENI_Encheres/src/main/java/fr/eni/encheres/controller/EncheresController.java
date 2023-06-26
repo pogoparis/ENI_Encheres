@@ -12,9 +12,15 @@ import fr.eni.encheres.service.EncheresServiceArticlesVendus;
 public class EncheresController {
 	
 	EncheresServiceArticlesVendus encheresServiceArticlesVendus;
+	
+	
 
 	
 	
+	public EncheresController(EncheresServiceArticlesVendus encheresServiceArticlesVendus) {
+		this.encheresServiceArticlesVendus = encheresServiceArticlesVendus;
+	}
+
 	@GetMapping("/encheres")
 	public String afficherAccueil(Model model) {
 		model.addAttribute("listeArticles", encheresServiceArticlesVendus.findAllArticleVendu());

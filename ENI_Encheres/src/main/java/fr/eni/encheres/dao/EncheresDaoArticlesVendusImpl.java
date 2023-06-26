@@ -14,6 +14,14 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 	final static String SELECT_ALL_ARTICLEVENDU = "select nom_article from ARTICLES_VENDUS";
 	
 	private NamedParameterJdbcTemplate namedParameterjdbcTemplate;
+	
+	
+
+	public EncheresDaoArticlesVendusImpl(NamedParameterJdbcTemplate namedParameterjdbcTemplate) {
+		this.namedParameterjdbcTemplate = namedParameterjdbcTemplate;
+	}
+
+
 
 	@Override
 	public List<ArticleVendu> getAllArticleVendu() {

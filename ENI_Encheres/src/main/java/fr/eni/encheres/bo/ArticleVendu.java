@@ -29,8 +29,7 @@ public class ArticleVendu {
 	public ArticleVendu() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	//Getter Setter
 	public Integer getNo_article() {
 		return no_article;
