@@ -22,6 +22,9 @@
         </ul>
       </nav>
     </div>
+    <div th:each="article:${listeArticles}">
+    <p th:text="${article.getNom_article()}"></p>
+    </div>
   </header>
 
 </body>
