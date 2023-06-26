@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Utilisateur {
 	
-	private Integer no_Utilisateur;
+	private Integer no_utilisateur;
 	private String pseudo;
 	private String nom;
 	private String prenom;
@@ -28,13 +28,18 @@ public class Utilisateur {
 	}
 	
 
-	// getters and setters
-	public Integer getNo_Utilisateur() {
-		return no_Utilisateur;
+	public Utilisateur(Integer idutilisateur) {
+		this.no_utilisateur=idutilisateur;
 	}
 
-	public void setNo_Utilisateur(Integer no_Utilisateur) {
-		this.no_Utilisateur = no_Utilisateur;
+
+	// getters and setters
+	public Integer getNo_utilisateur() {
+		return no_utilisateur;
+	}
+
+	public void setNo_utilisateur(Integer no_utilisateur) {
+		this.no_utilisateur = no_utilisateur;
 	}
 
 	public String getPseudo() {
@@ -161,7 +166,7 @@ public class Utilisateur {
 
 	@Override
 	public String toString() {
-		return "Utilisateur [no_Utilisateur=" + no_Utilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+		return "Utilisateur [no_Utilisateur=" + no_utilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
 				+ ", administrateur=" + administrateur + ", listeArticlesAchetes=" + listeArticlesAchetes

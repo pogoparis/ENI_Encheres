@@ -13,12 +13,14 @@ public class ArticleVenduRowMapper implements RowMapper<ArticleVendu>{
 	
 	EncheresDaoArticlesVendus encheresDaoArticlesVendus;
 	EncheresDaoCategories encheresDaoCategories;
+	EncheresDaoUtilisateurs encheresDaoUtilisateurs;
 	
 	
 
-	public ArticleVenduRowMapper(EncheresDaoArticlesVendus encheresDaoArticlesVendus, EncheresDaoCategories encheresDaoCategories) {
+	public ArticleVenduRowMapper(EncheresDaoArticlesVendus encheresDaoArticlesVendus, EncheresDaoCategories encheresDaoCategories, EncheresDaoUtilisateurs encheresDaoUtilisateurs) {
 		this.encheresDaoArticlesVendus = encheresDaoArticlesVendus;
 		this.encheresDaoCategories = encheresDaoCategories;
+		this.encheresDaoUtilisateurs = encheresDaoUtilisateurs;
 	}
 
 
@@ -35,6 +37,7 @@ public class ArticleVenduRowMapper implements RowMapper<ArticleVendu>{
 		article.setPrix_vente(rs.getInt(7));
 		System.out.println(rs.getInt(8));
 		article.setCategorie(encheresDaoCategories.getCategorieById(rs.getInt(8)));
+		article.setUtilisateur(encheresDaoUtilisateurs.getUtilisateurById(rs.getInt(9)));
 		
 		return article;
 	}
