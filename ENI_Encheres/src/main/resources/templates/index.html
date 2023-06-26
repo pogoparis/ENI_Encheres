@@ -11,7 +11,7 @@
     <div class="container">
       <h1>Enchères</h1>
       <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">ENI Encheres</a>
+        <a class="navbar-brand" href="#">ENI Enchères</a>
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
           </li>
@@ -23,7 +23,12 @@
       </nav>
     </div>
     <div th:each="article:${listeArticles}">
-    <p th:text="${article.getNom_article()}"></p>
+    <h2 th:text="${article.getNom_article()}"></h2>
+    <p> Description : <span th:text="${article.getDescription()}"></span></p>
+    <p> Début de l'enchère : <span th:text="${article.getDate_debut_encheres()}"></span></p>
+    <p> Fin de l'enchère : <span th:text="${article.getDate_fin_encheres()}"></span></p>
+    <p> Prix de départ : <span th:text="${article.getPrix_initial()}"></span> pts</p>
+    <p> Prix de vente : <span th:text="${article.getPrix_vente()}"></span> pts</p>
     </div>
   </header>
 

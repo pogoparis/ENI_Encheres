@@ -11,7 +11,7 @@ import fr.eni.encheres.bo.ArticleVendu;
 @Repository
 public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus {
 	
-	final static String SELECT_ALL_ARTICLEVENDU = "select nom_article from ARTICLES_VENDUS";
+	final static String SELECT_ALL_ARTICLEVENDU = "select nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente from ARTICLES_VENDUS";
 	
 	private NamedParameterJdbcTemplate namedParameterjdbcTemplate;
 	

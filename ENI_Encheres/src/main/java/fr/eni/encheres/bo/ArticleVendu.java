@@ -116,6 +116,14 @@ public class ArticleVendu {
 		this.utilisateur = utilisateur;
 	}
 
+	@Override
+	public String toString() {
+		return "ArticleVendu [no_article=" + no_article + ", nom_article=" + nom_article + ", description="
+				+ description + ", date_debut_encheres=" + date_debut_encheres + ", date_fin_encheres="
+				+ date_fin_encheres + ", prix_initial=" + prix_initial + ", prix_vente=" + prix_vente + ", etatVente="
+				+ etatVente + ", categorie=" + categorie + ", utilisateur=" + utilisateur + "]";
+	}
+
 	
 	
 }
