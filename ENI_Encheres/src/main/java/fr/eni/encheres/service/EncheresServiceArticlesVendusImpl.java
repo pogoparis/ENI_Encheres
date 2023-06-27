@@ -37,7 +37,7 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 
 	@Override
 	public ArticleVendu findArticleById(Integer id) {
-		return encheresDaoArticlesVendus.getArticleById();
+		return encheresDaoArticlesVendus.getArticleById(id);
 	}
 
 }
