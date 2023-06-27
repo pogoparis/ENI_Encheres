@@ -3,9 +3,13 @@ package fr.eni.encheres.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.service.EncheresServiceArticlesVendus;
+import fr.eni.encheres.service.EncheresServiceCategorie;
 
 
 
@@ -13,13 +17,15 @@ import fr.eni.encheres.service.EncheresServiceArticlesVendus;
 public class EncheresController {
 	
 	EncheresServiceArticlesVendus encheresServiceArticlesVendus;
+	EncheresServiceCategorie encheresServiceCategorie;
 	
 	
 
 	
 	
-	public EncheresController(EncheresServiceArticlesVendus encheresServiceArticlesVendus) {
+	public EncheresController(EncheresServiceArticlesVendus encheresServiceArticlesVendus, EncheresServiceCategorie encheresServiceCategorie) {
 		this.encheresServiceArticlesVendus = encheresServiceArticlesVendus;
+		this.encheresServiceCategorie = encheresServiceCategorie;
 	}
 
 	@GetMapping("/encheres")
@@ -60,7 +66,8 @@ public class EncheresController {
 	}
 	
 	@GetMapping("/creerarticle")
-	public String creerArticle() {
+	public String creerArticle(@ModelAttribute ArticleVendu articleVendu,@ModelAttribute Retrait retrait ,Model model) {
+		model.addAttribute("categories", encheresServiceCategorie.findAllCategorie());
 		
 		return "creerarticle";
 	}
