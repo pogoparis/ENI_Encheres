@@ -10,6 +10,7 @@ public interface EncheresDaoArticlesVendus {
 
 	void creerArticle(ArticleVendu article);
 
-	ArticleVendu getArticleById();
+	ArticleVendu getArticleById(Integer id);
+
 
 }

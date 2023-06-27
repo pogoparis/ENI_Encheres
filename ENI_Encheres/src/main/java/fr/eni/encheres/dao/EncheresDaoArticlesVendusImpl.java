@@ -6,15 +6,15 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import fr.eni.encheres.bo.ArticleVendu;
 
 @Repository
 public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus {
 
-	final static String SELECT_ALL_ARTICLEVENDU = "select * from ARTICLES_VENDUS";
-	final static String INSERT_ARTICLE = "INSERT INTO ARTCILES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial, :prix_vente, :no_utilisateur, :no_categorie)";
-
+	final static String SELECT_ALL_ARTICLEVENDU = "SELECT * from ARTICLES_VENDUS";
+	final static String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial, :prix_vente, :no_utilisateur, :no_categorie)";
+	final static String SELECT_ARTICLE_BY_ID = "SELECT ARTICLES_VENDUS WHERE no_article = :no_article";
+	
 	private NamedParameterJdbcTemplate namedParameterjdbcTemplate;
 	private EncheresDaoCategories encheresDaoCategories;
 	private EncheresDaoUtilisateurs encheresDaoUtilisateurs;
@@ -54,9 +54,11 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 	}
 
 	@Override
-	public ArticleVendu getArticleById() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArticleVendu getArticleById(Integer id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("no_article", id);
+		ArticleVendu article = namedParameterjdbcTemplate.queryForObject(SELECT_ARTICLE_BY_ID , map ,new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
+		return article;
 	}
 
 }
