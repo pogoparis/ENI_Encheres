@@ -59,4 +59,11 @@ public class EncheresController {
 		return "redirect:/encheres";
 	}
 	
+	@GetMapping("/creerarticle")
+	public String creerArticle() {
+		
+		return "creerarticle";
+	}
+	
+	
 }
