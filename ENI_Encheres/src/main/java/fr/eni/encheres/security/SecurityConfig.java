@@ -22,7 +22,7 @@ public class SecurityConfig {
 			.requestMatchers(HttpMethod.GET, "/encheres").permitAll()
 			.requestMatchers(HttpMethod.GET, "/").permitAll()
 			.requestMatchers(HttpMethod.GET, "/login").permitAll()
-			.requestMatchers(HttpMethod.GET, "/profil").hasRole("ADMIN");
+			.requestMatchers(HttpMethod.GET, "/profil").permitAll();
 		});
 		
 		
