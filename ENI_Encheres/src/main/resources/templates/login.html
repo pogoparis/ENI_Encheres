@@ -7,7 +7,24 @@
 <title>Enchères</title>
 </head>
 <body>
-  <h1>Login :</h1>
+  
+    <header>
+    <div class="container">
+      <h1>Enchères</h1>
+      <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">ENI Enchères</a>
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+          </li>
+          <li class="nav-item"><a class="nav-link " href="#">Enchères</a></li>
+          <li class="nav-item"><a class="nav-link " href="#">Vendre Article</a></li>
+          <li class="nav-item"><a class="nav-link " th:href="@{/login}">Se Connecter</a></li>
+          <li class="nav-item"><a class="nav-link " href="#">Déconnecter</a></li>
+          <li class="nav-item"><a class="nav-link " th:href="@{/profil}">Profil</a></li>
+        </ul>
+      </nav>
+    </div>
+    </header>
   
   <form th:action="@{/login}" method="post">
         <h1 data-th-text="#{login.h1}"></h1>
