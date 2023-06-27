@@ -3,6 +3,7 @@ package fr.eni.encheres.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import fr.eni.encheres.service.EncheresServiceArticlesVendus;
 
@@ -44,6 +45,18 @@ public class EncheresController {
 	public String afficherLogin() {
 		
 		return "login";
+	}
+	
+	@GetMapping("/profil")
+	public String afficherProfil() {
+		
+		return "profil";
+	}
+	
+	@PostMapping("/login")
+	public String login() {
+		
+		return "redirect:/encheres";
 	}
 	
 }
