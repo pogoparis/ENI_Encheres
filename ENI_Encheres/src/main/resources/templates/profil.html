@@ -32,7 +32,7 @@
     </header>
 
 <div class="container">
-    <form th:object="${utilisateur}">
+    <form th:object="${utilisateur}"  method="post" th:action="@{/register}">
         <fieldset>
             <legend>Legend</legend>
             <div class="form-group row">
