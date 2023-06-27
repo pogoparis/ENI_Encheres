@@ -64,11 +64,11 @@ public class EncheresController {
 		return "profil";
 	}
 	
-	@PostMapping("/login")
+	@PostMapping("/register")
 	 public String register( @ModelAttribute Utilisateur utilisateur ) {
 		utilisateur.setMotDePasse( "{noop}" + utilisateur.getMotDePasse() );
 		encheresServiceUtilisateur.createUtilisateur( utilisateur );
-        return "security/register";
+        return "redirect:/login";
     }
 	
 	@GetMapping("/creerarticle")
