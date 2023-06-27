@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<title>Enchères</title>
+</head>
+<body>
+  <h1>Login :</h1>
+  
+  <form th:action="@{/login}" method="post">
+        <h1 data-th-text="#{login.h1}"></h1>
+        <div class="cards" th:if="${param.error}" data-th-text="#{login.error}"></div>
+        <div th:if="${param.logout}" data-th-text="#{login.logout}"></div>
+            <ul  class="flex-outer">
+            <li>
+                <label for="inputUsername" data-th-text="#{login.username}"></label> 
+                <input id="inputUsername" type="text" name="username" />
+            </li>
+            <li>
+                <label for="inputPwd" data-th-text="#{login.pwd}"></label> 
+                <input id="inputPwd" type="password" name="password" />
+            </li>
+            <li>
+                <button type="submit" data-th-text="#{login.button}" ></button>
+            </li>
+            </ul>
+        </form>
+ 
+ 
+</body>
+</html>
