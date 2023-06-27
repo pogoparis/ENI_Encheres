@@ -59,7 +59,7 @@ public class EncheresController {
 	}
 	
 	@GetMapping("/profil")
-	public String afficherProfil() {
+	public String afficherProfil(@ModelAttribute Utilisateur utilisateur) {
 		
 		return "profil";
 	}
