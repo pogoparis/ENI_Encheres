@@ -21,7 +21,7 @@
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
           </li>
-          <li class="nav-item"><a class="nav-link " href="#">Enchères</a></li>
+          <li class="nav-item"><a class="nav-link " href="/encheres">Enchères</a></li>
           <li class="nav-item"><a class="nav-link " th:href="@{/creerarticle}">Vendre Article</a></li>
           <li class="nav-item"><a class="nav-link " th:href="@{/login}">Se Connecter</a></li>
           <li class="nav-item"><a class="nav-link " href="#">Déconnecter</a></li>
@@ -97,7 +97,7 @@
                 <div class="col-sm-5">
                     <div class="form-group">
                         <label class="form-label mt-4" for="codepostal">Code Postal : </label> 
-                        <input class="form-control" type="number" th:field="*{code_postal}" name="codepostal" id="codepostal" min="10000" max="99999">
+                        <input class="form-control" type="text" th:field="*{code_postal}" name="codepostal" id="codepostal">
                     </div>
                 </div>
                 <div class="col-sm-5">
@@ -111,7 +111,7 @@
            
             
 			<button type="submit" class="btn btn-dark">Submit</button>
-<button type="submit" class="btn btn-dark">Annuler</button>
+			<button type="submit" class="btn btn-dark">Annuler</button>
 			 </fieldset>
             </form>
         </fieldset>
