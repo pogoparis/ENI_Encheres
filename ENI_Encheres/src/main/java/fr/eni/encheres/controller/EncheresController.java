@@ -40,4 +40,10 @@ public class EncheresController {
 	
 }
 	
+	@GetMapping("/login")
+	public String afficherLogin() {
+		
+		return "login";
+	}
+	
 }
