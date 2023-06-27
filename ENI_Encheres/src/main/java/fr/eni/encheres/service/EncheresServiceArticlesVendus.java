@@ -7,5 +7,7 @@ import fr.eni.encheres.bo.ArticleVendu;
 public interface EncheresServiceArticlesVendus {
 	
 	List<ArticleVendu> findAllArticleVendu();
+	void createArticle(ArticleVendu article);
+	ArticleVendu findArticleById(Integer id);
 
 }

@@ -8,4 +8,8 @@ public interface EncheresDaoArticlesVendus {
 	
 	List<ArticleVendu> getAllArticleVendu();
 
+	void creerArticle(ArticleVendu article);
+
+	ArticleVendu getArticleById();
+
 }

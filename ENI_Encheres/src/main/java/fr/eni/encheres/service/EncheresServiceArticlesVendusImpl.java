@@ -25,4 +25,19 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 		return encheresDaoArticlesVendus.getAllArticleVendu();
 	}
 
+
+
+	@Override
+	public void createArticle(ArticleVendu article) {
+		encheresDaoArticlesVendus.creerArticle(article);
+		
+	}
+
+
+
+	@Override
+	public ArticleVendu findArticleById(Integer id) {
+		return encheresDaoArticlesVendus.getArticleById();
+	}
+
 }

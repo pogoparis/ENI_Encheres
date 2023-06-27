@@ -30,6 +30,21 @@ public class ArticleVendu {
 		// TODO Auto-generated constructor stub
 	}
 
+
+	public ArticleVendu(String nom_article, String description, LocalDate date_debut_encheres,
+			LocalDate date_fin_encheres, Integer prix_initial, Integer prix_vente, Utilisateur utilisateur,
+			Categorie categorie) {
+		this.nom_article = nom_article;
+		this.description = description;
+		this.date_debut_encheres = date_debut_encheres;
+		this.date_fin_encheres = date_fin_encheres;
+		this.prix_initial = prix_initial;
+		this.prix_vente = prix_vente;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
+	}
+
+
 	//Getter Setter
 	public Integer getNo_article() {
 		return no_article;
