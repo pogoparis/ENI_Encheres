@@ -7,14 +7,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
-public class Utilisateur implements UserDetails{
+public class Utilisateur{
 	
 	private Integer no_utilisateur;
 	private String pseudo;
 	private String nom;
 	private String prenom;
 	private String email;
-	private String telephone; //A voir si on le passe en chiffre pour le manipuler
+	private String telephone; 
 	private String rue;
 	private String codePostal;
 	private String ville;
@@ -181,57 +181,6 @@ public class Utilisateur implements UserDetails{
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
 				+ ", administrateur=" + administrateur + ", listeArticlesAchetes=" + listeArticlesAchetes
 				+ ", listeArticlesVendus=" + listeArticlesVendus + ", listeEncheres=" + listeEncheres + "]";
-	}
-
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public String getPassword() {
-		return this.getMotDePasse();
-	}
-
-
-	@Override
-	public String getUsername() {
-		return this.getPseudo();
-	}
-
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	
-	
-	
+	}	
 
 }
