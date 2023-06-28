@@ -21,7 +21,7 @@ public class EncheresDaoUtilisateursImpl implements EncheresDaoUtilisateurs {
 	public final static String SELECT_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";
 	public final static String SELECT_UTILISATEUR_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = :no_utilisateur";
 	final static String SELECT_USER_BY_USERNAME = "select pseudo, mot_de_passe from UTILISATEURS where pseudo=:pseudo";
-	final static String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, rue, code_postal, ville,mot_de_passe) VALUES (:pseudo, :nom, :prenom, :email, :rue, :code_postal, :ville,:mot_de_passe)";
+	final static String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, rue, code_postal, ville,mot_de_passe, credit, administrateur) VALUES (:pseudo, :nom, :prenom, :email, :rue, :code_postal, :ville,:mot_de_passe, :credit, :administrateur)";
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
@@ -64,8 +64,8 @@ public class EncheresDaoUtilisateursImpl implements EncheresDaoUtilisateurs {
 		map.put("code_postal", utilisateur.getCodePostal());
 		map.put("ville", utilisateur.getVille());
 		map.put("mot_de_passe", utilisateur.getMotDePasse());
-//		map.put("credit", utilisateur.getCredit());
-//		map.put("administrateur", utilisateur.getAdministrateur());
+		map.put("credit", 100);
+		map.put("administrateur", 1);
 		namedParameterJdbcTemplate.update(INSERT_UTILISATEUR, map);	
 		
 	}
