@@ -2,6 +2,7 @@ package fr.eni.encheres.service;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import fr.eni.encheres.bo.Utilisateur;
@@ -11,9 +12,11 @@ import fr.eni.encheres.dao.EncheresDaoUtilisateurs;
 public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateur{
 
 	EncheresDaoUtilisateurs encheresDaoUtilisateurs;
+	PasswordEncoder passwordEncoder ;
 
-	public EncheresServiceUtilisateurImpl(EncheresDaoUtilisateurs encheresDaoUtilisateurs) {
+	public EncheresServiceUtilisateurImpl(EncheresDaoUtilisateurs encheresDaoUtilisateurs,PasswordEncoder passwordEncoder) {
 		this.encheresDaoUtilisateurs=encheresDaoUtilisateurs;
+		this.passwordEncoder =passwordEncoder;
 	}
 
 	@Override
@@ -25,6 +28,7 @@ public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateu
 	@Override
 	public void createUtilisateur(Utilisateur utilisateur) {
 		System.out.println("SERVICE "+utilisateur);
+		utilisateur.setMotDePasse(passwordEncoder.encode(utilisateur.getMotDePasse()));
 		encheresDaoUtilisateurs.saveUtilisateur(utilisateur);
 		
 	}

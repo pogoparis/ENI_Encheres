@@ -61,8 +61,6 @@ public class EncheresController {
 	
 	@PostMapping("/register")
 	 public String register( @ModelAttribute Utilisateur utilisateur ) {
-		utilisateur.setMotDePasse( "{noop}" + utilisateur.getMotDePasse() );
-		System.out.println("CONTROLLER"+utilisateur);
 		encheresServiceUtilisateur.createUtilisateur(utilisateur);
         return "redirect:/login";
     }
