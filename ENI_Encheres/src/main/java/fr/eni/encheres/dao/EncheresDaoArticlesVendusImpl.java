@@ -37,9 +37,6 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 
 	@Override
 	public void creerArticle(ArticleVendu article) {
-//		ArticleVendu newArticle = new ArticleVendu(article.getNom_article(), article.getDescription(),
-//				article.getDate_debut_encheres(), article.getDate_fin_encheres(), article.getPrix_initial(),
-//				article.getPrix_vente(), article.getUtilisateur(), article.getCategorie());
 		Map<String, Object> map = new HashMap<>();
 		map.put("nom_article", article.getNom_article());
 		map.put("description", article.getDescription());
