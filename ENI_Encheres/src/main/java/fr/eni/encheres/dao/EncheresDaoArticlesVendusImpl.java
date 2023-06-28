@@ -32,7 +32,6 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 		List<ArticleVendu> liste;
 		liste = namedParameterjdbcTemplate.query(SELECT_ALL_ARTICLEVENDU,
 				new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
-		System.out.println(liste);
 		return liste;
 	}
 
