@@ -34,8 +34,8 @@ public class ArticleVenduRowMapper implements RowMapper<ArticleVendu>{
 		article.setDate_fin_encheres(rs.getObject(5, LocalDate.class));
 		article.setPrix_initial(rs.getInt(6));
 		article.setPrix_vente(rs.getInt(7));
-		article.setCategorie(encheresDaoCategories.getCategorieById(rs.getInt(8)));
-		article.setUtilisateur(encheresDaoUtilisateurs.getUtilisateurById(rs.getInt(9)));
+		article.setUtilisateur(encheresDaoUtilisateurs.getUtilisateurById(rs.getInt(8)));
+		article.setCategorie(encheresDaoCategories.getCategorieById(rs.getInt(9)));
 		
 		return article;
 	}

@@ -32,6 +32,7 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 		List<ArticleVendu> liste;
 		liste = namedParameterjdbcTemplate.query(SELECT_ALL_ARTICLEVENDU,
 				new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
+		System.out.println(liste);
 		return liste;
 	}
 
@@ -43,7 +44,7 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 		map.put("date_debut_encheres", article.getDate_debut_encheres());
 		map.put("date_fin_encheres", article.getDate_fin_encheres());
 		map.put("prix_initial", article.getPrix_initial());
-		map.put("prix_vente", article.getPrix_vente());
+		map.put("prix_vente", article.getPrix_initial());
 		map.put("no_utilisateur", article.getUtilisateur().getNo_utilisateur());
 		map.put("no_categorie", article.getCategorie().getNo_categorie());
 		namedParameterjdbcTemplate.update(INSERT_ARTICLE, map);	

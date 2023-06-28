@@ -13,7 +13,7 @@ import fr.eni.encheres.bo.Retrait;
 public class EncheresDaoRetraitsImpl implements EncheresDaoRetraits {
 
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-	final static String INSERT_RETRAIT = "INSERT INTO RETRAITS (rue, code_postal, ville, no_article VALUES (:rue, :code_postal, :ville, :no_article) ";
+	final static String INSERT_RETRAIT = "INSERT INTO RETRAITS (rue, code_postal, ville, no_article) VALUES (:rue, :code_postal, :ville, :no_article) ";
 	
 	
 	public EncheresDaoRetraitsImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
@@ -28,7 +28,7 @@ public class EncheresDaoRetraitsImpl implements EncheresDaoRetraits {
 		map.put("rue", retrait.getRue());
 		map.put("code_postal", retrait.getCode_postal());
 		map.put("ville", retrait.getVille());
-		map.put("no_article", retrait.getArticle().getNo_article());
+		map.put("no_article", article.getNo_article());
 		namedParameterJdbcTemplate.update(INSERT_RETRAIT, map);
 	}
 

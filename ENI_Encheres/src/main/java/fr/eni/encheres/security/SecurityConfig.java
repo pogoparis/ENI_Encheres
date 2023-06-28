@@ -52,7 +52,8 @@ public class SecurityConfig {
 					.requestMatchers(HttpMethod.GET, "/details").permitAll()
 					.requestMatchers(HttpMethod.GET, "/inscription").permitAll()
 					.requestMatchers(HttpMethod.POST, "/register").permitAll()
-					
+					.requestMatchers(HttpMethod.GET, "/creerarticle").permitAll()
+					.requestMatchers(HttpMethod.POST, "/creationarticle").permitAll()
 					.requestMatchers("/").permitAll()
 					
 					// Permettre à tous d'afficher correctement les images et CSS

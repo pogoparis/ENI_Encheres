@@ -13,6 +13,7 @@ import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.service.EncheresServiceArticlesVendus;
 import fr.eni.encheres.service.EncheresServiceCategorie;
+import fr.eni.encheres.service.EncheresServiceRetrait;
 import fr.eni.encheres.service.EncheresServiceUtilisateur;
 
 @Controller
@@ -21,11 +22,13 @@ public class EncheresController {
 	EncheresServiceArticlesVendus encheresServiceArticlesVendus;
 	EncheresServiceCategorie encheresServiceCategorie;
 	EncheresServiceUtilisateur encheresServiceUtilisateur;
+	EncheresServiceRetrait encheresServiceRetrait;
 
-	public EncheresController(EncheresServiceArticlesVendus encheresServiceArticlesVendus, EncheresServiceCategorie encheresServiceCategorie,EncheresServiceUtilisateur encheresServiceUtilisateur) {
+	public EncheresController(EncheresServiceArticlesVendus encheresServiceArticlesVendus, EncheresServiceCategorie encheresServiceCategorie,EncheresServiceUtilisateur encheresServiceUtilisateur, EncheresServiceRetrait encheresServiceRetrait) {
 		this.encheresServiceArticlesVendus = encheresServiceArticlesVendus;
 		this.encheresServiceCategorie = encheresServiceCategorie;
 		this.encheresServiceUtilisateur=encheresServiceUtilisateur;
+		this.encheresServiceRetrait=encheresServiceRetrait;
 	}
 
 	@GetMapping("/encheres")
@@ -72,10 +75,14 @@ public class EncheresController {
 	}
 	
 	@PostMapping("/creationarticle")
-	public String creationArticle(@ModelAttribute ArticleVendu articleVendu,@ModelAttribute Retrait retrait) {
+	public String creationArticle(@ModelAttribute ArticleVendu articleVendu,@ModelAttribute Retrait retrait, Principal principal) {
 		System.out.println(articleVendu);
 		System.out.println(retrait);
-		return "index";
+		articleVendu.setUtilisateur(encheresServiceUtilisateur.findUserByPseudo(principal.getName()));
+		encheresServiceArticlesVendus.createArticle(articleVendu);
+		encheresServiceRetrait.createRetrait(retrait, articleVendu);
+		System.out.println(retrait);
+		return "redirect:/encheres";
 	}
 	
 	@GetMapping("/details")
