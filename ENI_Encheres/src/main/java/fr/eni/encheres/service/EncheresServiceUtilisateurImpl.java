@@ -33,6 +33,10 @@ public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateu
 		// TODO Auto-generated method stub
 		return encheresDaoUtilisateurs.getUtilisateurById(id);
 	}
+	
+	public Utilisateur findUserByPseudo(String pseudo) {
+		return encheresDaoUtilisateurs.getUserByPseudo(pseudo);
+	}
 
 
 

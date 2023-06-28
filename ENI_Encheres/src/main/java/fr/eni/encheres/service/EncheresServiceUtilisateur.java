@@ -9,4 +9,5 @@ public interface EncheresServiceUtilisateur {
 	List<Utilisateur> findAllUtilisateurs();
 	void createUtilisateur(Utilisateur utilisateur);
 	Utilisateur findUtilisateurById(Integer id);
+	public Utilisateur findUserByPseudo(String pseudo);
 }

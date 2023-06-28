@@ -20,7 +20,7 @@ public class EncheresDaoUtilisateursImpl implements EncheresDaoUtilisateurs {
 
 	public final static String SELECT_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";
 	public final static String SELECT_UTILISATEUR_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = :no_utilisateur";
-	final static String SELECT_USER_BY_USERNAME = "select pseudo, mot_de_passe from UTILISATEURS where pseudo=:pseudo";
+	final static String SELECT_USER_BY_USERNAME = "select * from UTILISATEURS where pseudo=:pseudo";
 	final static String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, rue, code_postal, ville,mot_de_passe, credit, administrateur) VALUES (:pseudo, :nom, :prenom, :email, :rue, :code_postal, :ville,:mot_de_passe, :credit, :administrateur)";
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
