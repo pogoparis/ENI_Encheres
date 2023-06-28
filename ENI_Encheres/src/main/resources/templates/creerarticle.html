@@ -17,7 +17,7 @@
     
     <main>
     <div class="container">
-     <form th:object="${articleVendu}">
+     <form th:object="${articleVendu}" method="post" th:action="@{/creationarticle}">
         <fieldset>
             <legend>Creation d'article</legend>
             <div class="form-group row">

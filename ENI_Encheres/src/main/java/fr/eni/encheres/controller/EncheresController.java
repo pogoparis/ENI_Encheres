@@ -73,7 +73,12 @@ public class EncheresController {
 		return "creerarticle";
 	}
 	
-	
+	@PostMapping("/creationarticle")
+	public String creationArticle(@ModelAttribute ArticleVendu articleVendu,@ModelAttribute Retrait retrait) {
+		System.out.println(articleVendu);
+		System.out.println(retrait);
+		return "index";
+	}
 	
 	
 }

@@ -15,7 +15,7 @@
 <div data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
 
 <div class="container">
-    <form th:object="${utilisateur}"  method="post" th:action="@{/register}">
+    <form th:object="${utilisateur}" method="post" th:action="@{/register}">
         <fieldset>
         <input hidden type="number"
 					th:field="*{no_utilisateur}" id="id">
