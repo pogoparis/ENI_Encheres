@@ -38,7 +38,7 @@
     			<p> Prix de départ : <span th:text="${article.getPrix_initial()}"></span> pts</p>
     			<p> Prix de vente : <span th:text="${article.getPrix_vente()}"></span> pts</p>
     			<p> Categorie : <span th:text="${article.getCategorie()}"></span></p>
-    			<p> Utilisateur : <span th:text="${article.getUtilisateur().getPseudo()}"></span></p>
+    			<p> Utilisateur : <a th:href="@{/details}"><span th:text="${article.getUtilisateur().getPseudo()}"></span></a></p>
     		</div>
     	</div>
     </div>

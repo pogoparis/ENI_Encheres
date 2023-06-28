@@ -78,5 +78,11 @@ public class EncheresController {
 		return "index";
 	}
 	
+	@GetMapping("/details")
+	public String afficherDetails() {
+		
+		return "details";
+	}
+	
 	
 }
