@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
-public class Utilisateur{
+public class Utilisateur implements UserDetails{
 	
 	private Integer no_utilisateur;
 	private String pseudo;
@@ -181,6 +181,55 @@ public class Utilisateur{
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
 				+ ", administrateur=" + administrateur + ", listeArticlesAchetes=" + listeArticlesAchetes
 				+ ", listeArticlesVendus=" + listeArticlesVendus + ", listeEncheres=" + listeEncheres + "]";
+	}
+
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String getPassword() {
+		
+		return getMotDePasse();
+	}
+
+
+	@Override
+	public String getUsername() {
+
+		return getPseudo();
+	}
+
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return false;
 	}	
 
 }
