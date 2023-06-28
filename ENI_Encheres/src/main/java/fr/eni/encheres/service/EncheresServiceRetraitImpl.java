@@ -10,8 +10,7 @@ import fr.eni.encheres.dao.EncheresDaoRetraits;
 public class EncheresServiceRetraitImpl implements EncheresServiceRetrait {
 
 	EncheresDaoRetraits encheresDaoRetraits;
-	
-	
+
 	
 	public EncheresServiceRetraitImpl(EncheresDaoRetraits encheresDaoRetraits) {
 		this.encheresDaoRetraits = encheresDaoRetraits;
