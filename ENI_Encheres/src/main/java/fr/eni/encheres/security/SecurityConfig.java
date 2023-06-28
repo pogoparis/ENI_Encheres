@@ -54,7 +54,7 @@ public class SecurityConfig {
 
 		// /logout --> vider la session et le contexte de sécurité
 		http.logout(logout -> logout.invalidateHttpSession(true).clearAuthentication(true).deleteCookies("JSESSIONID")
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll());
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutUrl("/").permitAll());
 
 		return http.build();
 
