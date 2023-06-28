@@ -49,9 +49,10 @@ public class SecurityConfig {
 					// Permettre aux visiteurs d'accéder au détail d'un film
 					.requestMatchers(HttpMethod.GET, "/profil").permitAll()
 					// Accès à la vue principale
+					.requestMatchers(HttpMethod.GET, "/details").permitAll()
 					.requestMatchers(HttpMethod.GET, "/inscription").permitAll()
 					.requestMatchers(HttpMethod.POST, "/register").permitAll()
-					.requestMatchers(HttpMethod.GET, "/details").permitAll()
+					
 					.requestMatchers("/").permitAll()
 					
 					// Permettre à tous d'afficher correctement les images et CSS

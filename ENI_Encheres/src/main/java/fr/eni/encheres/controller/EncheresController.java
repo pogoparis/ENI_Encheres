@@ -79,8 +79,10 @@ public class EncheresController {
 	}
 	
 	@GetMapping("/details")
-	public String afficherDetails() {
+	public String afficherDetails(String pseudo,Model model) {
 		
+		Utilisateur utilisateur = encheresServiceUtilisateur.findUserByPseudo(pseudo);
+		model.addAttribute("utilisateur", utilisateur);
 		return "details";
 	}
 	
