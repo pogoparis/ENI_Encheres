@@ -17,6 +17,8 @@
 <div class="container">
     <form th:object="${utilisateur}"  method="post" th:action="@{/register}">
         <fieldset>
+        <input hidden type="number"
+					th:field="*{no_utilisateur}" id="id">
             <div class="form-group row">
                 <div class="col-sm-5">
                     <div class="form-group">
@@ -80,7 +82,7 @@
                 </div>
 
 
-            <div class="form-group row">
+            <div th:if="${utilisateur.getNo_utilisateur() == null}" class="form-group row">
                 <div class="col-sm-5">
                     <div class="form-group">
                         <label for="inputPassword" class="form-label mt-4">Password</label>

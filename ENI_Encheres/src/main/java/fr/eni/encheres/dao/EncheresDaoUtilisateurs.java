@@ -13,6 +13,6 @@ public interface EncheresDaoUtilisateurs {
 	
 	public Utilisateur getUserByPseudo(String pseudo);
 
-	void createUtilisateur(Utilisateur utilisateur);
+	void saveUtilisateur(Utilisateur utilisateur);
 
 }

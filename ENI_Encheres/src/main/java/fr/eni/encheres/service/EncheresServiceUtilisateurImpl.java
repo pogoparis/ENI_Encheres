@@ -24,7 +24,8 @@ public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateu
 	
 	@Override
 	public void createUtilisateur(Utilisateur utilisateur) {
-		encheresDaoUtilisateurs.createUtilisateur(utilisateur);
+		System.out.println("SERVICE "+utilisateur);
+		encheresDaoUtilisateurs.saveUtilisateur(utilisateur);
 		
 	}
 

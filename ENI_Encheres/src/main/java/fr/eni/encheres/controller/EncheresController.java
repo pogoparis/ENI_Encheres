@@ -46,6 +46,8 @@ public class EncheresController {
 	
 	@GetMapping("/inscription")
 	public String afficherProfil(@ModelAttribute Utilisateur utilisateur) {
+		System.out.println(utilisateur);
+		System.out.println("ON PASSE PAR INSCRIPTION");
 		return "profil";
 	}
 	
@@ -60,7 +62,8 @@ public class EncheresController {
 	@PostMapping("/register")
 	 public String register( @ModelAttribute Utilisateur utilisateur ) {
 		utilisateur.setMotDePasse( "{noop}" + utilisateur.getMotDePasse() );
-		encheresServiceUtilisateur.createUtilisateur( utilisateur );
+		System.out.println("CONTROLLER"+utilisateur);
+		encheresServiceUtilisateur.createUtilisateur(utilisateur);
         return "redirect:/login";
     }
 	
