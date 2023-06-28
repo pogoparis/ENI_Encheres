@@ -24,7 +24,9 @@
           <li class="nav-item"><a class="nav-link " href="/encheres">Enchères</a></li>
           <li class="nav-item"><a class="nav-link " th:href="@{/creerarticle}">Vendre Article</a></li>
           <li class="nav-item"><a class="nav-link " th:href="@{/login}">Se Connecter</a></li>
-          <li class="nav-item"><a class="nav-link " href="#">Déconnecter</a></li>
+           <li class="nav-item" data-th-if="${#authorization.expression('isAuthenticated()')}">
+          <a class="nav-link " href="/logout">Déconnecter</a>
+          </li>
           <li class="nav-item"><a class="nav-link " th:href="@{/inscription}">S'inscrire</a> </li>
           <li class="nav-item"><a class="nav-link " th:href="@{/profil}">Profil</a></li>
         </ul>

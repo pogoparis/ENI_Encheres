@@ -36,9 +36,13 @@ public class SecurityConfig {
 					// Permettre aux visiteurs d'accéder au détail d'un film
 					.requestMatchers(HttpMethod.GET, "/profil").permitAll()
 					// Accès à la vue principale
+					.requestMatchers(HttpMethod.GET, "/inscription").permitAll()
+					
 					.requestMatchers("/").permitAll()
+					
 					// Permettre à tous d'afficher correctement les images et CSS
 					.requestMatchers("/css/*").permitAll().requestMatchers("/images/*").permitAll()
+					
 					// Il faut être connecté pour toutes autres URLs
 					.anyRequest().authenticated();
 		});
@@ -54,7 +58,7 @@ public class SecurityConfig {
 
 		// /logout --> vider la session et le contexte de sécurité
 		http.logout(logout -> logout.invalidateHttpSession(true).clearAuthentication(true).deleteCookies("JSESSIONID")
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutUrl("/").permitAll());
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll());
 
 		return http.build();
 
