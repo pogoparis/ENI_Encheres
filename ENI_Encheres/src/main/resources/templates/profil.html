@@ -89,11 +89,12 @@
                         <input type="password" class="form-control" id="inputPassword" placeholder="Password" th:field="*{motDePasse}">
                     </div>
                 </div>
+            </div>
+            <div th:if="${utilisateur.getNo_utilisateur() != null}" hidden class="form-group row">
                 <div class="col-sm-5">
                     <div class="form-group">
-                        <label for="confirmPassword" class="form-label mt-4">Password Confirm</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1"
-                            placeholder="Confirm Password">
+                        <label for="inputPassword" class="form-label mt-4">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Password" th:field="*{motDePasse}" value="*{motDePasse}">
                     </div>
                 </div>
             </div>
