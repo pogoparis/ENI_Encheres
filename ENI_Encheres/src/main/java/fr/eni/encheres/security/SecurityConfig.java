@@ -37,7 +37,7 @@ public class SecurityConfig {
 					.requestMatchers(HttpMethod.GET, "/profil").permitAll()
 					// Accès à la vue principale
 					.requestMatchers(HttpMethod.GET, "/inscription").permitAll()
-					
+					.requestMatchers(HttpMethod.POST, "/register").permitAll()
 					.requestMatchers("/").permitAll()
 					
 					// Permettre à tous d'afficher correctement les images et CSS
