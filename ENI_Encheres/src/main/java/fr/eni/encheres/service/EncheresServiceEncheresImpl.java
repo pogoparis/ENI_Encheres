@@ -49,8 +49,4 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 			}
 		return true;
 	}
-
-	
-	
-
 }
