@@ -80,6 +80,7 @@ public class EncheresController {
 		System.out.println(retrait);
 		articleVendu.setUtilisateur(encheresServiceUtilisateur.findUserByPseudo(principal.getName()));
 		encheresServiceArticlesVendus.createArticle(articleVendu);
+		System.out.println(articleVendu);
 		encheresServiceRetrait.createRetrait(retrait, articleVendu);
 		System.out.println(retrait);
 		return "redirect:/encheres";

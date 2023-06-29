@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import fr.eni.encheres.bo.ArticleVendu;
 
@@ -38,16 +41,19 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 
 	@Override
 	public void creerArticle(ArticleVendu article) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("nom_article", article.getNom_article());
-		map.put("description", article.getDescription());
-		map.put("date_debut_encheres", article.getDate_debut_encheres());
-		map.put("date_fin_encheres", article.getDate_fin_encheres());
-		map.put("prix_initial", article.getPrix_initial());
-		map.put("prix_vente", article.getPrix_initial());
-		map.put("no_utilisateur", article.getUtilisateur().getNo_utilisateur());
-		map.put("no_categorie", article.getCategorie().getNo_categorie());
-		namedParameterjdbcTemplate.update(INSERT_ARTICLE, map);	
+		MapSqlParameterSource articleMap = new MapSqlParameterSource();
+		
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		articleMap.addValue("nom_article", article.getNom_article());
+		articleMap.addValue("description", article.getDescription());
+		articleMap.addValue("date_debut_encheres", article.getDate_debut_encheres());
+		articleMap.addValue("date_fin_encheres", article.getDate_fin_encheres());
+		articleMap.addValue("prix_initial", article.getPrix_initial());
+		articleMap.addValue("prix_vente", article.getPrix_initial());
+		articleMap.addValue("no_utilisateur", article.getUtilisateur().getNo_utilisateur());
+		articleMap.addValue("no_categorie", article.getCategorie().getNo_categorie());
+		namedParameterjdbcTemplate.update(INSERT_ARTICLE, articleMap, keyHolder);
+		article.setNo_article(keyHolder.getKey().intValue());
 	}
 
 	@Override
