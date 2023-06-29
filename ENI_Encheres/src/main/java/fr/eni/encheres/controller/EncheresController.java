@@ -32,7 +32,7 @@ public class EncheresController {
 	EncheresServiceRetrait encheresServiceRetrait;
 	EncheresServiceEncheres encheresServiceEncheres;
 	
-	public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
+	public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "src/main/resources/Images/";
 	
 	
 
@@ -99,10 +99,10 @@ public class EncheresController {
 		encheresServiceRetrait.createRetrait(retrait, articleVendu);
 		//images
 		StringBuilder fileNames = new StringBuilder();
-        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
-        fileNames.append(file.getOriginalFilename());
+        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, articleVendu.getNo_article().toString());
+        fileNames.append(articleVendu.getNo_article()+".jpg");
         Files.write(fileNameAndPath, file.getBytes());
-        model.addAttribute("msg", "Uploaded images: " + fileNames.toString());
+        model.addAttribute("msg", fileNames.toString());
 		return "redirect:/encheres";
 	}
 	
