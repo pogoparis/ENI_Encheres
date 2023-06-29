@@ -1,12 +1,15 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap');
-html*{
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap')
+	;
+
+html* {
 	font-family: 'Delicious Handrawn', cursive !important;
-	
 }
 
-.lien:hover{
-	transform : scale(1.1);
+.lien:hover {
+	transform: scale(1.1);
 	cursor: pointer;
 	transition: all .35s;
 }
