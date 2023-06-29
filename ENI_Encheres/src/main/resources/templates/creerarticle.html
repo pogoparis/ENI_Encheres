@@ -16,8 +16,28 @@
  <div data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
     
     <main>
+    
+<!--      <div class="container"> -->
+<!--         <div class="row"> -->
+<!--             <div class="col-md-8 mx-auto"> -->
+<!--                 <h2>Upload Image Example</h2> -->
+<!--                 <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p> -->
+<!--                 <form method="post" th:action="@{/upload}" enctype="multipart/form-data"> -->
+<!--                     <div class="form-group"> -->
+<!--                         <input type="file" name="image" accept="image/*" class="form-control-file"> -->
+<!--                     </div> -->
+<!--                     <button type="submit" class="btn btn-primary">Upload image</button> -->
+<!--                 </form> -->
+<!--                 <span th:if="${msg != null}" th:text="${msg}"></span> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--     </div> -->
+    
+    
+    
+    
     <div class="container">
-     <form th:object="${articleVendu}" method="post" th:action="@{/creationarticle}">
+     <form th:object="${articleVendu}" method="post" th:action="@{/creationarticle}" enctype="multipart/form-data">
         <fieldset>
             <legend>Creation d'article</legend>
             <div class="form-group row">
@@ -84,17 +104,24 @@
                         <input class="form-control" type="text" th:field="*{code_postal}" name="codepostal" id="codepostal">
                     </div>
                 </div>
-                <div class="col-sm-5">
+            </div>
+            <div class="form-group row">
+                   <div class="col-sm-5">
                     <div class="form-group">
                         <label class="form-label mt-4" for="ville"> Ville </label>
                         <input type="text" class="form-control" placeholder="Ville" id="ville" th:field="*{ville}" name="ville">
                     </div>
-                </div>
-            </div>
-            
+                    </div>
+                    <div class="col-sm-5">
+                     <div class="form-group">
+                        <label class="form-label mt-4" for="Image"> Image </label>
+                         <input type="file" name="image" accept="image/*" class="form-control-file">
+                    </div>
+                    </div>
+             </div>  
            </fieldset>
             </div>
-            
+                       
 			<button type="submit" class="btn btn-dark">Submit</button>
 			<button type="submit" class="btn btn-dark">Annuler</button>
 			 

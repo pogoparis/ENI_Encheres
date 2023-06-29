@@ -1,5 +1,9 @@
 package fr.eni.encheres.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 
 import org.springframework.stereotype.Controller;
@@ -7,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Retrait;
@@ -23,7 +29,8 @@ public class EncheresController {
 	EncheresServiceCategorie encheresServiceCategorie;
 	EncheresServiceUtilisateur encheresServiceUtilisateur;
 	EncheresServiceRetrait encheresServiceRetrait;
-
+	public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
+	
 	public EncheresController(EncheresServiceArticlesVendus encheresServiceArticlesVendus, EncheresServiceCategorie encheresServiceCategorie,EncheresServiceUtilisateur encheresServiceUtilisateur, EncheresServiceRetrait encheresServiceRetrait) {
 		this.encheresServiceArticlesVendus = encheresServiceArticlesVendus;
 		this.encheresServiceCategorie = encheresServiceCategorie;
@@ -75,14 +82,16 @@ public class EncheresController {
 	}
 	
 	@PostMapping("/creationarticle")
-	public String creationArticle(@ModelAttribute ArticleVendu articleVendu,@ModelAttribute Retrait retrait, Principal principal) {
-		System.out.println(articleVendu);
-		System.out.println(retrait);
+	public String creationArticle(@RequestParam("image") MultipartFile file, @ModelAttribute ArticleVendu articleVendu,@ModelAttribute Retrait retrait, Principal principal, Model model) throws IOException {
 		articleVendu.setUtilisateur(encheresServiceUtilisateur.findUserByPseudo(principal.getName()));
 		encheresServiceArticlesVendus.createArticle(articleVendu);
-		System.out.println(articleVendu);
 		encheresServiceRetrait.createRetrait(retrait, articleVendu);
-		System.out.println(retrait);
+		//images
+		StringBuilder fileNames = new StringBuilder();
+        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
+        fileNames.append(file.getOriginalFilename());
+        Files.write(fileNameAndPath, file.getBytes());
+        model.addAttribute("msg", "Uploaded images: " + fileNames.toString());
 		return "redirect:/encheres";
 	}
 	
@@ -107,5 +116,16 @@ public class EncheresController {
 		
 		return "article";
 	}
+	
+	
+//	@PostMapping("/upload") 
+//    public String uploadImage(Model model, @RequestParam("image") MultipartFile file) throws IOException {
+//        StringBuilder fileNames = new StringBuilder();
+//        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
+//        fileNames.append(file.getOriginalFilename());
+//        Files.write(fileNameAndPath, file.getBytes());
+//        model.addAttribute("msg", "Uploaded images: " + fileNames.toString());
+//        return "redirect:/creerarticle";
+//    }
 	
 }
