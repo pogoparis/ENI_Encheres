@@ -19,6 +19,7 @@ import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.service.EncheresServiceArticlesVendus;
 import fr.eni.encheres.service.EncheresServiceCategorie;
+import fr.eni.encheres.service.EncheresServiceEncheres;
 import fr.eni.encheres.service.EncheresServiceRetrait;
 import fr.eni.encheres.service.EncheresServiceUtilisateur;
 
@@ -29,13 +30,20 @@ public class EncheresController {
 	EncheresServiceCategorie encheresServiceCategorie;
 	EncheresServiceUtilisateur encheresServiceUtilisateur;
 	EncheresServiceRetrait encheresServiceRetrait;
+	EncheresServiceEncheres encheresServiceEncheres;
+	
 	public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
 	
-	public EncheresController(EncheresServiceArticlesVendus encheresServiceArticlesVendus, EncheresServiceCategorie encheresServiceCategorie,EncheresServiceUtilisateur encheresServiceUtilisateur, EncheresServiceRetrait encheresServiceRetrait) {
+	
+
+	public EncheresController(EncheresServiceArticlesVendus encheresServiceArticlesVendus,
+			EncheresServiceCategorie encheresServiceCategorie, EncheresServiceUtilisateur encheresServiceUtilisateur,
+			EncheresServiceRetrait encheresServiceRetrait, EncheresServiceEncheres encheresServiceEncheres) {
 		this.encheresServiceArticlesVendus = encheresServiceArticlesVendus;
 		this.encheresServiceCategorie = encheresServiceCategorie;
-		this.encheresServiceUtilisateur=encheresServiceUtilisateur;
-		this.encheresServiceRetrait=encheresServiceRetrait;
+		this.encheresServiceUtilisateur = encheresServiceUtilisateur;
+		this.encheresServiceRetrait = encheresServiceRetrait;
+		this.encheresServiceEncheres = encheresServiceEncheres;
 	}
 
 	@GetMapping("/encheres")
@@ -104,16 +112,13 @@ public class EncheresController {
 	}
 	
 	@GetMapping("/article")
-	public String afficherDetailsArticles(Integer id,Model model) {
-		System.out.println("ON ENTRE DANS LE CONTROLLER");
-		System.out.println("L'ID UTILISE EST : "+id);
+	public String afficherDetailsArticles(Integer id, Model model, Principal principal) {
 		ArticleVendu article = encheresServiceArticlesVendus.findArticleById(id);
-		System.out.println(article);
 		Retrait retrait = encheresServiceRetrait.findRetraitByArticle(article);
-		System.out.println(retrait);
 		model.addAttribute("article", article);
 		model.addAttribute("retrait", retrait);
-		
+		Boolean tokenAffichage = encheresServiceEncheres.affichageDuBouton(article, principal);
+		model.addAttribute("tokenAffichage", tokenAffichage);
 		return "article";
 	}
 	
