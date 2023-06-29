@@ -9,24 +9,17 @@
 <body>
 <div data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
   
-  <form th:action="@{/login}" method="post">
-        <h1 data-th-text="#{login.h1}"></h1>
-        <div class="cards" th:if="${param.error}" data-th-text="#{login.error}"></div>
-        <div th:if="${param.logout}" data-th-text="#{login.logout}"></div>
-            <ul  class="flex-outer">
-            <li>
-                <label for="inputUsername" data-th-text="#{login.username}"></label> 
-                <input id="inputUsername" type="text" name="username" />
-            </li>
-            <li>
-                <label for="inputPwd" data-th-text="#{login.pwd}"></label> 
-                <input id="inputPwd" type="password" name="password" />
-            </li>
-            <li>
-                <button type="submit" data-th-text="#{login.button}" ></button>
-            </li>
-            </ul>
-        </form>
- 
+<div class="container">
+ <div class="form-group d-flex justify-content-center">
+ 	   <form th:action="@{/login}" method="post"> 
+          <label for="inputUsername">Login</label> 
+          <input class="form-control" id="inputUsername" type="text" name="username" />
+          <label for="inputPwd">Mot de Passe</label> 
+          <input class="form-control" id="inputPwd" type="password" name="password" />
+          <button class="btn btn-primary"type="submit">Connexion</button>
+      </form>
+ </div>
+</div>
+
 </body>
 </html>
