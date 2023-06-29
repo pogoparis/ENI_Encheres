@@ -66,13 +66,12 @@ public class SecurityConfig {
 		});
 		// formulaire de connexion par défaut
 		http.formLogin(Customizer.withDefaults());
-//
-//	        
-//	        // Customiser le formulaire
-//	        http.formLogin(form -> {
-//	            form.loginPage("/login").permitAll();
-//	            form.defaultSuccessUrl("/session").permitAll();
-//	        });
+	        
+	        // Customiser le formulaire
+	        http.formLogin(form -> {
+	            form.loginPage("/login").permitAll();
+	            form.defaultSuccessUrl("/encheres").permitAll();
+	        });
 
 		// /logout --> vider la session et le contexte de sécurité
 		http.logout(logout -> logout.invalidateHttpSession(true).clearAuthentication(true).deleteCookies("JSESSIONID")

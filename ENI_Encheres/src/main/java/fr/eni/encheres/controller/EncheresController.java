@@ -58,8 +58,11 @@ public class EncheresController {
 	}
 	
 	@GetMapping("/login")
-	public String afficherLogin() {
-		return "login";
+	public String afficherLogin(Principal principal) {
+		if (principal != null ) {
+			return "redirect:/encheres";
+		} 	
+			return "login";	
 	}
 	
 	@GetMapping("/inscription")
