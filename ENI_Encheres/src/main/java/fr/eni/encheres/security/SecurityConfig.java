@@ -59,7 +59,7 @@ public class SecurityConfig {
 					.requestMatchers("/").permitAll()
 					
 					// Permettre à tous d'afficher correctement les images et CSS
-					.requestMatchers("/css/*").permitAll().requestMatchers("/images/*").permitAll()
+					.requestMatchers("/css/*").permitAll().requestMatchers("/Images/*").permitAll()
 					
 					// Il faut être connecté pour toutes autres URLs
 					.anyRequest().authenticated();
