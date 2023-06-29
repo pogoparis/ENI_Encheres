@@ -2,37 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap" rel="stylesheet"> 
 <link rel="stylesheet" href="/css/style.css">
-<title>Enchères</title>
+<title>Detail article</title>
 </head>
-<body style="font-family : 'Delicious Handrawn', cursive;">
- <div data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
-   
-    <div class="container border">
-      <form class="d-flex">
-        <input class="form-control me-sm-2" type="search" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>
-       <div class="form-group">
-      <label for="exampleSelect1" class="form-label mt-4">Example select</label>
-      <select class="form-select" id="exampleSelect1" >
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-    </div>
-    	<div class="row">
-    	
-       		<div class= "d-inline-block col-4 border" th:each="article:${listeArticles}">
-       		<a class="lien" th:href="@{/article(id=${article.getNo_article()})}">
+<body>
+<div data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
+
+<div class= "d-inline-block col-4 border">
     			<h2>Article n°<span  th:text="${article.getNo_article()}"></span> : <span th:text="${article.getNom_article()}"></span></h2>
     			<br><p> Description : <span th:text="${article.getDescription()}"></span></p>
     			<p> Début de l'enchère : <div th:text="${article.getDate_debut_encheres()}"></div></p>
@@ -40,14 +21,16 @@
     			<p> Prix de départ : <span th:text="${article.getPrix_initial()}"></span> pts</p>
     			<p> Prix de vente : <span th:text="${article.getPrix_vente()}"></span> pts</p>
     			<p> Categorie : <span th:text="${article.getCategorie()}"></span></p>
-    			
-    		</a>
-    		<p> Utilisateur : <a th:href="@{/details(pseudo=${article.getUtilisateur().getPseudo()})}"><span th:text="${article.getUtilisateur().getPseudo()}"></span></a></p>
+    			<p> Utilisateur : <a th:href="@{/details(pseudo=${article.getUtilisateur().getPseudo()})}"><span th:text="${article.getUtilisateur().getPseudo()}"></span></a></p>
     		</div>
-    		
-    	</div>
-    </div>
-  
+    		<div>
+    		<h3>Lieu de retrait : </h3>
+    		<p>
+    		<span th:text="${retrait.getRue()}"></span></br>
+    		<span th:text="${retrait.getCode_postal()}"></span>
+    		<span th:text="${retrait.getVille()}"></span>
+    		</p>
+    		</div>
 
 </body>
 </html>

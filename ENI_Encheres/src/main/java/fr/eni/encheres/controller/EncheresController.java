@@ -98,7 +98,10 @@ public class EncheresController {
 	public String afficherDetailsArticles(Integer id,Model model) {
 		
 		ArticleVendu article = encheresServiceArticlesVendus.findArticleById(id);
+		Retrait retrait = encheresServiceRetrait.findRetraitByArticle(article);
 		model.addAttribute("article", article);
+		model.addAttribute("retrait", retrait);
+		
 		return "article";
 	}
 	

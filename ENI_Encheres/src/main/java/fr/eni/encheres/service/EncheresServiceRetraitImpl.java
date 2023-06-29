@@ -24,4 +24,8 @@ public class EncheresServiceRetraitImpl implements EncheresServiceRetrait {
 		encheresDaoRetraits.createRetrait(retrait , article);
 	}
 	
+	public Retrait findRetraitByArticle (ArticleVendu article) {
+		return encheresDaoRetraits.getRetraitByArticle(article);
+	}
+	
 }

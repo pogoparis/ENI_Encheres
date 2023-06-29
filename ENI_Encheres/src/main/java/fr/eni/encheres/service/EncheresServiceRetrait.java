@@ -6,4 +6,5 @@ import fr.eni.encheres.bo.Retrait;
 public interface EncheresServiceRetrait {
 
 	void createRetrait(Retrait retrait, ArticleVendu article);
+	public Retrait findRetraitByArticle (ArticleVendu article);
 }

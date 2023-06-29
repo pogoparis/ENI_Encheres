@@ -18,6 +18,10 @@ public class Retrait {
 		this.code_postal = code_postal;
 		this.ville = ville;
 	}
+	
+	public Retrait(ArticleVendu article) {
+		this.article = article;
+	}
 	// Getter SETTER
 	public String getRue() {
 		return rue;
