@@ -1,6 +1,7 @@
 package fr.eni.encheres.controller;
 
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -32,7 +33,8 @@ public class EncheresController {
 	EncheresServiceRetrait encheresServiceRetrait;
 	EncheresServiceEncheres encheresServiceEncheres;
 	
-	public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "src/main/resources/Images/";
+	public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") +  "/src/main/resources/static/Images";
+	//private static final String UPLOAD_DIR ="/Images";
 	
 	
 
@@ -99,7 +101,7 @@ public class EncheresController {
 		encheresServiceRetrait.createRetrait(retrait, articleVendu);
 		//images
 		StringBuilder fileNames = new StringBuilder();
-        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, articleVendu.getNo_article().toString());
+        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, (articleVendu.getNo_article().toString()+".jpg") );
         fileNames.append(articleVendu.getNo_article()+".jpg");
         Files.write(fileNameAndPath, file.getBytes());
         model.addAttribute("msg", fileNames.toString());
