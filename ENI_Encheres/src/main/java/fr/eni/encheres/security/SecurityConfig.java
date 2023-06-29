@@ -53,6 +53,8 @@ public class SecurityConfig {
 					.requestMatchers(HttpMethod.GET, "/inscription").permitAll()
 					.requestMatchers(HttpMethod.POST, "/register").permitAll()
 					.requestMatchers(HttpMethod.GET, "/creerarticle").permitAll()
+					.requestMatchers(HttpMethod.GET, "/article").permitAll()
+					.requestMatchers(HttpMethod.GET, "/error").permitAll()
 					.requestMatchers(HttpMethod.POST, "/creationarticle").permitAll()
 					.requestMatchers("/").permitAll()
 					

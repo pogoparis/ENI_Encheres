@@ -96,9 +96,12 @@ public class EncheresController {
 	
 	@GetMapping("/article")
 	public String afficherDetailsArticles(Integer id,Model model) {
-		
+		System.out.println("ON ENTRE DANS LE CONTROLLER");
+		System.out.println("L'ID UTILISE EST : "+id);
 		ArticleVendu article = encheresServiceArticlesVendus.findArticleById(id);
+		System.out.println(article);
 		Retrait retrait = encheresServiceRetrait.findRetraitByArticle(article);
+		System.out.println(retrait);
 		model.addAttribute("article", article);
 		model.addAttribute("retrait", retrait);
 		

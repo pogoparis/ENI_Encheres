@@ -45,6 +45,11 @@ public class ArticleVendu {
 	}
 
 
+	public ArticleVendu(Integer id) {
+		this.no_article = id;
+	}
+
+
 	//Getter Setter
 	public Integer getNo_article() {
 		return no_article;
