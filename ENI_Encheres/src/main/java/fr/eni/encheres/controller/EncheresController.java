@@ -94,5 +94,12 @@ public class EncheresController {
 		return "details";
 	}
 	
+	@GetMapping("/article")
+	public String afficherDetailsArticles(Integer id,Model model) {
+		
+		ArticleVendu article = encheresServiceArticlesVendus.findArticleById(id);
+		model.addAttribute("article", article);
+		return "article";
+	}
 	
 }
