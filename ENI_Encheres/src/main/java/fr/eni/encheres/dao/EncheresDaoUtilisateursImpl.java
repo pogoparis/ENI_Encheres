@@ -71,7 +71,7 @@ public class EncheresDaoUtilisateursImpl implements EncheresDaoUtilisateurs {
 		if (utilisateur.getNo_utilisateur() == null) {
 			map.put("mot_de_passe", utilisateur.getMotDePasse());
 		}
-		map.put("credit", 100);
+		map.put("credit", 600);
 		map.put("administrateur", 1);
 		
 		if (utilisateur.getNo_utilisateur() == null) {	
