@@ -115,6 +115,7 @@ public class EncheresController {
 	public String afficherDetailsArticles(Integer id, Model model, Principal principal) {
 		ArticleVendu article = encheresServiceArticlesVendus.findArticleById(id);
 		Retrait retrait = encheresServiceRetrait.findRetraitByArticle(article);
+		model.addAttribute("user", encheresServiceUtilisateur.findUserByPseudo(principal.getName()));
 		model.addAttribute("article", article);
 		model.addAttribute("retrait", retrait);
 		Boolean tokenAffichage = encheresServiceEncheres.affichageDuBouton(article, principal);

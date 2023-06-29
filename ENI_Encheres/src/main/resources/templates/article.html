@@ -34,7 +34,7 @@
     		
     		<div th:if="${tokenAffichage}">
     		<form>
-    		<input type="number">
+    		<input th:min="${article.getPrix_vente()+10}" th:max="${user.getCredit()}" step="10" type="number">
     		<button type="submit">ENCHERIR</button>
     		</form>
     		</div>
