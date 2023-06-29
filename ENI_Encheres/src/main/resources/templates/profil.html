@@ -76,7 +76,7 @@
                	 <div class="col-sm-5">
                        <div class="form-group">
                         <label for="inputTel" class="form-label mt-4">Telephone</label>
-                        <input type="text" class="form-control" id="inputTel" placeholder="Numéro de téléphone">
+                        <input type="text" class="form-control" id="inputTel" placeholder="Numéro de téléphone" th:field="*{telephone}">
                    	   </div>
                	 </div>
                 </div>
@@ -99,7 +99,7 @@
                 </div>
             </div>
 			<button type="submit" class="btn btn-dark">Submit</button>
-			<button type="button" class="btn btn-dark">Annuler</button>
+			<a th:href="@{/encheres}"><button type="button" class="btn btn-dark" >Annuler</button></a>
         </fieldset>
     </form>
 
