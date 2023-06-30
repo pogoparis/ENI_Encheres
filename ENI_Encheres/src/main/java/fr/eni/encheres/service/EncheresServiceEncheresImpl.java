@@ -54,9 +54,11 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 			}
 		return true;
 	}
-
+	
 	@Override
 	public void creationEncheres(Enchere enchere) {
+		datedujour = LocalDate.now();
+		enchere.setDate_enchere(datedujour);
 		enchereDaoEncheres.saveEnchere(enchere);
 	}
 
