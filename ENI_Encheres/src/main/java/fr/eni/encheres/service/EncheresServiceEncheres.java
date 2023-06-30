@@ -10,6 +10,8 @@ public interface EncheresServiceEncheres {
 	
 	public Boolean affichageDuBouton(ArticleVendu article, Principal user);
 
-	public void creationEncheres(Enchere enchere);
+	public void creationEncheres(ArticleVendu article, Utilisateur utilisateur);
+
+	
 
 }

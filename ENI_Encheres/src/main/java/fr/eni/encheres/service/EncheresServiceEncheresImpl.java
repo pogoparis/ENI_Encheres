@@ -56,10 +56,11 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 	}
 
 	@Override
-	public void creationEncheres(Enchere enchere) {
-		
-		
+	public void creationEncheres(ArticleVendu article, Utilisateur utilisateur) {
+		// TODO Auto-generated method stub	
 	}
+
+
 
 	
 
