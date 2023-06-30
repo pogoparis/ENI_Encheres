@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.bo.Utilisateur;
@@ -49,7 +52,6 @@ public class EncheresController {
 	@PostMapping("/encherir")
 	public String encherir(@ModelAttribute Enchere enchere,  Model model ) {
 		System.out.println("ENCHERES "+enchere);
-		
 		encheresServiceEncheres.creationEncheres(enchere);
 		encheresServiceArticlesVendus.majPrixArticle(enchere);
 		encheresServiceUtilisateur.majCreditUtilisateur(enchere);
@@ -141,6 +143,17 @@ public class EncheresController {
 		model.addAttribute("tokenAffichage", tokenAffichage);
 		return "article";
 	}
+	
+	// Methode En GettMaping Recherche par nom
+	@GetMapping("/recherche")
+	public String recherche(String rechercheNom, Model model) {
+		model.addAttribute("listeCategorie", encheresServiceCategorie.findAllCategorie());
+		List<ArticleVendu> listeArticles = encheresServiceArticlesVendus.findArticleContainNom(rechercheNom);
+		model.addAttribute("listeArticles", listeArticles);
+		
+		return "index";
+	}
+	
 	
 	
 //	@PostMapping("/upload") 

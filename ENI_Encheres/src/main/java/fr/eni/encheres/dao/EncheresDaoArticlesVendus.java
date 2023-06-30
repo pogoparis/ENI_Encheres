@@ -15,5 +15,7 @@ public interface EncheresDaoArticlesVendus {
 	
 	void majPrixArticle(Enchere enchere);
 
+	List<ArticleVendu> getArticleContainNom(String rechercheNom);
+
 
 }

@@ -51,4 +51,12 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 		
 	}
 
+
+
+	@Override
+	public List<ArticleVendu> findArticleContainNom(String rechercheNom) {
+		return encheresDaoArticlesVendus.getArticleContainNom(rechercheNom);
+		
+	}
+
 }

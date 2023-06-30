@@ -66,12 +66,21 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 	@Override
 	public void majPrixArticle(Enchere enchere) {
 		MapSqlParameterSource articleMap = new MapSqlParameterSource();
-		
-	
 		articleMap.addValue("prix_vente",enchere.getMontant_enchere());
 		articleMap.addValue("no_article",enchere.getArticle().getNo_article());
+		namedParameterjdbcTemplate.update(UPDATE_PRIX_VENTE_ARTICLE_APRES_ENCHERE,  articleMap);	
+	}
+
+	
+	// RECHERCHE ARTICLES PAR NOM
+	@Override
+	public List<ArticleVendu> getArticleContainNom(String rechercheNom) {
+		List<ArticleVendu> listeArticleTrouve;
+		String sql = "SELECT * from ARTICLES_VENDUS WHERE nom_article LIKE '%" + rechercheNom + "%'";
+		listeArticleTrouve = namedParameterjdbcTemplate.query(sql,
+				new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
+		return listeArticleTrouve;
 		
-		namedParameterjdbcTemplate.update(UPDATE_PRIX_VENTE_ARTICLE_APRES_ENCHERE,  articleMap);
 		
 	}
 

@@ -50,6 +50,7 @@ public class SecurityConfig {
 					.requestMatchers(HttpMethod.GET, "/profil").permitAll()
 					// Accès à la vue principale
 					.requestMatchers(HttpMethod.GET, "/details").permitAll()
+					.requestMatchers(HttpMethod.GET, "/recherche").permitAll()
 					.requestMatchers(HttpMethod.GET, "/inscription").permitAll()
 					.requestMatchers(HttpMethod.POST, "/register").permitAll()
 					.requestMatchers(HttpMethod.GET, "/creerarticle").permitAll()
