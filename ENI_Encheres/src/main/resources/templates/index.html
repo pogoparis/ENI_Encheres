@@ -23,25 +23,15 @@
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Recherche</button>
     </form>
 
-    <!--        		 <div class="form-group col-3"> -->
-    <!--                  <div class="form-group"> -->
-    <!--                        <label class="form-label mt-4" for="categorie">Choisissez une categorie</label>  -->
-    <!--                     <select class="form-select col-3" id="categorie" th:field="*{categorie}"> -->
-    <!-- 						<option th:each="categorie: ${@encheresServiceCategorie.allCategorie}" th:text="${categorie.getLibelle()}" th:value="${categorie.getNo_categorie()}" th:selected></option> -->
-    <!-- 					</select> -->
-    <!--                  </div> -->
-    <!--              </div> -->
+           		 <div class="form-group col-3">
+                     <div class="form-group">
+                           <label class="form-label mt-4" for="cat">Choisissez une categorie</label> 
+                        <select class="form-select col-3" id="cat" name="catSelect">
+    						<option th:each="cat: ${listeCategorie}" th:text="${cat.getLibelle()}" th:value="${cat.getNo_categorie()}" th:selected></option>
+    					</select>
+                     </div>
+                 </div>
 
-    <br>
-    <div class="form-group col-3">
-        <select class="form-select col-3" id="exampleSelect1">
-            <option>Choisir Catégorie</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-        </select>
-    </div>
     <br>
     <div class="container-fluid">
         <div class="row">

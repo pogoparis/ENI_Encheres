@@ -1,12 +1,10 @@
 package fr.eni.encheres.controller;
 
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Retrait;
@@ -61,6 +58,7 @@ public class EncheresController {
 	
 	@GetMapping("/encheres")
 	public String afficherAccueil(Model model) {
+		model.addAttribute("listeCategorie", encheresServiceCategorie.findAllCategorie());
 		model.addAttribute("listeArticles", encheresServiceArticlesVendus.findAllArticleVendu());
 		return "index";
 	}
