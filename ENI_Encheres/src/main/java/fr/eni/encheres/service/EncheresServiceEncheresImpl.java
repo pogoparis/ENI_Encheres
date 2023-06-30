@@ -27,10 +27,38 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 		datedujour = LocalDate.now();
 		Boolean verifVendeur = verificationVendeur(article, user);
 		Boolean verifDate = verificationDates(article);
-		if (verifVendeur && verifDate) {
+		Boolean verifDernierEncherisseur = verificationDernierEncherisseur(article, user);
+		Boolean verifSoldeSuffisant = verificationSoldeSuffisant(article, user);
+		if (verifVendeur && verifDate && verifDernierEncherisseur && verifSoldeSuffisant) {
 			return true;
 		}
 		return false;
+	}
+
+	private Boolean verificationSoldeSuffisant(ArticleVendu article, Principal user) {
+		if (user == null) {
+			return false;
+		}
+		if (article.getPrix_vente() >= encheresServiceUtilisateur.findUserByPseudo(user.getName()).getCredit()) {
+			return false;
+		}
+		return true;
+	}
+
+	private Boolean verificationDernierEncherisseur(ArticleVendu article, Principal user) {
+		
+		if (getMeilleureEnchereByArticle(article) == null) {
+			return true;
+		}
+		Utilisateur meilleurencherisseur = getMeilleureEnchereByArticle(article).getUtilisateur();
+		if (user == null){
+			return false;
+		}
+		Utilisateur utilisateuractuel = encheresServiceUtilisateur.findUserByPseudo(user.getName());
+		if (meilleurencherisseur.getNo_utilisateur() == utilisateuractuel.getNo_utilisateur()) {
+			return false;
+		}
+		return true;
 	}
 
 	private Boolean verificationDates(ArticleVendu article) {
