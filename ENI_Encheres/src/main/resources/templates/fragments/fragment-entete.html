@@ -1,10 +1,10 @@
 <header xmlns:th="http://www.thymeleaf.org" data-th-fragment="frag-entete">
-    <div class="container">
-      <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">ENI Enchères</a>
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-          </li>
+  
+      <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container">
+        <a class="navbar-brand" href="/">ENI Enchères</a>
+    	<div class="collapse navbar-collapse" id="navbarColor01">
+         <ul class="navbar-nav me-auto">
           <li class="nav-item">
           	<a class="nav-link " href="/encheres">Enchères</a>
           </li>
@@ -20,8 +20,10 @@
           <li class="nav-item" data-th-if="${#authorization.expression('isAnonymous()')}">
           	<a class="nav-link " th:href="@{/inscription}">S'inscrire</a> </li>
           <li class="nav-item" data-th-if="${#authorization.expression('isAuthenticated()')}">
-          	<a class="nav-link " th:href="@{/profil}">Profil</a></li>
+          	<a class="nav-link " th:href="@{/profil}">Profil</a>
+          	</li>
         </ul>
+        </div>
+       </div> 
       </nav>
-    </div>
 </header>
