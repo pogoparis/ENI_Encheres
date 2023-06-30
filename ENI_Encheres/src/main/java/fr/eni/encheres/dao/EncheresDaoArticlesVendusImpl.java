@@ -34,7 +34,6 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 		List<ArticleVendu> liste;
 		liste = namedParameterjdbcTemplate.query(SELECT_ALL_ARTICLEVENDU,
 				new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
-		System.out.println(liste);
 		return liste;
 	}
 
@@ -57,11 +56,8 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 
 	@Override
 	public ArticleVendu getArticleById(Integer id) {
-		System.out.println("METHODE GET ARTICLE BY ID ID= "+id);
 		ArticleVendu src = new ArticleVendu(id);
-		System.out.println(src);
 		ArticleVendu article = namedParameterjdbcTemplate.queryForObject(SELECT_ARTICLE_BY_ID , new BeanPropertySqlParameterSource(src) ,new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
-		System.out.println(article);
 		return article;
 	}
 

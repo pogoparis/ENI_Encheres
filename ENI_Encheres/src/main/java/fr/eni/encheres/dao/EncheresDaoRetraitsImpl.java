@@ -39,9 +39,7 @@ public class EncheresDaoRetraitsImpl implements EncheresDaoRetraits {
 	
 	public Retrait getRetraitByArticle(ArticleVendu article) {
 		Retrait retrait = new Retrait();
-		System.out.println("RETRAIT : "+retrait);
-		retrait = namedParameterJdbcTemplate.queryForObject(SELECT_RETRAIT_BY_ID, new BeanPropertySqlParameterSource(article), new RetraitRowMapper(encheresDaoArticlesVendus));
-		System.out.println("RETRAIT : "+retrait);	
+		retrait = namedParameterJdbcTemplate.queryForObject(SELECT_RETRAIT_BY_ID, new BeanPropertySqlParameterSource(article), new RetraitRowMapper(encheresDaoArticlesVendus));	
 		return retrait;
 	}
 

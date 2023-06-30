@@ -56,6 +56,7 @@ public class SecurityConfig {
 					.requestMatchers(HttpMethod.GET, "/article").permitAll()
 					.requestMatchers(HttpMethod.GET, "/error").permitAll()
 					.requestMatchers(HttpMethod.POST, "/creationarticle").permitAll()
+					.requestMatchers(HttpMethod.POST, "/encherir").permitAll()
 					.requestMatchers("/").permitAll()
 					
 					// Permettre à tous d'afficher correctement les images et CSS

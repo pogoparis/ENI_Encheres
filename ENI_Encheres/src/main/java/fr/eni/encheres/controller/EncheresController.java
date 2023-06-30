@@ -51,9 +51,10 @@ public class EncheresController {
 
 	@PostMapping("/encherir")
 	public String encherir(@ModelAttribute Enchere enchere,  Model model ) {
+		System.out.println("ENCHERES "+enchere);
 		
 		encheresServiceEncheres.creationEncheres(enchere);
-		return "article";
+		return "redirect:/article?id="+enchere.getArticle().getNo_article();
 	}
 	
 	
@@ -78,14 +79,11 @@ public class EncheresController {
 	
 	@GetMapping("/inscription")
 	public String afficherProfil(@ModelAttribute Utilisateur utilisateur) {
-		System.out.println(utilisateur);
-		System.out.println("ON PASSE PAR INSCRIPTION");
 		return "profil";
 	}
 	
 	@GetMapping("/profil")
 	public String afficherProfil(Principal principal , Model model) {
-		System.out.println("PRINCIPAL"+principal.getName());
 		Utilisateur utilisateurconnecte = encheresServiceUtilisateur.findUserByPseudo(principal.getName());
 		model.addAttribute("utilisateur", utilisateurconnecte);
 		return "profil";
@@ -129,9 +127,13 @@ public class EncheresController {
 	public String afficherDetailsArticles(Integer id, Model model, Principal principal, @ModelAttribute Enchere enchere) {
 		ArticleVendu article = encheresServiceArticlesVendus.findArticleById(id);
 		Retrait retrait = encheresServiceRetrait.findRetraitByArticle(article);
+		
+		
 		if(principal!=null) {
 			model.addAttribute("user", encheresServiceUtilisateur.findUserByPseudo(principal.getName()));
+			
 		}
+		System.out.println("ENCHERE PRE VALIDATION"+enchere);
 		model.addAttribute("article", article);
 		model.addAttribute("retrait", retrait);
 		Boolean tokenAffichage = encheresServiceEncheres.affichageDuBouton(article, principal);

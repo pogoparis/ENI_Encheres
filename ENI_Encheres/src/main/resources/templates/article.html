@@ -48,7 +48,9 @@
 		</div>
 			<div th:if="${tokenAffichage}">
 		<form th:action="@{/encherir}" method="post" th:object="${enchere}">
-			<input th:min="${article.getPrix_vente()+10}" th:max="${user.getCredit()}" step="10" type="number" th:value="${article.getPrix_vente()}" th:field="*{montant_enchere}" >
+			<select hidden name="numeroarticle" th:field="*{article}" ><option th:value="${article.getNo_article()}"></option></select>
+			<select hidden name="numerouser" type="number" th:field="*{utilisateur}" ><option th:value="${user.getNo_utilisateur()}"></option></select>
+			<input th:min="${article.getPrix_vente()+10}" th:max="${user.getCredit()}" step="10" type="number" th:placeholder="${article.getPrix_vente()+10}" th:field="*{montant_enchere}" >
 			<button type="submit">ENCHERIR</button>
 		</form>
 	</div>
