@@ -3,6 +3,7 @@ package fr.eni.encheres.dao;
 import java.util.List;
 
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Enchere;
 
 public interface EncheresDaoArticlesVendus {
 	
@@ -11,6 +12,8 @@ public interface EncheresDaoArticlesVendus {
 	void creerArticle(ArticleVendu article);
 
 	ArticleVendu getArticleById(Integer id);
+	
+	void majPrixArticle(Enchere enchere);
 
 
 }
