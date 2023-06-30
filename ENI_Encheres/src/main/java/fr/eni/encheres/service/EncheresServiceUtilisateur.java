@@ -2,6 +2,7 @@ package fr.eni.encheres.service;
 
 import java.util.List;
 
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 
 public interface EncheresServiceUtilisateur {
@@ -10,4 +11,5 @@ public interface EncheresServiceUtilisateur {
 	void createUtilisateur(Utilisateur utilisateur);
 	Utilisateur findUtilisateurById(Integer id);
 	public Utilisateur findUserByPseudo(String pseudo);
+	void majCreditUtilisateur(Enchere enchere);
 }

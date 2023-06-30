@@ -52,6 +52,7 @@ public class EncheresController {
 		
 		encheresServiceEncheres.creationEncheres(enchere);
 		encheresServiceArticlesVendus.majPrixArticle(enchere);
+		encheresServiceUtilisateur.majCreditUtilisateur(enchere);
 		return "redirect:/article?id="+enchere.getArticle().getNo_article();
 	}
 	

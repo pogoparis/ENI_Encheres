@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dao.EncheresDaoUtilisateurs;
 
@@ -41,6 +42,12 @@ public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateu
 	
 	public Utilisateur findUserByPseudo(String pseudo) {
 		return encheresDaoUtilisateurs.getUserByPseudo(pseudo);
+	}
+
+	@Override
+	public void majCreditUtilisateur(Enchere enchere) {
+		encheresDaoUtilisateurs.majCreditUtilisateur(enchere);
+		
 	}
 
 

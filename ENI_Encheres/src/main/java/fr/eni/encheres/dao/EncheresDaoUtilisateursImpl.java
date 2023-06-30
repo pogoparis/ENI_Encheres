@@ -7,11 +7,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 
 
@@ -23,6 +25,7 @@ public class EncheresDaoUtilisateursImpl implements EncheresDaoUtilisateurs {
 	final static String SELECT_USER_BY_USERNAME = "select * from UTILISATEURS where pseudo=:pseudo";
 	final static String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, rue, code_postal, ville,mot_de_passe, credit, telephone, administrateur) VALUES (:pseudo, :nom, :prenom, :email, :rue, :code_postal, :ville,:mot_de_passe, :credit,:telephone, :administrateur)";
 	final static String UPDATE_UTILISATEUR = "update UTILISATEURS set pseudo=:pseudo, nom=:nom, prenom=:prenom, email=:email, rue=:rue, code_postal=:code_postal, ville=:ville, credit=:credit,telephone=:telephone, administrateur=:administrateur where no_utilisateur=:no_utilisateur";
+	final static String UPDATE_CREDIT_UTILISATEUR_APRES_ENCHERE = "UPDATE UTILISATEURS set credit=:credit where no_utilisateur = :no_utilisateur"; 
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
@@ -80,6 +83,17 @@ public class EncheresDaoUtilisateursImpl implements EncheresDaoUtilisateurs {
 		namedParameterJdbcTemplate.update(UPDATE_UTILISATEUR, map);
 		}
 		
+	}
+
+
+	@Override
+	public void majCreditUtilisateur(Enchere enchere) {
+		MapSqlParameterSource utilisateurMap = new MapSqlParameterSource();
+		utilisateurMap.addValue("no_utilisateur",enchere.getUtilisateur().getNo_utilisateur());
+		utilisateurMap.addValue("credit",
+							(enchere.getUtilisateur().getCredit()-enchere.getMontant_enchere())
+							);
+		namedParameterJdbcTemplate.update(UPDATE_CREDIT_UTILISATEUR_APRES_ENCHERE,  utilisateurMap);
 	}
 
 }
