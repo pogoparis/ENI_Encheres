@@ -36,7 +36,12 @@
 			<p> Categorie : <span th:text="${article.getCategorie()}"></span></p>
 			<p> Vendeur : <a th:href="@{/details(pseudo=${article.getUtilisateur().getPseudo()})}"><span
 						th:text="${article.getUtilisateur().getPseudo()}"></span></a></p>
-			<p>Meilleur offre :<span></span></p>
+			<p th:if="${meilleureEnchere != null}">
+				Meilleure offre : 
+					<span th:text="${meilleureEnchere.getMontant_enchere()}"></span> 
+					crédits, par : 
+					<a th:href="@{/details(pseudo=${meilleureEnchere.getUtilisateur().getPseudo()})}"><span th:text="${meilleureEnchere.getUtilisateur().getPseudo()}"></span></a>
+					</p>
 			<div>
 				<h3>Lieu de retrait : </h3>
 				<p>

@@ -128,7 +128,7 @@ public class EncheresController {
 	public String afficherDetailsArticles(Integer id, Model model, Principal principal, @ModelAttribute Enchere enchere) {
 		ArticleVendu article = encheresServiceArticlesVendus.findArticleById(id);
 		Retrait retrait = encheresServiceRetrait.findRetraitByArticle(article);
-		
+		Enchere meilleureEnchere = encheresServiceEncheres.getMeilleureEnchereByArticle(article);
 		
 		if(principal!=null) {
 			model.addAttribute("user", encheresServiceUtilisateur.findUserByPseudo(principal.getName()));
@@ -137,6 +137,7 @@ public class EncheresController {
 		System.out.println("ENCHERE PRE VALIDATION"+enchere);
 		model.addAttribute("article", article);
 		model.addAttribute("retrait", retrait);
+		model.addAttribute("meilleureEnchere", meilleureEnchere);
 		Boolean tokenAffichage = encheresServiceEncheres.affichageDuBouton(article, principal);
 		model.addAttribute("tokenAffichage", tokenAffichage);
 		return "article";
