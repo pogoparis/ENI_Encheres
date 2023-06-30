@@ -45,7 +45,6 @@ public class EncheresDaoEncheresImpl implements EncheresDaoEncheres {
 	public List<Enchere> findEncheresByArticle(ArticleVendu article){
 		List<Enchere> liste;
 		liste = namedParameterJdbcTemplate.query(SELECT_ENCHERES_BY_ARTICLE, new BeanPropertySqlParameterSource(article) ,new EncheresRowMapper(encheresDaoArticlesVendus, encheresDaoUtilisateurs));
-		System.out.println(liste);
 		return liste;
 	}
 

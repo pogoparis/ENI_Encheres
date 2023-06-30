@@ -66,6 +66,20 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 	public List<Enchere> getEncheresByArticle (ArticleVendu articleVendu){
 		return enchereDaoEncheres.findEncheresByArticle(articleVendu);
 	}
+	
+	public Enchere getMeilleureEnchereByArticle (ArticleVendu article) {
+		List<Enchere> liste = getEncheresByArticle(article);
+		 if (liste.isEmpty()) {
+		        return null;
+		    }
+		    Enchere plusHauteEnchere = liste.get(0);
+		    for (Enchere enchere : liste) {
+		        if (enchere.getMontant_enchere() > plusHauteEnchere.getMontant_enchere()) {
+		        	plusHauteEnchere = enchere;
+		        }
+		    }
+		    return plusHauteEnchere;
+	}
 
 
 
