@@ -2,6 +2,7 @@ package fr.eni.encheres.service;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -60,6 +61,10 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 		datedujour = LocalDate.now();
 		enchere.setDate_enchere(datedujour);
 		enchereDaoEncheres.saveEnchere(enchere);
+	}
+	
+	public List<Enchere> getEncheresByArticle (ArticleVendu articleVendu){
+		return enchereDaoEncheres.findEncheresByArticle(articleVendu);
 	}
 
 
