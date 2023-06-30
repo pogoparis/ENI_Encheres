@@ -46,14 +46,15 @@
 				</p>
 			</div>
 		</div>
-	</div>
-
-	<div th:if="${tokenAffichage}">
+			<div th:if="${tokenAffichage}">
 		<form>
-			<input th:min="${article.getPrix_vente()+10}" th:max="${user.getCredit()}" step="10" type="number" disabled>
+			<input th:min="${article.getPrix_vente()+10}" th:max="${user.getCredit()}" step="10" type="number">
 			<button type="submit">ENCHERIR</button>
 		</form>
 	</div>
+		
+	</div>
+
 
 </body>
 
