@@ -55,6 +55,12 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 		return true;
 	}
 
+	@Override
+	public void creationEncheres(Enchere enchere) {
+		
+		
+	}
+
 	
 
 	

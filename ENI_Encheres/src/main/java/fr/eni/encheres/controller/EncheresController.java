@@ -50,10 +50,12 @@ public class EncheresController {
 	}
 
 	@PostMapping("/encherir")
-	public String encherir(@RequestParam ("article") ArticleVendu article ,Utilisateur utilisateur, Model model ) {
-		
+	public String encherir(@RequestParam ("article") ArticleVendu article ,Utilisateur utilisateur, Model model, Enchere enchere ) {
+		if (enchere == null) {
+			enchere =new Enchere();
+			return "article";
+		}
 		encheresServiceEncheres.creationEncheres(article, utilisateur);
-		
 		return "article";
 	}
 	
