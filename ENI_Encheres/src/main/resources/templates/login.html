@@ -9,17 +9,15 @@
 </head>
 <body>
 <div data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
-  
+  <br>
 <div class="container">
- <div class="form-group d-flex justify-content-center">
+ <div class="form-group d-block col-6 justify-content-center">
  	   <form th:action="@{/login}" method="post"> 
- 	  
           <label for="inputUsername">Login</label> 
           <input class="form-control" id="inputUsername" type="text" name="username" />
           <label for="inputPwd">Mot de Passe</label> 
           <input class="form-control" id="inputPwd" type="password" name="password" /><br>
           <button class="btn btn-primary"type="submit">Connexion</button>
-      	
       </form>
       </div>
  </div>

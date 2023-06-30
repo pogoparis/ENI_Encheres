@@ -18,8 +18,8 @@
 
 <body style="font-family : 'Delicious Handrawn', cursive;">
  <div data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
-   
-    <div class="container border">
+   <br>
+    <div class="container">
        <form class="d-flex col-4">
         <input class="form-control me-sm-2" type="search" placeholder="Search">
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
@@ -33,8 +33,8 @@
 <!--                  </div> -->
 <!--              </div> -->
      
-      
-       <div class="form-group col-3">
+      <br>
+     <div class="form-group col-3">
       <select class="form-select col-3" id="exampleSelect1" >
         <option>Choisir Catégorie</option>
         <option>2</option>
@@ -43,9 +43,10 @@
         <option>5</option>
       </select>
     </div>
+    <br>
+    <div class="container-fluid">
     	<div class="row">
-    	
-       		<div class= "d-inline-block col-4 border" th:each="article:${listeArticles}">
+       		<div class= "d-inline-block col-4" th:each="article:${listeArticles}">
        		<a class="lien" th:href="@{/article(id=${article.getNo_article()})}">
        		<img style="width:200px" class="img-thumbnail" th:src="'/Images/'+${article.getNo_article()}+'.jpg'">
     			<h2>Article n°<span  th:text="${article.getNo_article()}"></span> : <span th:text="${article.getNom_article()}"></span></h2>
@@ -54,16 +55,14 @@
     			<p> Fin de l'enchère : <span th:text="${article.getDate_fin_encheres()}"></span></p>
     			<p> Prix de départ : <span th:text="${article.getPrix_initial()}"></span> pts</p>
     			<p> Prix de vente : <span th:text="${article.getPrix_vente()}"></span> pts</p>
-    			<p> Categorie : <span th:text="${article.getCategorie()}"></span></p>
-    			
+    			<p> Categorie : <span th:text="${article.getCategorie()}"></span></p>	
     		</a>
     		<p> Utilisateur : <a th:href="@{/details(pseudo=${article.getUtilisateur().getPseudo()})}"><span th:text="${article.getUtilisateur().getPseudo()}"></span></a></p>
     		
     		</div>
-    		
     	</div>
     </div>
-  
+  </div>
 
 </body>
 </html>
