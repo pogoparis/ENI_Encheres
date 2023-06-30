@@ -47,8 +47,7 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 
 	@Override
 	public void majPrixArticle(Enchere enchere) {
-		 ArticleVendu article = encheresDaoArticlesVendus.getArticleById(enchere.getArticle().getNo_article());
-		 article.setPrix_vente(enchere.getMontant_enchere());
+		 encheresDaoArticlesVendus.majPrixArticle(enchere);
 		
 	}
 

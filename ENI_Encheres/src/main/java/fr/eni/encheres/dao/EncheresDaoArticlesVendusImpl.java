@@ -17,7 +17,7 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 	final static String SELECT_ALL_ARTICLEVENDU = "SELECT * from ARTICLES_VENDUS";
 	final static String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial, :prix_vente, :no_utilisateur, :no_categorie)";
 	final static String SELECT_ARTICLE_BY_ID = "SELECT * from ARTICLES_VENDUS WHERE no_article = :no_article";
-	final static String UPDATE_ARTICLE_BY_ENCHERE = "UPDATE ARTICLES set prix_vente=:prix_vente where no_article = :no_article and no_utilisateur = :no_utilisateur "; 
+	final static String UPDATE_ARTICLE_BY_ENCHERE = "UPDATE ARTICLES_VENDUS set prix_vente=:prix_vente where no_article = :no_article"; 
 	
 	private NamedParameterJdbcTemplate namedParameterjdbcTemplate;
 	private EncheresDaoCategories encheresDaoCategories;
@@ -65,7 +65,13 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 
 	@Override
 	public void majPrixArticle(Enchere enchere) {
-		namedParameterjdbcTemplate.update(UPDATE_ARTICLE_BY_ENCHERE, new BeanPropertySqlParameterSource(enchere));
+		MapSqlParameterSource articleMap = new MapSqlParameterSource();
+		
+	
+		articleMap.addValue("prix_vente",enchere.getMontant_enchere());
+		articleMap.addValue("no_article",enchere.getArticle().getNo_article());
+		
+		namedParameterjdbcTemplate.update(UPDATE_ARTICLE_BY_ENCHERE,  articleMap);
 		
 	}
 

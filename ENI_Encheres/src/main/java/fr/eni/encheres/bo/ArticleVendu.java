@@ -50,6 +50,9 @@ public class ArticleVendu {
 	}
 
 
+
+
+
 	//Getter Setter
 	public Integer getNo_article() {
 		return no_article;
