@@ -22,7 +22,7 @@ public class EncheresRowMapper implements RowMapper<Enchere>{
 	@Override
 	public Enchere mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Enchere enchere = new Enchere();
-		enchere.setDate_enchere(rs.getObject("date_encheres", LocalDate.class));
+		enchere.setDate_enchere(rs.getObject("date_enchere", LocalDate.class));
 		enchere.setMontant_enchere(rs.getInt("montant_enchere"));
 		enchere.setUtilisateur(encheresDaoUtilisateurs.getUtilisateurById(rs.getInt("no_utilisateur")));
 		enchere.setArticle(encheresDaoArticlesVendus.getArticleById(rs.getInt("no_article")));
