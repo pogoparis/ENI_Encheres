@@ -2,8 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,14 +20,23 @@
  <div data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
    
     <div class="container border">
-      <form class="d-flex">
+       <form class="d-flex col-4">
         <input class="form-control me-sm-2" type="search" placeholder="Search">
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
       </form>
-       <div class="form-group">
-      <label for="exampleSelect1" class="form-label mt-4">Example select</label>
-      <select class="form-select" id="exampleSelect1" >
-        <option>1</option>
+<!--        		 <div class="form-group col-3"> -->
+<!--                  <div class="form-group"> -->
+<!--                        <label class="form-label mt-4" for="categorie">Choisissez une categorie</label>  -->
+<!--                     <select class="form-select col-3" id="categorie" th:field="*{categorie}"> -->
+<!-- 						<option th:each="categorie: ${@encheresServiceCategorie.allCategorie}" th:text="${categorie.getLibelle()}" th:value="${categorie.getNo_categorie()}" th:selected></option> -->
+<!-- 					</select> -->
+<!--                  </div> -->
+<!--              </div> -->
+     
+      
+       <div class="form-group col-3">
+      <select class="form-select col-3" id="exampleSelect1" >
+        <option>Choisir Catégorie</option>
         <option>2</option>
         <option>3</option>
         <option>4</option>
