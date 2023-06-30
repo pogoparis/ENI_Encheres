@@ -54,6 +54,7 @@ public class EncheresController {
 		System.out.println("ENCHERES "+enchere);
 		
 		encheresServiceEncheres.creationEncheres(enchere);
+		encheresServiceArticlesVendus.majPrixArticle(enchere);
 		return "redirect:/article?id="+enchere.getArticle().getNo_article();
 	}
 	

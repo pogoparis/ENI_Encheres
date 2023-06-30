@@ -13,7 +13,7 @@ public interface EncheresServiceEncheres {
 	public void creationEncheres(Enchere enchere);
 	
 	public List<Enchere> getEncheresByArticle (ArticleVendu articleVendu);
-
 	
-
+	public Enchere getMeilleureEnchereByArticle (ArticleVendu article);
+	
 }
