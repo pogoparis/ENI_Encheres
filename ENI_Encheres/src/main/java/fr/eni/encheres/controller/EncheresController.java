@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.service.EncheresServiceArticlesVendus;
@@ -48,6 +49,15 @@ public class EncheresController {
 		this.encheresServiceEncheres = encheresServiceEncheres;
 	}
 
+	@PostMapping("/encherir")
+	public String encherir(@RequestParam ("article") ArticleVendu article ,Utilisateur utilisateur, Model model ) {
+		
+		encheresServiceEncheres.creationEncheres(article, utilisateur);
+		
+		return "article";
+	}
+	
+	
 	@GetMapping("/encheres")
 	public String afficherAccueil(Model model) {
 		model.addAttribute("listeArticles", encheresServiceArticlesVendus.findAllArticleVendu());

@@ -6,14 +6,19 @@ import java.time.LocalDate;
 import org.springframework.stereotype.Service;
 
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.Utilisateur;
+import fr.eni.encheres.dao.EncheresDaoEncheres;
 
 @Service
 public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 	
 	LocalDate datedujour;
+	EncheresDaoEncheres enchereDaoEncheres;
 	EncheresServiceUtilisateur encheresServiceUtilisateur;
 
-	public EncheresServiceEncheresImpl(EncheresServiceUtilisateur encheresServiceUtilisateur) {
+	public EncheresServiceEncheresImpl(EncheresServiceUtilisateur encheresServiceUtilisateur, EncheresDaoEncheres enchereDaoEncheres) {
+		this.enchereDaoEncheres = enchereDaoEncheres;
 		this.encheresServiceUtilisateur = encheresServiceUtilisateur;
 	}
 
@@ -49,6 +54,8 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 			}
 		return true;
 	}
+
+	
 
 	
 	
