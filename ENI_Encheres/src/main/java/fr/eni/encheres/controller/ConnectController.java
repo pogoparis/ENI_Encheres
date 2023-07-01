@@ -54,7 +54,10 @@ public class ConnectController {
 	public String afficherDetails(String pseudo, Model model, Principal principal) {
 		Utilisateur utilisateur = encheresServiceUtilisateur.findUserByPseudo(pseudo);
 		model.addAttribute("utilisateur", utilisateur);
-		model.addAttribute("pseudoConnecte", principal.getName());
+		if (principal != null) {
+			model.addAttribute("pseudoConnecte", principal.getName());
+			return "details";
+		}
 		return "details";
 	}
 
