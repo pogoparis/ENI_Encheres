@@ -45,7 +45,7 @@
 				<td class="border" th:text="${utilisateur.telephone}"></td>
 			</tr>
 		</table>
-	</div>
+	</div> 
 	<div th:if="${utilisateur.pseudo == pseudoConnecte}">
 		<div class="text-center m-3">
 			<form th:action="@{/profil}" method="get">
@@ -54,5 +54,4 @@
 		</form>
 	</div>
 </body>
-
 </html>
