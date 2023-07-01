@@ -2,6 +2,9 @@ package fr.eni.encheres.bo;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 public class ArticleVendu {
 
 
@@ -10,17 +13,22 @@ public class ArticleVendu {
 	private final static int EN_COURS = 1;
 	private final static int ENCHERES_TERMINEES = 2;
 	private final static int RETRAIT_EFFECTUE = 3;
-
-	
 	
 	private Integer no_article;
+	@NotBlank
 	private String nom_article;
+	
+	@NotBlank
 	private String description;
 	private LocalDate date_debut_encheres;
 	private LocalDate date_fin_encheres;
+	
+	@NotBlank
+	@Min(0)
 	private Integer prix_initial;
 	private Integer prix_vente;
 	private String etatVente;
+	@NotBlank
 	private Categorie categorie;
 	private Utilisateur utilisateur;
 	

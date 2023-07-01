@@ -57,7 +57,7 @@ public class EncheresController {
 		return "redirect:/encheres";
 	}
 
-	/************* AFFICAHGE CREATION ARTICLE ******************/
+	/************* AFFICHAGE CREATION ARTICLE ******************/
 	@GetMapping("/creerarticle")
 	public String creerArticle(@ModelAttribute ArticleVendu articleVendu, @ModelAttribute Retrait retrait,
 			Model model) {
@@ -100,7 +100,6 @@ public class EncheresController {
 		
 		if (principal != null) {
 			model.addAttribute("user", encheresServiceUtilisateur.findUserByPseudo(principal.getName()));
-
 		}
 		model.addAttribute("article", article);
 		model.addAttribute("retrait", retrait);
