@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dao.EncheresDaoArticlesVendus;
 import fr.eni.encheres.dao.EncheresDaoEncheres;
@@ -52,10 +53,14 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 	}
 
 
-
 	@Override
-	public List<ArticleVendu> findArticleContainNom(String rechercheNom) {
-		return encheresDaoArticlesVendus.getArticleContainNom(rechercheNom);
+	public List<ArticleVendu> findArticleByCategorieContainNom(String rechercheNom, Categorie categorie) {
+		// l'option 99 du select indique qu'aucune catégorie n'a été choisie
+		if (categorie.getNo_categorie() == 99) {
+			return encheresDaoArticlesVendus.getArticleContainNom(rechercheNom);
+		} else {
+			return encheresDaoArticlesVendus.getArticleByCategorieContainNom(rechercheNom, categorie);
+		}
 		
 	}
 

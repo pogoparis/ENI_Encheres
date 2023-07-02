@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.bo.Utilisateur;
@@ -113,10 +114,10 @@ public class EncheresController {
 
 	/************** BOUTON RECHERCHE GET *****************/
 	@GetMapping("/recherche")
-	public String recherche(String rechercheNom, Model model) {
-		model.addAttribute("listeCategorie", encheresServiceCategorie.findAllCategorie());
-		List<ArticleVendu> listeArticles = encheresServiceArticlesVendus.findArticleContainNom(rechercheNom);
-		model.addAttribute("listeArticles", listeArticles);
+	public String recherche(String rechercheNom, Model model, Categorie categorie) {
+		model.addAttribute("listeCategorie", encheresServiceCategorie.findAllCategorie());	
+		List<ArticleVendu> listeArticlesCate = encheresServiceArticlesVendus.findArticleByCategorieContainNom(rechercheNom, categorie);
+		model.addAttribute("listeArticles", listeArticlesCate);
 		return "index";
 	}
 

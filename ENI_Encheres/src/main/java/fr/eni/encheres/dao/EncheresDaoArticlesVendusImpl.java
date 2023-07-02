@@ -1,6 +1,8 @@
 package fr.eni.encheres.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -9,6 +11,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Enchere;
 
 @Repository
@@ -76,12 +79,25 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 	@Override
 	public List<ArticleVendu> getArticleContainNom(String rechercheNom) {
 		List<ArticleVendu> listeArticleTrouve;
-		String sql = "SELECT * from ARTICLES_VENDUS WHERE nom_article LIKE '%" + rechercheNom + "%'";
-		listeArticleTrouve = namedParameterjdbcTemplate.query(sql,
-				new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
-		return listeArticleTrouve;
-		
-		
+		String sql = "SELECT * from ARTICLES_VENDUS WHERE nom_article LIKE :rechercheNom";
+		Map<String, Object> params = new HashMap<>();
+	    params.put("rechercheNom", "%" + rechercheNom + "%");
+	    listeArticleTrouve = namedParameterjdbcTemplate.query(sql, params,
+	            new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
+	    return listeArticleTrouve;
+	}
+	
+	// RECHERCHE ARTICLES PAR NOM ET CATEGORIE
+	@Override
+	public List<ArticleVendu> getArticleByCategorieContainNom(String rechercheNom, Categorie categorie) {
+		List<ArticleVendu> listeArticleTrouve2;
+		String sqlCat = "SELECT * from ARTICLES_VENDUS WHERE no_categorie=:no_categorie AND nom_article LIKE :rechercheNom";
+		Map<String, Object> params = new HashMap<>();
+		params.put("no_categorie", categorie.getNo_categorie());
+	    params.put("rechercheNom", "%" + rechercheNom + "%");
+	    listeArticleTrouve2 = namedParameterjdbcTemplate.query(sqlCat, params,
+	            new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
+	    return listeArticleTrouve2;
 	}
 
 }

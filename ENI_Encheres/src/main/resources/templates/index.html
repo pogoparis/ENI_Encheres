@@ -24,7 +24,8 @@
 <div class="row">
  		<div class="col-6">
            		 <div class="form-group">
-                        <select class="form-select col-3" id="cat" name="catSelect">
+                        <select class="form-select col-3" id="cat" name="no_categorie">
+    						<option value="99">Choisir une Catégorie</option>
     						<option data-th-each="cat: ${listeCategorie}" data-th-text="${cat.getLibelle()}" data-th-value="${cat.getNo_categorie()}" th:selected></option>
     					</select>        
                  </div>
