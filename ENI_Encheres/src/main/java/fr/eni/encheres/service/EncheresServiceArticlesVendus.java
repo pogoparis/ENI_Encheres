@@ -5,6 +5,7 @@ import java.util.List;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.Utilisateur;
 
 public interface EncheresServiceArticlesVendus {
 	
@@ -12,6 +13,7 @@ public interface EncheresServiceArticlesVendus {
 	void createArticle(ArticleVendu article);
 	ArticleVendu findArticleById(Integer id);
 	void majPrixArticle(Enchere enchere);
-	List<ArticleVendu> findArticleByCategorieContainNom(String rechercheNom, Categorie categorie);
+	List<ArticleVendu> rechercheNonConnecte(String rechercheNom, Categorie categorie);
+	List<ArticleVendu> rechercheConnecte(String rechercheNom, Categorie categorie, Utilisateur utilisateur, String optionArticle);
 
 }

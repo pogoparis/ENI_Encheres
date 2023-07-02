@@ -114,12 +114,22 @@ public class EncheresController {
 
 	/************** BOUTON RECHERCHE GET *****************/
 	@GetMapping("/recherche")
-	public String recherche(String rechercheNom, Model model, Categorie categorie) {
-		model.addAttribute("listeCategorie", encheresServiceCategorie.findAllCategorie());	
-		List<ArticleVendu> listeArticlesCate = encheresServiceArticlesVendus.findArticleByCategorieContainNom(rechercheNom, categorie);
-		model.addAttribute("listeArticles", listeArticlesCate);
-		return "index";
+	public String recherche(String rechercheNom, Model model, Categorie categorie, Utilisateur utilisateur, Principal principal, String optionArticle) {
+		model.addAttribute("listeCategorie", encheresServiceCategorie.findAllCategorie());
+		if (principal != null) {
+			/********** A FAIRE ************* POUR LE MOMENT ça ne renvoi que les ventes ****/
+			utilisateur = encheresServiceUtilisateur.findUserByPseudo(principal.getName());
+			List<ArticleVendu> listeArticlesVendeur = encheresServiceArticlesVendus.rechercheConnecte(rechercheNom, categorie, utilisateur, optionArticle);
+			model.addAttribute("listeArticles", listeArticlesVendeur);
+			return "index";
+		} else {
+			// Recherche Non connectée OK
+			List<ArticleVendu> listeArticlesCate = encheresServiceArticlesVendus.rechercheNonConnecte(rechercheNom, categorie);
+			model.addAttribute("listeArticles", listeArticlesCate);
+			return "index";
+		}	
 	}
+	
 
 
 }

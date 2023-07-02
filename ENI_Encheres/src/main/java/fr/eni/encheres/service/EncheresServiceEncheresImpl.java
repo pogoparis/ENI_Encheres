@@ -109,6 +109,11 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 		    return plusHauteEnchere;
 	}
 
+	@Override
+	public List<Enchere> getEncheresByUser(Utilisateur utilisateur) {
+		return enchereDaoEncheres.getEncheresByUser(utilisateur);
+	}
+
 
 
 	

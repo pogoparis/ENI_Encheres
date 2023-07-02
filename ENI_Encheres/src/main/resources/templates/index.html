@@ -23,8 +23,9 @@
 
 
 <div class="container">
+<div class="container">
 	<form action="/recherche" method="get">
-		<div class="row mt-3">
+		<div class="row m-4">
 			<div class="col-6">
 				<div class="form-group">
 					<select class="form-select col-3" id="cat" name="no_categorie">
@@ -42,16 +43,14 @@
 				<br>
 			</div>
 		</div>
-	</form>
-
 
 	<div class="row"
 		data-th-if="${#authorization.expression('isAuthenticated()')}">
 		<div class="col-6 p-3">
 			<fieldset class="form-group">
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="optionsRadios"
-						id="optionsRadios1" value="option1"> <label
+					<input class="form-check-input" type="radio" name="optionArticle"
+						id="optionsRadios1" value="achats"> <label
 						class="form-check-label" for="optionsRadios1"> Achats </label>
 				</div>
 			</fieldset>
@@ -79,8 +78,8 @@
 		<div class="col-6 p-3">
 			<fieldset class="form-group">
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="optionsRadios"
-						id="optionsRadios1" value="option1"> <label
+					<input class="form-check-input" type="radio" name="optionArticle"
+						id="optionsRadios1" value="ventes"> <label
 						class="form-check-label" for="optionsRadios1"> Mes ventes
 					</label>
 				</div>
@@ -106,8 +105,8 @@
 			</div>
 		</div>
 	</div>
-	<br>
-
+</form>
+</div>
 
 	<div class="container-fluid">
 		<div th:if="${listeArticles.isEmpty()}" class="row">La liste

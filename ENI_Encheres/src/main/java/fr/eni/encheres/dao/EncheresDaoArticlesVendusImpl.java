@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.Utilisateur;
 
 @Repository
 public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus {
@@ -86,18 +87,47 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 	            new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
 	    return listeArticleTrouve;
 	}
+	 
 	
-	// RECHERCHE ARTICLES PAR NOM ET CATEGORIE
+	/******************************  RECHERCHE *******************************************/
+	// recherche par categorie et contenant la recherche
 	@Override
 	public List<ArticleVendu> getArticleByCategorieContainNom(String rechercheNom, Categorie categorie) {
 		List<ArticleVendu> listeArticleTrouve2;
-		String sqlCat = "SELECT * from ARTICLES_VENDUS WHERE no_categorie=:no_categorie AND nom_article LIKE :rechercheNom";
+		String sqlCat = "SELECT * from ARTICLES_VENDUS WHERE no_categorie=:no_categorie AND nom_article AND nom_article LIKE :rechercheNom";
 		Map<String, Object> params = new HashMap<>();
 		params.put("no_categorie", categorie.getNo_categorie());
 	    params.put("rechercheNom", "%" + rechercheNom + "%");
 	    listeArticleTrouve2 = namedParameterjdbcTemplate.query(sqlCat, params,
 	            new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
 	    return listeArticleTrouve2;
+	}
+
+	// recherche article par utilisateur
+	@Override
+	public List<ArticleVendu> getArticlesByUser(Utilisateur utilisateur, String rechercheNom) {
+		List<ArticleVendu> listeArticleUser;
+		String sql = "SELECT * from ARTICLES_VENDUS WHERE no_utilisateur=:no_utilisateur AND nom_article LIKE :rechercheNom";
+		Map<String, Object> params = new HashMap<>();
+		params.put("no_utilisateur", utilisateur.getNo_utilisateur());
+		params.put("rechercheNom", "%" + rechercheNom + "%");
+		listeArticleUser = namedParameterjdbcTemplate.query(sql, params,
+	            new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
+	    return listeArticleUser;
+	}
+	
+	//recherche article par utilisateur et categorie
+	@Override
+	public List<ArticleVendu> getArticlesByUserByCategorie(Utilisateur utilisateur, Categorie categorie, String rechercheNom) {
+		List<ArticleVendu> listeArticleUserCat;
+		String sql = "SELECT * from ARTICLES_VENDUS WHERE no_utilisateur=:no_utilisateur AND no_categorie=:no_categorie AND nom_article LIKE :rechercheNom";
+		Map<String, Object> params = new HashMap<>();
+		params.put("no_utilisateur", utilisateur.getNo_utilisateur());
+		params.put("no_categorie", categorie.getNo_categorie());
+		params.put("rechercheNom", "%" + rechercheNom + "%");
+		listeArticleUserCat = namedParameterjdbcTemplate.query(sql, params,
+	            new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
+	    return listeArticleUserCat;
 	}
 
 }

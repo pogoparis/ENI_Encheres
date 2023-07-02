@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.Utilisateur;
 
 @Repository
 public class EncheresDaoEncheresImpl implements EncheresDaoEncheres {
@@ -17,6 +18,7 @@ public class EncheresDaoEncheresImpl implements EncheresDaoEncheres {
 	public final static String INSERT_ENCHERES ="INSERT INTO ENCHERES (date_enchere, montant_enchere, no_article, no_utilisateur) VALUES (:date_enchere, :montant_enchere, :no_article, :no_utilisateur)";
 	public final static String SELECT_ENCHERES_BY_ARTICLE = "select encheres.no_utilisateur, encheres.no_article, date_enchere, montant_enchere from ENCHERES inner join ARTICLES_VENDUS on ENCHERES.no_article = ARTICLES_VENDUS.no_article where ARTICLES_VENDUS.no_article =:no_article";
 	public final static String UPDATE_ENCHERE = "update ENCHERES set date_enchere=:date_enchere, montant_enchere=:montant_enchere where no_utilisateur=:no_utilisateur";
+	private static final String SELECT_ENCHERES_BY_USER = "SELECT * FROM ENCHERES INNER JOIN ARTICLES_VENDUS ON ENCHERES.no_utilisateur = ARTICLES_VENDUS.no_utilisateur WHERE ARTICLES_VENDUS.no_utilisateur =:no_utilisateur";
 	
 	private EncheresDaoUtilisateurs encheresDaoUtilisateurs;
 	private EncheresDaoArticlesVendus encheresDaoArticlesVendus;
@@ -59,6 +61,14 @@ public class EncheresDaoEncheresImpl implements EncheresDaoEncheres {
 	public List<Enchere> findEncheresByArticle(ArticleVendu article){
 		List<Enchere> liste;
 		liste = namedParameterJdbcTemplate.query(SELECT_ENCHERES_BY_ARTICLE, new BeanPropertySqlParameterSource(article) ,new EncheresRowMapper(encheresDaoArticlesVendus, encheresDaoUtilisateurs));
+		return liste;
+	}
+
+
+	@Override
+	public List<Enchere> getEncheresByUser(Utilisateur utilisateur) {
+		List<Enchere> liste;
+		liste = namedParameterJdbcTemplate.query(SELECT_ENCHERES_BY_USER, new BeanPropertySqlParameterSource(utilisateur) ,new EncheresRowMapper(encheresDaoArticlesVendus, encheresDaoUtilisateurs));
 		return liste;
 	}
 
