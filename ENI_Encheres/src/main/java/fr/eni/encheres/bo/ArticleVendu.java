@@ -20,16 +20,23 @@ public class ArticleVendu {
 	
 	@NotBlank
 	private String description;
+	
 	private LocalDate date_debut_encheres;
 	private LocalDate date_fin_encheres;
 	
 	@NotBlank
 	@Min(0)
 	private Integer prix_initial;
+	
+	@NotBlank
+	@Min(0)
 	private Integer prix_vente;
+	
 	private String etatVente;
+	
 	@NotBlank
 	private Categorie categorie;
+	
 	private Utilisateur utilisateur;
 	
 	

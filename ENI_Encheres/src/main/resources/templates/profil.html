@@ -2,42 +2,49 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
-		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-		crossorigin="anonymous"></script>
-	<title>Profil Utilisateur</title>
-	<link rel="icon" type="image/x-icon" href="/Images/images.ico">
+<meta charset="UTF-8">
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+	crossorigin="anonymous"></script>
+<title>Profil Utilisateur</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="icon" type="image/x-icon" href="/Images/images.ico">
 </head>
 
 <body>
 	<div data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
 
 	<div class="container">
-		<form th:object="${utilisateur}" method="post" th:action="@{/register}">
+		<form th:object="${utilisateur}" method="post"
+			th:action="@{/register}">
 			<fieldset>
 				<input hidden type="number" th:field="*{no_utilisateur}" id="id">
 				<div class="form-group row">
 					<div class="col-sm-5">
 						<div class="form-group">
 							<label class="form-label mt-2" for="inputPseudo"> Pseudo</label>
-							<input type="text" class="form-control" placeholder="Pseudo" id="inputPseudo"
-								th:field="*{pseudo}">
-							<span class="text-danger col-6" th:if="${#fields.hasErrors('pseudo')}">
+							<input type="text" class="form-control" placeholder="Pseudo"
+								id="inputPseudo" th:field="*{pseudo}"> <span
+								class="text-danger col-6" th:if="${#fields.hasErrors('pseudo')}">
 								<ul>
-									<li th:each="erreur: ${#fields.errors('pseudo')}" th:text="${erreur}"></li>
+									<li th:each="erreur: ${#fields.errors('pseudo')}"
+										th:text="${erreur}"></li>
 								</ul>
 							</span>
 						</div>
 					</div>
 					<div class="col-sm-5">
 						<div class="form-group">
-							<label class="form-label mt-2" for="inputNom"> Nom</label>
-							<input type="text" class="form-control" placeholder="Nom" id="inputNom" th:field="*{nom}">
-							<span class="text-danger col-6" th:if="${#fields.hasErrors('nom')}">
+							<label class="form-label mt-2" for="inputNom"> Nom</label> <input
+								type="text" class="form-control" placeholder="Nom" id="inputNom"
+								th:field="*{nom}"> <span class="text-danger col-6"
+								th:if="${#fields.hasErrors('nom')}">
 								<ul>
-									<li th:each="erreur: ${#fields.errors('nom')}" th:text="${erreur}"></li>
+									<li th:each="erreur: ${#fields.errors('nom')}"
+										th:text="${erreur}"></li>
 								</ul>
 							</span>
 						</div>
@@ -47,24 +54,27 @@
 				<div class="form-group row">
 					<div class="col-sm-5">
 						<div class="form-group">
-							<label class="form-label mt-2" for="inputPrenom">Prenom</label>
-							<input type="text" class="form-control" placeholder="Prenom" id="inputPrenom"
-								th:field="*{prenom}">
-							<span class="text-danger col-6" th:if="${#fields.hasErrors('prenom')}">
+							<label class="form-label mt-2" for="inputPrenom">Prenom</label> <input
+								type="text" class="form-control" placeholder="Prenom"
+								id="inputPrenom" th:field="*{prenom}"> <span
+								class="text-danger col-6" th:if="${#fields.hasErrors('prenom')}">
 								<ul>
-									<li th:each="erreur: ${#fields.errors('prenom')}" th:text="${erreur}"></li>
+									<li th:each="erreur: ${#fields.errors('prenom')}"
+										th:text="${erreur}"></li>
 								</ul>
 							</span>
 						</div>
 					</div>
 					<div class="col-sm-5">
 						<div class="form-group">
-							<label for="inputEmail" class="form-label mt-2">Email address</label>
-							<input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
-								placeholder="Entrez votre email" th:field="*{email}">
-							<span class="text-danger col-6" th:if="${#fields.hasErrors('email')}">
+							<label for="inputEmail" class="form-label mt-2">Email
+								address</label> <input type="email" class="form-control" id="inputEmail"
+								aria-describedby="emailHelp" placeholder="Entrez votre email"
+								th:field="*{email}"> <span class="text-danger col-6"
+								th:if="${#fields.hasErrors('email')}">
 								<ul>
-									<li th:each="erreur: ${#fields.errors('email')}" th:text="${erreur}"></li>
+									<li th:each="erreur: ${#fields.errors('email')}"
+										th:text="${erreur}"></li>
 								</ul>
 							</span>
 						</div>
@@ -75,24 +85,28 @@
 				<div class="form-group row">
 					<div class="col-sm-5">
 						<div class="form-group">
-							<label for="inputrue" class="form-label mt-2">Rue</label>
-							<input type="text" class="form-control" id="inputrue" placeholder="Nom de la rue"
-								th:field="*{rue}">
-							<span class="text-danger col-6" th:if="${#fields.hasErrors('rue')}">
+							<label for="inputrue" class="form-label mt-2">Rue</label> <input
+								type="text" class="form-control" id="inputrue"
+								placeholder="Nom de la rue" th:field="*{rue}"> <span
+								class="text-danger col-6" th:if="${#fields.hasErrors('rue')}">
 								<ul>
-									<li th:each="erreur: ${#fields.errors('rue')}" th:text="${erreur}"></li>
+									<li th:each="erreur: ${#fields.errors('rue')}"
+										th:text="${erreur}"></li>
 								</ul>
 							</span>
 						</div>
 					</div>
 					<div class="col-sm-5">
 						<div class="form-group">
-							<label class="form-label mt-2" for="inputCodePostal">Code Postal</label>
-							<input type="text" class="form-control" placeholder="Code postal" id="inputCodePostal"
-								th:field="*{codePostal}">
-							<span class="text-danger col-6" th:if="${#fields.hasErrors('codePostal')}">
+							<label class="form-label mt-2" for="inputCodePostal">Code
+								Postal</label> <input type="text" class="form-control"
+								placeholder="Code postal" id="inputCodePostal"
+								th:field="*{codePostal}"> <span
+								class="text-danger col-6"
+								th:if="${#fields.hasErrors('codePostal')}">
 								<ul>
-									<li th:each="erreur: ${#fields.errors('codePostal')}" th:text="${erreur}"></li>
+									<li th:each="erreur: ${#fields.errors('codePostal')}"
+										th:text="${erreur}"></li>
 								</ul>
 							</span>
 						</div>
@@ -101,24 +115,27 @@
 				<div class="form-group row">
 					<div class="col-sm-5">
 						<div class="form-group">
-							<label for="inputVille" class="form-label mt-2">Ville</label>
-							<input type="text" class="form-control" id="inputVille" placeholder="Nom de la Ville"
-								th:field="*{ville}">
-							<span class="text-danger col-6" th:if="${#fields.hasErrors('ville')}">
+							<label for="inputVille" class="form-label mt-2">Ville</label> <input
+								type="text" class="form-control" id="inputVille"
+								placeholder="Nom de la Ville" th:field="*{ville}"> <span
+								class="text-danger col-6" th:if="${#fields.hasErrors('ville')}">
 								<ul>
-									<li th:each="erreur: ${#fields.errors('ville')}" th:text="${erreur}"></li>
+									<li th:each="erreur: ${#fields.errors('ville')}"
+										th:text="${erreur}"></li>
 								</ul>
 							</span>
 						</div>
 					</div>
 					<div class="col-sm-5">
 						<div class="form-group">
-							<label for="inputTel" class="form-label mt-2">Telephone</label>
-							<input type="text" class="form-control" id="inputTel" placeholder="Numéro de téléphone"
-								th:field="*{telephone}">
-							<span class="text-danger col-6" th:if="${#fields.hasErrors('telephone')}">
+							<label for="inputTel" class="form-label mt-2">Telephone</label> <input
+								type="text" class="form-control" id="inputTel"
+								placeholder="Numéro de téléphone" th:field="*{telephone}">
+							<span class="text-danger col-6"
+								th:if="${#fields.hasErrors('telephone')}">
 								<ul>
-									<li th:each="erreur: ${#fields.errors('telephone')}" th:text="${erreur}"></li>
+									<li th:each="erreur: ${#fields.errors('telephone')}"
+										th:text="${erreur}"></li>
 								</ul>
 							</span>
 						</div>
@@ -126,32 +143,38 @@
 				</div>
 
 
-				<div th:if="${utilisateur.getNo_utilisateur() == null}" class="form-group row">
+				<div th:if="${utilisateur.getNo_utilisateur() == null}"
+					class="form-group row">
 					<div class="col-sm-5">
 						<div class="form-group">
 							<label for="inputPassword" class="form-label mt-2">Password</label>
-							<input type="password" class="form-control" id="inputPassword" placeholder="Password"
-								th:field="*{motDePasse}">
-							<span class="text-danger col-6" th:if="${#fields.hasErrors('motDePasse')}">
+							<input type="password" class="form-control" id="inputPassword"
+								placeholder="Password" th:field="*{motDePasse}"> <span
+								class="text-danger col-6"
+								th:if="${#fields.hasErrors('motDePasse')}">
 								<ul>
-									<li th:each="erreur: ${#fields.errors('motDePasse')}" th:text="${erreur}"></li>
+									<li th:each="erreur: ${#fields.errors('motDePasse')}"
+										th:text="${erreur}"></li>
 								</ul>
 							</span>
 						</div>
 					</div>
 				</div>
-				<div th:if="${utilisateur.getNo_utilisateur() != null}" hidden class="form-group row">
+				<div th:if="${utilisateur.getNo_utilisateur() != null}" hidden
+					class="form-group row">
 					<div class="col-sm-5">
 						<div class="form-group">
 							<label for="inputPassword" class="form-label mt-2">Password</label>
-							<input type="password" class="form-control" id="inputPassword" placeholder="Password"
-								th:field="*{motDePasse}" value="*{motDePasse}">
+							<input type="password" class="form-control" id="inputPassword"
+								placeholder="Password" th:field="*{motDePasse}"
+								value="*{motDePasse}">
 						</div>
 					</div>
 				</div>
 				<div class="text-center m-4 col-10">
 					<button type="submit" class="btn btn-dark">Valider</button>
-					<a th:href="@{/encheres}"><button type="button" class="btn btn-dark">Annuler</button></a>
+					<a th:href="@{/encheres}"><button type="button"
+							class="btn btn-dark">Annuler</button></a>
 				</div>
 			</fieldset>
 		</form>

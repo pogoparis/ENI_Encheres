@@ -2,132 +2,149 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap" rel="stylesheet">
-    <title>Cherry</title>
-    <link rel="icon" type="image/x-icon" href="/Images/images.ico">
+<meta charset="UTF-8">
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+	crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap"
+	rel="stylesheet">
+<title>Cherry</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="icon" type="image/x-icon" href="/Images/images.ico">
 </head>
 
-<!-- <body style="font-family : 'Delicious Handrawn', cursive;"> -->
 <div data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
 
 
-<br>
 <div class="container">
- <form action="/recherche" method="get" >
-<div class="row">
- 		<div class="col-6">
-           		 <div class="form-group">
-                        <select class="form-select col-3" id="cat" name="no_categorie">
-    						<option value="99">Choisir une Catégorie</option>
-    						<option data-th-each="cat: ${listeCategorie}" data-th-text="${cat.getLibelle()}" data-th-value="${cat.getNo_categorie()}" th:selected></option>
-    					</select>        
-                 </div>
-                 </div>         
-                 <div class="d-flex col-6">		
-      			  <input name="rechercheNom" class="form-control me-sm-2" type="search" placeholder="Recherche">
-     			 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Recherche</button>
- 		   <br>
- 		</div>
- </div>     
-    </form>
-            
-            
-   <div class="row" data-th-if="${#authorization.expression('isAuthenticated()')}">   
-   <div class="col-6 p-3"> 
-    <fieldset class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-        <label class="form-check-label" for="optionsRadios1">
-         Achats
-        </label>
-      </div>
-    </fieldset>
-    <div class="container pl-3 ml-3">
-   <fieldset class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="">
-        <label class="form-check-label" for="flexCheckDefault">
-          Enchères ouvertes
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" >
-        <label class="form-check-label" for="flexCheckDefault">
-          Mes enchères en cours
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" >
-        <label class="form-check-label" for="flexCheckDefault">
-          Mes enchères remportées
-        </label>
-      </div>
-   </fieldset>
-   </div>
-   </div>   
-  
-<div class="col-6 p-3"> 
- <fieldset class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" >
-        <label class="form-check-label" for="optionsRadios1">
-          Mes ventes
-        </label>
-      </div>
-    </fieldset>
-    <div class="container pl-3 ml-3">
-   <fieldset class="form-group">
-      <div class="form-check">
-        <input class="form-check-input pl-3" type="checkbox" value="">
-        <label class="form-check-label pl-3" for="flexCheckDefault">
-          Mises en ventes en cours
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input pl-3" type="checkbox" value="">
-        <label class="form-check-label pl-3" for="flexCheckDefault">
-          Ventes non débutées
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input pl-3" type="checkbox" value="">
-        <label class="form-check-label pl-3" for="flexCheckDefault">
-          Ventes terminées
-        </label>
-      </div>
-   </fieldset>
-   </div>
-</div>
-</div>   <br> 
-  
-    
-    <div class="container-fluid">
-        <div class="row">
-            <div class="d-inline-flex col-6" th:each="article:${listeArticles}">
-                <a class="lien" th:href="@{/article(id=${article.getNo_article()})}">
-                    <img style="width:150px" class="pull-left img-responsive col-3  p-2 img-thumbnail"
-                        th:src="'/Images/'+${article.getNo_article()}+'.jpg'"></a>
+	<form action="/recherche" method="get">
+		<div class="row mt-3">
+			<div class="col-6">
+				<div class="form-group">
+					<select class="form-select col-3" id="cat" name="no_categorie">
+						<option value="99">Choisir une Catégorie</option>
+						<option data-th-each="cat: ${listeCategorie}"
+							data-th-text="${cat.getLibelle()}"
+							data-th-value="${cat.getNo_categorie()}" th:selected></option>
+					</select>
+				</div>
+			</div>
+			<div class="d-flex col-6">
+				<input name="rechercheNom" class="form-control me-sm-2"
+					type="search" placeholder="Recherche">
+				<button class="btn btn-secondary my-2 my-sm-0" type="submit">Recherche</button>
+				<br>
+			</div>
+		</div>
+	</form>
+
+
+	<div class="row"
+		data-th-if="${#authorization.expression('isAuthenticated()')}">
+		<div class="col-6 p-3">
+			<fieldset class="form-group">
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="optionsRadios"
+						id="optionsRadios1" value="option1"> <label
+						class="form-check-label" for="optionsRadios1"> Achats </label>
+				</div>
+			</fieldset>
+			<div class="container pl-3 ml-3">
+				<fieldset class="form-group">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="">
+						<label class="form-check-label" for="flexCheckDefault">
+							Enchères ouvertes </label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="">
+						<label class="form-check-label" for="flexCheckDefault">
+							Mes enchères en cours </label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="">
+						<label class="form-check-label" for="flexCheckDefault">
+							Mes enchères remportées </label>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+
+		<div class="col-6 p-3">
+			<fieldset class="form-group">
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="optionsRadios"
+						id="optionsRadios1" value="option1"> <label
+						class="form-check-label" for="optionsRadios1"> Mes ventes
+					</label>
+				</div>
+			</fieldset>
+			<div class="container pl-3 ml-3">
+				<fieldset class="form-group">
+					<div class="form-check">
+						<input class="form-check-input pl-3" type="checkbox" value="">
+						<label class="form-check-label pl-3" for="flexCheckDefault">
+							Mises en ventes en cours </label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input pl-3" type="checkbox" value="">
+						<label class="form-check-label pl-3" for="flexCheckDefault">
+							Ventes non débutées </label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input pl-3" type="checkbox" value="">
+						<label class="form-check-label pl-3" for="flexCheckDefault">
+							Ventes terminées </label>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+	<br>
+
+
+	<div class="container-fluid">
+		<div th:if="${listeArticles.isEmpty()}" class="row">La liste
+			d'article est vide.</div>
+		<div class="row">
+			<div class="d-inline-flex col-6" th:each="article:${listeArticles}">
+				<a class="lien" th:href="@{/article(id=${article.getNo_article()})}">
+					<img style="width: 150px"
+					class="pull-left img-responsive col-3  p-2 img-thumbnail"
+					th:src="'/Images/'+${article.getNo_article()}+'.jpg'">
+				</a>
 				<div class="d-block">
-	                <h2>Article n°<span  th:text="${article.getNo_article()}"></span> : <span th:text="${article.getNom_article()}"></span></h2>
-	                <p> Fin de l'enchère : <span th:text="${article.getDate_fin_encheres()}"></span></p>
-	                <p> Prix de vente : <span th:text="${article.getPrix_vente()}"></span> pts</p>
-	                <!--     			<p> Prix de départ : <span th:text="${article.getPrix_initial()}"></span> pts</p> -->
-	                <!--     			<p> Début de l'enchère : <div th:text="${article.getDate_debut_encheres()}"></div></p> -->
+					<h2>
+						Article n°<span th:text="${article.getNo_article()}"></span> : <span
+							th:text="${article.getNom_article()}"></span>
+					</h2>
+					<p>
+						Fin de l'enchère : <span
+							th:text="${article.getDate_fin_encheres()}"></span>
+					</p>
+					<p>
+						Prix de vente : <span th:text="${article.getPrix_vente()}"></span>
+						pts
+					</p>
+					<!--     			<p> Prix de départ : <span th:text="${article.getPrix_initial()}"></span> pts</p> -->
+					<!--     			<p> Début de l'enchère : <div th:text="${article.getDate_debut_encheres()}"></div></p> -->
 					<!--                <p>Description : <span th:text="${article.getDescription()}"></span></p><br> -->
-	                <!--     			<p> Categorie : <span th:text="${article.getCategorie()}"></span></p>	 -->
-	                <p> Utilisateur : <a th:href="@{/details(pseudo=${article.getUtilisateur().getPseudo()})}"><span
-	                            th:text="${article.getUtilisateur().getPseudo()}"></span></a></p>     
-                </div>
-            </div>
-        </div>
-    </div>
+					<!--     			<p> Categorie : <span th:text="${article.getCategorie()}"></span></p>	 -->
+					<p>
+						Utilisateur : <a
+							th:href="@{/details(pseudo=${article.getUtilisateur().getPseudo()})}"><span
+							th:text="${article.getUtilisateur().getPseudo()}"></span></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 </body>

@@ -10,7 +10,7 @@ public class Enchere {
 	private ArticleVendu article;
 	
 	
-	// COnstructeur
+	// Constructeur
 	public Enchere() {
 		// Pour Spring
 	}
