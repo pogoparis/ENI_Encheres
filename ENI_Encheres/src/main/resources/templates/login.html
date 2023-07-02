@@ -11,6 +11,10 @@
 <div data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
   <br>
 <div class="container">
+ <div th:if="${successMessage}" class="alert alert-success col-6">
+    <p th:text="${successMessage}"></p>
+</div>
+
  <div class="form-group d-block col-6 justify-content-center">
  	   <form th:action="@{/login}" method="post"> 
           <label for="inputUsername">Login</label> 

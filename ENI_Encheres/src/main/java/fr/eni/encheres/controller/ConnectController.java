@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.service.EncheresServiceUtilisateur;
@@ -26,9 +27,13 @@ public class ConnectController {
 
 	/*********** AFFICHAGE PAGE LOGIN ****************/
 	@GetMapping("/login")
-	public String afficherLogin(Principal principal) {
+	public String afficherLogin(Principal principal, Model model) {
 		if (principal != null) {
 			return "redirect:/encheres";
+		}
+		if (model.containsAttribute("successMessage")) {
+	        String successMessage = (String) model.getAttribute("successMessage");
+	        model.addAttribute("successMessage", successMessage);
 		}
 		return "login";
 	}
@@ -41,11 +46,12 @@ public class ConnectController {
 
 	/************* BOUTON VALIDATION REGISTER *****************/
 	@PostMapping("/register")
-	public String register(@Valid @ModelAttribute Utilisateur utilisateur, BindingResult validationResult) {
+	public String register(@Valid @ModelAttribute Utilisateur utilisateur, BindingResult validationResult, RedirectAttributes redirectAttributes) {
 		if(validationResult.hasErrors()) {
 			return "profil";
 		}
 		encheresServiceUtilisateur.createUtilisateur(utilisateur);
+		redirectAttributes.addFlashAttribute("successMessage", "L'enregistrement a réussi. Veuillez vous connecter avec vos identifiants.");
 		return "redirect:/login";
 	}
 

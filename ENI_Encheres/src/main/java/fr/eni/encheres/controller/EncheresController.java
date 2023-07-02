@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Retrait;
@@ -44,7 +46,7 @@ public class EncheresController {
 		this.encheresServiceEncheres = encheresServiceEncheres;
 	}
 
-	/************ AFFICHAGE ACCUEIL ********************/
+	/************ AFFICHAGE ACCUEIL LISTE ARTICLE********************/
 	@GetMapping("/encheres")
 	public String afficherAccueil(Model model) {
 		model.addAttribute("listeCategorie", encheresServiceCategorie.findAllCategorie());
