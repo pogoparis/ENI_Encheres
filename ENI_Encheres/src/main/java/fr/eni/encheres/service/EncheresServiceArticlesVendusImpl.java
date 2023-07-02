@@ -44,9 +44,11 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 
 	}
 
+	
+	/*********************** RECHERCHE ***************************/
 	@Override
 	public List<ArticleVendu> rechercheNonConnecte(String rechercheNom, Categorie categorie) {
-		// l'option 99 du select indique qu'aucune catégorie n'a été choisie alors on
+		// l'option 99 du select indique qu'aucune catégorie n'a été choisie
 		if (categorie.getNo_categorie() == 99) {
 			return encheresDaoArticlesVendus.getArticleContainNom(rechercheNom);
 		} else {
@@ -54,15 +56,31 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 		}
 	}
 
+	// RECHERCHE AVEC UTILISATEUR CONNECTE
 	@Override
 	public List<ArticleVendu> rechercheConnecte(String rechercheNom, Categorie categorie, Utilisateur utilisateur,
 			String optionArticle) {
 		// IL FAUT FAIRE LES OPTIONS VENTE ET ACHAT
 		if (categorie.getNo_categorie() == 99) {
-			return encheresDaoArticlesVendus.getArticlesByUser(utilisateur, rechercheNom);
+			if (optionArticle.equals("ventes") ) {
+				return encheresDaoArticlesVendus.getArticlesByUser(utilisateur, rechercheNom);
+			} else if (optionArticle.equals("achats") ) {
+				//**************************** A FAIRE************************************** //
+				return null;
+			} else {
+				return encheresDaoArticlesVendus.getArticleContainNom(rechercheNom);
+			}
 		} else {
-			return encheresDaoArticlesVendus.getArticlesByUserByCategorie(utilisateur, categorie, rechercheNom);
+			if (optionArticle.equals("ventes")) {
+				return encheresDaoArticlesVendus.getArticlesByUserByCategorie(utilisateur, categorie, rechercheNom);
+			} else if (optionArticle.equals("achats")) {
+				//************************** A FAIRE *******************************************// 			
+				return null;
+			} else {
+				return encheresDaoArticlesVendus.getArticleByCategorieContainNom(rechercheNom, categorie);
+			}
 		}
-
 	}
+	
+	
 }
