@@ -1,8 +1,7 @@
 package fr.eni.encheres.service;
 
 import java.util.List;
-
-import com.microsoft.sqlserver.jdbc.SQLServerException;
+	
 
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
@@ -10,7 +9,7 @@ import fr.eni.encheres.bo.Utilisateur;
 public interface EncheresServiceUtilisateur {
 
 	List<Utilisateur> findAllUtilisateurs();
-	void createUtilisateur(Utilisateur utilisateur) throws SQLServerException;
+	void createUtilisateur(Utilisateur utilisateur) ;
 	Utilisateur findUtilisateurById(Integer id);
 	public Utilisateur findUserByPseudo(String pseudo);
 	void majCreditUtilisateur(Enchere enchere);

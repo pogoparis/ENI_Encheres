@@ -1,11 +1,13 @@
 package fr.eni.encheres.dao;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -17,6 +19,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
+import fr.eni.encheres.security.UniciteException;
 
 
 @Repository
@@ -58,36 +61,44 @@ public class EncheresDaoUtilisateursImpl implements EncheresDaoUtilisateurs {
 		return utilisateur;
 	}
 
-
+	public boolean isPseudoUnique(String pseudo) {
+        String sql = "SELECT COUNT(*) FROM UTILISATEURS WHERE pseudo = :pseudo";
+        Map<String, Object> params = Collections.singletonMap("pseudo", pseudo);
+        int count = namedParameterJdbcTemplate.queryForObject(sql, params, Integer.class);
+        return count == 0;
+    }
+	
+	
 	// Enregistrement de l'utilisateur en BDD
 	@Override
-	public void saveUtilisateur(Utilisateur utilisateur) throws SQLServerException {
-		System.out.println("DAO"+utilisateur);
-		Map<String, Object> map = new HashMap<>();
-		
-		if(utilisateur.getNo_utilisateur() != null) {
-			map.put("no_utilisateur", utilisateur.getNo_utilisateur());
-		}
-		map.put("pseudo", utilisateur.getPseudo());
-		map.put("nom", utilisateur.getNom());
-		map.put("prenom", utilisateur.getPrenom());
-		map.put("email", utilisateur.getEmail());
-		map.put("telephone", utilisateur.getTelephone());
-		map.put("rue", utilisateur.getRue());
-		map.put("code_postal", utilisateur.getCodePostal());
-		map.put("ville", utilisateur.getVille());
-		if (utilisateur.getNo_utilisateur() == null) {
-			map.put("mot_de_passe", utilisateur.getMotDePasse());
-		}
-		map.put("credit", 600);
-		map.put("administrateur", 1);
-		
-		if (utilisateur.getNo_utilisateur() == null) {	
-		namedParameterJdbcTemplate.update(INSERT_UTILISATEUR, map);	
+	public void saveUtilisateur(Utilisateur utilisateur) {
+		if (!isPseudoUnique(utilisateur.getPseudo())) {
+			System.out.println("erreur");
 		} else {
-		namedParameterJdbcTemplate.update(UPDATE_UTILISATEUR, map);
+			Map<String, Object> map = new HashMap<>();
+			if(utilisateur.getNo_utilisateur() != null) {
+				map.put("no_utilisateur", utilisateur.getNo_utilisateur());
+			}
+			map.put("pseudo", utilisateur.getPseudo());
+			map.put("nom", utilisateur.getNom());
+			map.put("prenom", utilisateur.getPrenom());
+			map.put("email", utilisateur.getEmail());
+			map.put("telephone", utilisateur.getTelephone());
+			map.put("rue", utilisateur.getRue());
+			map.put("code_postal", utilisateur.getCodePostal());
+			map.put("ville", utilisateur.getVille());
+			if (utilisateur.getNo_utilisateur() == null) {
+				map.put("mot_de_passe", utilisateur.getMotDePasse());
+			}
+			map.put("credit", 600);
+			map.put("administrateur", 1);
+			
+			if (utilisateur.getNo_utilisateur() == null) {	
+			namedParameterJdbcTemplate.update(INSERT_UTILISATEUR, map);	
+			} else {
+			namedParameterJdbcTemplate.update(UPDATE_UTILISATEUR, map);
+			}			
 		}
-		
 	}
 
 

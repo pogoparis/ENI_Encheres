@@ -32,6 +32,9 @@
 									</li>
 								</ul>
 							</span>
+							<div th:if="${errorMessage}" class="error-message">
+    							<span th:text="${errorMessage}"></span>
+							</div>
 						</div>
 					</div>
 					<div class="col-sm-5">
