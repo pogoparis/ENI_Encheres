@@ -55,6 +55,13 @@ public class ConnectController {
 	/************* BOUTON VALIDATION REGISTER  *****************/
 	@PostMapping("/register")
 	public String register(@Valid @ModelAttribute Utilisateur utilisateur, BindingResult validationResult, RedirectAttributes redirectAttributes)  {
+		
+		if (!encheresServiceUtilisateur.isPseudoUnique(utilisateur.getPseudo())) {
+			validationResult.rejectValue("pseudo", "pseudo.alreadyTaken", "Le pseudo est déjà pris");
+		}
+		
+		
+		
 		if(validationResult.hasErrors()) {
 			return "profil";		
 		}		

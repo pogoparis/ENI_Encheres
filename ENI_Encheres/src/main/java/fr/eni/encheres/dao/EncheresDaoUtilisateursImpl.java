@@ -19,7 +19,6 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
-import fr.eni.encheres.security.UniciteException;
 
 
 @Repository

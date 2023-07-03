@@ -20,5 +20,7 @@ public interface EncheresDaoUtilisateurs {
 	void delete(Integer id);
 
 	void remboursementCreditUtilisateur(Enchere ancienneMeilleureEnchere);
+	
+	public boolean isPseudoUnique(String pseudo);
 
 }
