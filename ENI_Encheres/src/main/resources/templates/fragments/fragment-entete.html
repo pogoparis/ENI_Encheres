@@ -20,7 +20,7 @@
           <li class="nav-item" data-th-if="${#authorization.expression('isAnonymous()')}">
           	<a class="nav-link " th:href="@{/inscription}">S'inscrire</a> </li>
           <li class="nav-item" data-th-if="${#authorization.expression('isAuthenticated()')}">
-          	<a class="nav-link " th:href="@{/profil}">Profil</a>
+          	<a class="nav-link " th:href="@{/moncompte}">Mon Compte</a>
           	</li>
         </ul>
         </div>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+	<title th:text="${utilisateur.pseudo}">Pseudo</title>
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="icon" type="image/x-icon" href="/Images/images.ico">
+</head>
+
+<body>
+	<div data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
+	
+	
+<div class="container">
+	<div class="list-group">
+		<table class="table table-hover col-6" style="margin:auto">
+			<tr class="table-light">
+				<th class="border" scope="row">Nom</th>
+				<td class="border" th:text="${utilisateur.nom}"></td>
+			</tr>
+			<tr class="table-light">
+				<th class="border" scope="row">Prenom</th>
+				<td class="border" th:text="${utilisateur.prenom}"></td>
+			</tr>
+			<tr class="table-light">
+				<th class="border" scope="row">Email</th>
+				<td class="border" th:text="${utilisateur.email}"></td>
+			</tr>
+			<tr class="table-light">
+				<th class="border" scope="row">Rue</th>
+				<td class="border" th:text="${utilisateur.rue}"></td>
+			</tr>
+			<tr class="table-light">
+				<th class="border" scope="row">Code postal</th>
+				<td class="border" th:text="${utilisateur.codePostal}"></td>
+			</tr>
+			<tr class="table-light">
+				<th class="border" scope="row">Villes</th>
+				<td class="border" th:text="${utilisateur.ville}"></td>
+			</tr>
+			<tr class="table-light">
+				<th class="border" scope="row">Téléphone</th>
+				<td class="border" th:text="${utilisateur.telephone}"></td>
+			</tr>
+			
+			
+			
+		</table>
+		
+		
+	</div> 
+</div>
+<!-- 	<div th:if="${utilisateur.pseudo == pseudoConnecte}"> -->
+<!-- 		<div class="text-center m-3"> -->
+<!-- 			<form th:action="@{/profil}" method="get"> -->
+<!-- 				<button class="btn btn-dark" type="submit">Modifier</button> -->
+<!-- 		</div> -->
+<!-- 		</form> -->
+<!-- 	</div> -->
+</body>
+</html>
