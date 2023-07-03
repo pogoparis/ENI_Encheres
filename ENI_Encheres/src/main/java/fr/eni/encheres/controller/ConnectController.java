@@ -95,6 +95,7 @@ public class ConnectController {
 			utilisateur = encheresServiceUtilisateur.findUserByPseudo(principal.getName());
 		model.addAttribute("utilisateur" , utilisateur);
 		model.addAttribute("listeEncheres", encheresServiceEncheres.getEncheresByUser(utilisateur));
+		model.addAttribute("serviceEncheres", encheresServiceEncheres);
 			return "moncompte";
 			
 		}
