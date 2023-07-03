@@ -3,7 +3,10 @@ package fr.eni.encheres.service;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.support.PeriodicTrigger;
 import org.springframework.stereotype.Service;
 
 import fr.eni.encheres.bo.ArticleVendu;
@@ -18,8 +21,14 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 	EncheresDaoEncheres enchereDaoEncheres;
 	EncheresServiceUtilisateur encheresServiceUtilisateur;
 	EncheresServiceArticlesVendus encheresServiceArticlesVendus;
+//	private final TaskScheduler taskScheduler;
 
+//	 private void verifierEncheresTerminees() {
+//	        System.out.println("test");
+//	    }
 	
+	//injecter au service TaskScheduler taskScheduler
+	// et appeler la méthode planifierVerificationEncheresTerminees();
 	public EncheresServiceEncheresImpl(EncheresDaoEncheres enchereDaoEncheres,
 			EncheresServiceUtilisateur encheresServiceUtilisateur,
 			EncheresServiceArticlesVendus encheresServiceArticlesVendus) {
@@ -27,7 +36,12 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 		this.encheresServiceUtilisateur = encheresServiceUtilisateur;
 		this.encheresServiceArticlesVendus = encheresServiceArticlesVendus;
 	}
-
+//
+//	private void planifierVerificationEncheresTerminees() {
+//        // Exemple de planification avec un délai fixe de 60 secondes
+//        taskScheduler.schedule(this::verifierEncheresTerminees, new PeriodicTrigger(2, TimeUnit.SECONDS));
+//    }
+	
 	public Boolean affichageDuBouton(ArticleVendu article, Principal user) {
 		datedujour = LocalDate.now();
 		Boolean verifVendeur = verificationVendeur(article, user);
