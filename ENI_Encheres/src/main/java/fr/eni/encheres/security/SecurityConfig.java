@@ -69,6 +69,7 @@ public class SecurityConfig {
 	        http.formLogin(form -> {
 	            form.loginPage("/login").permitAll();
 	            form.defaultSuccessUrl("/encheres").permitAll();
+	            form.failureUrl("/login?error");
 	        });
 
 		// /logout --> vider la session et le contexte de sécurité

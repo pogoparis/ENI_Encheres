@@ -35,10 +35,13 @@ public class ConnectController {
 
 	/*********** AFFICHAGE PAGE LOGIN ****************/
 	@GetMapping("/login")
-	public String afficherLogin(Principal principal, Model model) {
+	public String afficherLogin(@RequestParam(value = "error", required = false) String error,Principal principal, Model model) {
 		if (principal != null) {
 			return "redirect:/encheres";
-		}
+		} 
+		if (error != null) {
+	        model.addAttribute("errorMessage", "Identifiant ou mot de passe incorrect");
+	    }
 		if (model.containsAttribute("successMessage")) {
 	        String successMessage = (String) model.getAttribute("successMessage");
 	        model.addAttribute("successMessage", successMessage);
