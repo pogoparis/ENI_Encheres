@@ -92,11 +92,16 @@ public void miseEnPlaceDesListes (Utilisateur utilisateur) {
 		List<ArticleVendu> listeArticlesVendus = encheresDaoArticlesVendus.getArticlesByUser(utilisateur);
 		utilisateur.setListeArticlesVendus(listeArticlesVendus);
 		
-		List<Enchere> listeEncheres = encheresDaoEncheres.getEncheresByUser(utilisateur);
+		List<Enchere> listeEncheres = new ArrayList<>();
+		for (Enchere enchere : encheresDaoEncheres.getEncheresByUser(utilisateur)) {
+			if (enchere.getArticle().getDate_fin_encheres().isAfter(LocalDate.now())){
+				listeEncheres.add(enchere);
+			}
+		}
 		utilisateur.setListeEncheres(listeEncheres);
 		
 		List<ArticleVendu> listeArticlesAchetes = new ArrayList<>();
-		for (Enchere enchere : listeEncheres) {
+		for (Enchere enchere : encheresDaoEncheres.getEncheresByUser(utilisateur)) {
 			if ((enchere.getArticle().getDate_fin_encheres().isBefore(LocalDate.now())) 
 					&& 
 				(isMeilleurEncherisseur(utilisateur, enchere.getArticle())) ) {
