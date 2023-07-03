@@ -122,7 +122,9 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 	@Override
 	public void surencherir(Enchere enchere) {
 		Enchere ancienneMeilleureEnchere = getMeilleureEnchereByArticle(enchere.getArticle());
-		encheresServiceUtilisateur.remboursementDernierEncherisseur(ancienneMeilleureEnchere);
+		if (ancienneMeilleureEnchere != null) {
+			encheresServiceUtilisateur.remboursementDernierEncherisseur(ancienneMeilleureEnchere);
+		}
 		creationEncheres(enchere);
 		encheresServiceArticlesVendus.majPrixArticle(enchere);
 		encheresServiceUtilisateur.majCreditUtilisateur(enchere);
