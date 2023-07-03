@@ -2,6 +2,8 @@ package fr.eni.encheres.dao;
 
 import java.util.List;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 
@@ -13,7 +15,7 @@ public interface EncheresDaoUtilisateurs {
 	
 	public Utilisateur getUserByPseudo(String pseudo);
 
-	void saveUtilisateur(Utilisateur utilisateur);
+	void saveUtilisateur(Utilisateur utilisateur) throws SQLServerException;
 
 	void majCreditUtilisateur(Enchere enchere);
 	void delete(Integer id);
