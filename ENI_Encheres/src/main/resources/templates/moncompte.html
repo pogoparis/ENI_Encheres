@@ -50,13 +50,34 @@
 						
 		</table>
 		
-		<div th:each="enchere:${listeEncheres}">
-			<p th:text="${enchere.getArticle().getNom_article()}"></p>
-		</div>
+		
 		
 		
 	</div> 
 </div>
+
+<h2>Encheres en cours</h2>
+<div class="container-fluid">
+<div class="row">
+<div class="d-inline-flex col-6"  th:each="enchere:${listeEncheres}">
+	<img style="width: 150px"
+					class="pull-left img-responsive col-3  p-2 img-thumbnail"
+					th:src="'/Images/'+${enchere.getArticle().getNo_article()}+'.jpg'">
+					<div class="d-block">
+			<h3 th:text="${enchere.getArticle().getNom_article()}"></h3>
+			<p> Meilleur enchérisseur : 
+				<span style="color : green" th:if="${serviceEncheres.getMeilleureEnchereByArticle(enchere.getArticle()).getUtilisateur().getNo_utilisateur()} == ${utilisateur.getNo_utilisateur()}">OUI</span>
+				<span style="color : red" th:if="${serviceEncheres.getMeilleureEnchereByArticle(enchere.getArticle()).getUtilisateur().getNo_utilisateur()} != ${utilisateur.getNo_utilisateur()}">NON</span>
+				
+			</p>
+			<p> Montant proposé : <span th:text="${enchere.getMontant_enchere()}"></span> crédits</p>
+			<p> Date de l'enchère : <span th:text="${enchere.getDate_enchere()}"></span></p>
+			</div>
+			</div>
+		</div>
+		</div>
+		
+		
 		<div class="text-center m-3">
 			<form th:action="@{/profil}" method="get">
 				<button class="btn btn-dark" type="submit">Modifier</button>
