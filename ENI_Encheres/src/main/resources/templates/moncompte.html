@@ -60,9 +60,11 @@
 <div class="container-fluid">
 <div class="row">
 <div class="d-inline-flex col-6"  th:each="enchere:${listeEncheres}">
+<a class="lien" th:href="@{/article(id=${enchere.getArticle().getNo_article()})}">
 	<img style="width: 150px"
 					class="pull-left img-responsive col-3  p-2 img-thumbnail"
 					th:src="'/Images/'+${enchere.getArticle().getNo_article()}+'.jpg'">
+					</a>
 					<div class="d-block">
 			<h3 th:text="${enchere.getArticle().getNom_article()}"></h3>
 			<p> Meilleur enchérisseur : 
