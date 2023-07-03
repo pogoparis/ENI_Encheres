@@ -71,9 +71,8 @@ public class EncheresController {
 	/********** BOUTON VALIDATION CREATION ENCHERE ***********/
 	@PostMapping("/encherir")
 	public String encherir(@ModelAttribute Enchere enchere, Model model) {
-		encheresServiceEncheres.creationEncheres(enchere);
-		encheresServiceArticlesVendus.majPrixArticle(enchere);
-		encheresServiceUtilisateur.majCreditUtilisateur(enchere);
+		encheresServiceEncheres.surencherir(enchere);
+		
 		return "redirect:/article?id=" + enchere.getArticle().getNo_article();
 	}
 

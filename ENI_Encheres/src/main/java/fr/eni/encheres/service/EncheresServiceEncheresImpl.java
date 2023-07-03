@@ -17,10 +17,15 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 	LocalDate datedujour;
 	EncheresDaoEncheres enchereDaoEncheres;
 	EncheresServiceUtilisateur encheresServiceUtilisateur;
+	EncheresServiceArticlesVendus encheresServiceArticlesVendus;
 
-	public EncheresServiceEncheresImpl(EncheresServiceUtilisateur encheresServiceUtilisateur, EncheresDaoEncheres enchereDaoEncheres) {
+	
+	public EncheresServiceEncheresImpl(EncheresDaoEncheres enchereDaoEncheres,
+			EncheresServiceUtilisateur encheresServiceUtilisateur,
+			EncheresServiceArticlesVendus encheresServiceArticlesVendus) {
 		this.enchereDaoEncheres = enchereDaoEncheres;
 		this.encheresServiceUtilisateur = encheresServiceUtilisateur;
+		this.encheresServiceArticlesVendus = encheresServiceArticlesVendus;
 	}
 
 	public Boolean affichageDuBouton(ArticleVendu article, Principal user) {
@@ -112,6 +117,15 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 	@Override
 	public List<Enchere> getEncheresByUser(Utilisateur utilisateur) {
 		return enchereDaoEncheres.getEncheresByUser(utilisateur);
+	}
+
+	@Override
+	public void surencherir(Enchere enchere) {
+		Enchere ancienneMeilleureEnchere = getMeilleureEnchereByArticle(enchere.getArticle());
+		encheresServiceUtilisateur.remboursementDernierEncherisseur(ancienneMeilleureEnchere);
+		creationEncheres(enchere);
+		encheresServiceArticlesVendus.majPrixArticle(enchere);
+		encheresServiceUtilisateur.majCreditUtilisateur(enchere);
 	}
 
 

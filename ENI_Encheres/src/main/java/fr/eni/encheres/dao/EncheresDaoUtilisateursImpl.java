@@ -96,4 +96,15 @@ public class EncheresDaoUtilisateursImpl implements EncheresDaoUtilisateurs {
 		namedParameterJdbcTemplate.update(UPDATE_CREDIT_UTILISATEUR_APRES_ENCHERE,  utilisateurMap);
 	}
 
+
+	@Override
+	public void remboursementCreditUtilisateur(Enchere ancienneMeilleureEnchere) {
+		MapSqlParameterSource utilisateurMap = new MapSqlParameterSource();
+		utilisateurMap.addValue("no_utilisateur",ancienneMeilleureEnchere.getUtilisateur().getNo_utilisateur());
+		utilisateurMap.addValue("credit",
+							(ancienneMeilleureEnchere.getUtilisateur().getCredit()+ancienneMeilleureEnchere.getMontant_enchere())
+							);
+		namedParameterJdbcTemplate.update(UPDATE_CREDIT_UTILISATEUR_APRES_ENCHERE,  utilisateurMap);
+	}
+
 }

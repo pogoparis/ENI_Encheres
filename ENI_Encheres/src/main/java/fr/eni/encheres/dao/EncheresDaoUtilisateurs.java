@@ -17,4 +17,6 @@ public interface EncheresDaoUtilisateurs {
 
 	void majCreditUtilisateur(Enchere enchere);
 
+	void remboursementCreditUtilisateur(Enchere ancienneMeilleureEnchere);
+
 }

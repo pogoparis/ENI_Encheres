@@ -50,6 +50,13 @@ public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateu
 		
 	}
 
+	@Override
+	public void remboursementDernierEncherisseur(Enchere ancienneMeilleureEnchere) {
+		encheresDaoUtilisateurs.remboursementCreditUtilisateur(ancienneMeilleureEnchere);
+	}
+	
+	
+
 
 
 }

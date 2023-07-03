@@ -12,4 +12,5 @@ public interface EncheresServiceUtilisateur {
 	Utilisateur findUtilisateurById(Integer id);
 	public Utilisateur findUserByPseudo(String pseudo);
 	void majCreditUtilisateur(Enchere enchere);
+	void remboursementDernierEncherisseur(Enchere ancienneMeilleureEnchere);
 }

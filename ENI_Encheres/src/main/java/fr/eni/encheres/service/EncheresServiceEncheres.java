@@ -23,6 +23,9 @@ public interface EncheresServiceEncheres {
 	// Récupération de toutes les enchères d'un utilisateur
 	List<Enchere> getEncheresByUser(Utilisateur utilisateur);
 	
+	
+	public void surencherir(Enchere enchere);
+	
 	//Récupération de toutes les enchères d'un utilisateur sur un article en particulier
 	//List<Enchere> getEncheresByArticleByUser(ArticleVendu article, Utilisateur utilisateur);
 }
