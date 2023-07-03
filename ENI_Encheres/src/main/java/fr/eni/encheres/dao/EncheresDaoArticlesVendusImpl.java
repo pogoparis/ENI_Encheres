@@ -94,7 +94,7 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 	@Override
 	public List<ArticleVendu> getArticleByCategorieContainNom(String rechercheNom, Categorie categorie) {
 		List<ArticleVendu> listeArticleTrouve2;
-		String sqlCat = "SELECT * from ARTICLES_VENDUS WHERE no_categorie=:no_categorie AND nom_article AND nom_article LIKE :rechercheNom";
+		String sqlCat = "SELECT * from ARTICLES_VENDUS WHERE no_categorie=:no_categorie AND nom_article LIKE :rechercheNom";
 		Map<String, Object> params = new HashMap<>();
 		params.put("no_categorie", categorie.getNo_categorie());
 	    params.put("rechercheNom", "%" + rechercheNom + "%");
