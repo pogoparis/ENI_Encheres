@@ -13,7 +13,7 @@ public class Categorie {
 //	}
 
 	public Categorie() {
-		// COnstructeur vide
+		// Constructeur vide
 	}
 	
 	public Categorie(Integer idCategorie) {
