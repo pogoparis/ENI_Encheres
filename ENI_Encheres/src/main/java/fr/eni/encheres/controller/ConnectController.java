@@ -82,4 +82,14 @@ public class ConnectController {
 		encheresServiceUtilisateur.deleteUser(id);
 		return "redirect:/logout";
 	}
+	
+	/************ AFFICHAGE PAGE MON COMPTE ********************/
+	@GetMapping("/moncompte")
+		public String afficherMonCompte(Principal principal, Utilisateur utilisateur, Model model) {
+			utilisateur = encheresServiceUtilisateur.findUserByPseudo(principal.getName());
+		model.addAttribute("utilisateur" , utilisateur);
+			return "moncompte";
+			
+		}
+	
 }
