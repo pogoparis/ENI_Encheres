@@ -1,7 +1,6 @@
 package fr.eni.encheres.dao;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.security.Principal;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +13,6 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 
@@ -81,9 +79,9 @@ public class EncheresDaoUtilisateursImpl implements EncheresDaoUtilisateurs {
 	// Enregistrement de l'utilisateur en BDD
 	@Override
 	public void saveUtilisateur(Utilisateur utilisateur) {
-		if (!isPseudoUnique(utilisateur.getPseudo())) {
-			System.out.println("erreur");
-		} else {
+		
+		System.out.println("----------------------------------------------------------------");
+		
 			Map<String, Object> map = new HashMap<>();
 			if(utilisateur.getNo_utilisateur() != null) {
 				map.put("no_utilisateur", utilisateur.getNo_utilisateur());
@@ -104,10 +102,12 @@ public class EncheresDaoUtilisateursImpl implements EncheresDaoUtilisateurs {
 			
 			if (utilisateur.getNo_utilisateur() == null) {	
 			namedParameterJdbcTemplate.update(INSERT_UTILISATEUR, map);	
+			System.out.println("Mauvais passage");
 			} else {
 			namedParameterJdbcTemplate.update(UPDATE_UTILISATEUR, map);
+			System.out.println("Bon passage");
 			}			
-		}
+		
 	}
 
 

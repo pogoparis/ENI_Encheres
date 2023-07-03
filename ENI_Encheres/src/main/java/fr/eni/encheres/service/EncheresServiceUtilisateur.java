@@ -1,7 +1,7 @@
 package fr.eni.encheres.service;
 
+import java.security.Principal;
 import java.util.List;
-	
 
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;

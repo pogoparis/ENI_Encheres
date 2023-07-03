@@ -54,23 +54,32 @@ public class ConnectController {
 
 	/************* BOUTON VALIDATION REGISTER  *****************/
 	@PostMapping("/register")
-	public String register(@Valid @ModelAttribute Utilisateur utilisateur, BindingResult validationResult, RedirectAttributes redirectAttributes)  {
+	public String register(@Valid @ModelAttribute Utilisateur utilisateur, BindingResult validationResult, RedirectAttributes redirectAttributes, Principal principal)  {
 		
-		if (!encheresServiceUtilisateur.isPseudoUnique(utilisateur.getPseudo())) {
+		System.out.println("debut controller");
+		if ((!encheresServiceUtilisateur.isPseudoUnique(utilisateur.getPseudo())) || (utilisateur.getPseudo() != principal.getName())) {
 			validationResult.rejectValue("pseudo", "pseudo.alreadyTaken", "Le pseudo est déjà pris");
+			System.out.println("if pseudo");
+		
 		}
-		if (!encheresServiceUtilisateur.isMailUnique(utilisateur.getEmail())) {
+		if ((!encheresServiceUtilisateur.isMailUnique(utilisateur.getEmail())) || (utilisateur.getEmail() != encheresServiceUtilisateur.findUserByPseudo(principal.getName()).getEmail())) {
 			validationResult.rejectValue("email", "email.alreadyTaken", "Ce mail est deja associé à un compte");
+			System.out.println("if mail");
 		}
+		
 		
 		
 		if(validationResult.hasErrors()) {
 			return "profil";		
-		}		
+		}
+		System.out.println("Controller bon passage");
 		encheresServiceUtilisateur.createUtilisateur(utilisateur);
 		redirectAttributes.addFlashAttribute("successMessage", "L'enregistrement a réussi. Veuillez vous connecter avec vos identifiants.");
 		return "redirect:/login";		
 	}
+	
+	
+
 
 
 	/****************** AFFICHAGE DETAIL UTILISATEUR (DETAIL) *******************/

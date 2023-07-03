@@ -43,6 +43,7 @@ public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateu
 	
 	@Override
 	public void createUtilisateur(Utilisateur utilisateur) {
+		System.out.println("service");
 		System.out.println("SERVICE "+utilisateur);
 		utilisateur.setMotDePasse(passwordEncoder.encode(utilisateur.getMotDePasse()));
 		encheresDaoUtilisateurs.saveUtilisateur(utilisateur);
