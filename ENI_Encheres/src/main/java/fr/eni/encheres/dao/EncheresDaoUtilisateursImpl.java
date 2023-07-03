@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 
@@ -57,10 +59,12 @@ public class EncheresDaoUtilisateursImpl implements EncheresDaoUtilisateurs {
 	}
 
 
+	// Enregistrement de l'utilisateur en BDD
 	@Override
-	public void saveUtilisateur(Utilisateur utilisateur) {
+	public void saveUtilisateur(Utilisateur utilisateur) throws SQLServerException {
 		System.out.println("DAO"+utilisateur);
 		Map<String, Object> map = new HashMap<>();
+		
 		if(utilisateur.getNo_utilisateur() != null) {
 			map.put("no_utilisateur", utilisateur.getNo_utilisateur());
 		}

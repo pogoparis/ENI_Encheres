@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dao.EncheresDaoUtilisateurs;
@@ -27,7 +29,7 @@ public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateu
 	}
 	
 	@Override
-	public void createUtilisateur(Utilisateur utilisateur) {
+	public void createUtilisateur(Utilisateur utilisateur) throws SQLServerException {
 		System.out.println("SERVICE "+utilisateur);
 		utilisateur.setMotDePasse(passwordEncoder.encode(utilisateur.getMotDePasse()));
 		encheresDaoUtilisateurs.saveUtilisateur(utilisateur);
