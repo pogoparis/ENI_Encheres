@@ -22,5 +22,7 @@ public interface EncheresDaoUtilisateurs {
 	void remboursementCreditUtilisateur(Enchere ancienneMeilleureEnchere);
 	
 	public boolean isPseudoUnique(String pseudo);
+	
+	public boolean isMailUnique(String email);
 
 }

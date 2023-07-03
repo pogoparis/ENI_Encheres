@@ -64,8 +64,11 @@ public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateu
 	}
 
 	public Boolean isPseudoUnique(String pseudo) {
-		return encheresDaoUtilisateurs.isPseudoUnique(pseudo);
-		
+		return encheresDaoUtilisateurs.isPseudoUnique(pseudo);	
+	}
+	
+	public Boolean isMailUnique(String email) {
+		return encheresDaoUtilisateurs.isMailUnique(email);
 	}
 	
 

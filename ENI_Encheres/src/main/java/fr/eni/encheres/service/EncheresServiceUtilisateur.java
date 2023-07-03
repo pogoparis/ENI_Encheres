@@ -16,4 +16,5 @@ public interface EncheresServiceUtilisateur {
 	void remboursementDernierEncherisseur(Enchere ancienneMeilleureEnchere);
 	void deleteUser(Integer id);
 	public Boolean isPseudoUnique(String pseudo);
+	public Boolean isMailUnique(String email);
 }

@@ -67,6 +67,13 @@ public class EncheresDaoUtilisateursImpl implements EncheresDaoUtilisateurs {
         return count == 0;
     }
 	
+	public boolean isMailUnique(String email) {
+        String sql = "SELECT COUNT(*) FROM UTILISATEURS WHERE email = :email";
+        Map<String, Object> params = Collections.singletonMap("email", email);
+        int count = namedParameterJdbcTemplate.queryForObject(sql, params, Integer.class);
+        return count == 0;
+    }
+	
 	
 	// Enregistrement de l'utilisateur en BDD
 	@Override
