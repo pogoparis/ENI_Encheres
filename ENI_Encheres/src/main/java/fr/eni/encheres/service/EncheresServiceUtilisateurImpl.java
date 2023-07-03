@@ -51,11 +51,18 @@ public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateu
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void remboursementDernierEncherisseur(Enchere ancienneMeilleureEnchere) {
 		encheresDaoUtilisateurs.remboursementCreditUtilisateur(ancienneMeilleureEnchere);
 	}
 	
 	
+=======
+	public void deleteUser(Integer id) {
+		encheresDaoUtilisateurs.delete(id);
+		
+	}
+>>>>>>> branch 'master' of https://github.com/pogoparis/ENI_Encheres.git
 
 
 

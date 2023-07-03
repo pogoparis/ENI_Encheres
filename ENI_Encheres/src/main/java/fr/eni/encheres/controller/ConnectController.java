@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.eni.encheres.bo.Utilisateur;
@@ -73,5 +74,12 @@ public class ConnectController {
 		Utilisateur utilisateurconnecte = encheresServiceUtilisateur.findUserByPseudo(principal.getName());
 		model.addAttribute("utilisateur", utilisateurconnecte);
 		return "profil";
+	}
+	
+	@GetMapping("/delete")
+	public String deleteUtilisateur(@RequestParam Integer id, Model modele) {
+		
+		encheresServiceUtilisateur.deleteUser(id);
+		return "redirect:/encheres";
 	}
 }
