@@ -50,6 +50,12 @@ public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateu
 		
 	}
 
+	@Override
+	public void deleteUser(Integer id) {
+		encheresDaoUtilisateurs.delete(id);
+		
+	}
+
 
 
 }
