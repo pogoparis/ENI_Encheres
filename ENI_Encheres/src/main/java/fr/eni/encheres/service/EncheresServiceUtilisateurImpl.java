@@ -1,5 +1,7 @@
 package fr.eni.encheres.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -7,19 +9,30 @@ import org.springframework.stereotype.Service;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
+import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
+import fr.eni.encheres.dao.EncheresDaoArticlesVendus;
+import fr.eni.encheres.dao.EncheresDaoEncheres;
 import fr.eni.encheres.dao.EncheresDaoUtilisateurs;
 
 @Service
 public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateur{
 
 	EncheresDaoUtilisateurs encheresDaoUtilisateurs;
+	EncheresDaoEncheres encheresDaoEncheres;
+	EncheresDaoArticlesVendus encheresDaoArticlesVendus;
 	PasswordEncoder passwordEncoder ;
 
-	public EncheresServiceUtilisateurImpl(EncheresDaoUtilisateurs encheresDaoUtilisateurs,PasswordEncoder passwordEncoder) {
-		this.encheresDaoUtilisateurs=encheresDaoUtilisateurs;
-		this.passwordEncoder =passwordEncoder;
+	
+
+	public EncheresServiceUtilisateurImpl(EncheresDaoUtilisateurs encheresDaoUtilisateurs,
+			EncheresDaoEncheres encheresDaoEncheres, EncheresDaoArticlesVendus encheresDaoArticlesVendus,
+			PasswordEncoder passwordEncoder) {
+		this.encheresDaoUtilisateurs = encheresDaoUtilisateurs;
+		this.encheresDaoEncheres = encheresDaoEncheres;
+		this.encheresDaoArticlesVendus = encheresDaoArticlesVendus;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
@@ -38,12 +51,15 @@ public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateu
 
 	@Override
 	public Utilisateur findUtilisateurById(Integer id) {
-		// TODO Auto-generated method stub
-		return encheresDaoUtilisateurs.getUtilisateurById(id);
+		Utilisateur utilisateur = encheresDaoUtilisateurs.getUtilisateurById(id);
+		miseEnPlaceDesListes(utilisateur);
+		return utilisateur;
 	}
 	
 	public Utilisateur findUserByPseudo(String pseudo) {
-		return encheresDaoUtilisateurs.getUserByPseudo(pseudo);
+		Utilisateur utilisateur = encheresDaoUtilisateurs.getUserByPseudo(pseudo);
+		miseEnPlaceDesListes(utilisateur);
+		return utilisateur;
 	}
 
 	@Override
@@ -71,5 +87,40 @@ public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateu
 		return encheresDaoUtilisateurs.isMailUnique(email);
 	}
 	
+public void miseEnPlaceDesListes (Utilisateur utilisateur) {
+		
+		List<ArticleVendu> listeArticlesVendus = encheresDaoArticlesVendus.getArticlesByUser(utilisateur);
+		utilisateur.setListeArticlesVendus(listeArticlesVendus);
+		
+		List<Enchere> listeEncheres = encheresDaoEncheres.getEncheresByUser(utilisateur);
+		utilisateur.setListeEncheres(listeEncheres);
+		
+		List<ArticleVendu> listeArticlesAchetes = new ArrayList<>();
+		for (Enchere enchere : listeEncheres) {
+			if ((enchere.getArticle().getDate_fin_encheres().isBefore(LocalDate.now())) 
+					&& 
+				(isMeilleurEncherisseur(utilisateur, enchere.getArticle())) ) {
+				listeArticlesAchetes.add(enchere.getArticle());	
+			}	
+		}
+		utilisateur.setListeArticlesAchetes(listeArticlesAchetes);
+	}
+
+	public Boolean isMeilleurEncherisseur(Utilisateur utilisateur, ArticleVendu article) {
+		List<Enchere> listeDesEncheres = encheresDaoEncheres.findEncheresByArticle(article);
+		 if (listeDesEncheres.isEmpty()) {
+		        return false;
+		    }
+		    Enchere plusHauteEnchere = listeDesEncheres.get(0);
+		    for (Enchere enchere : listeDesEncheres) {
+		        if (enchere.getMontant_enchere() > plusHauteEnchere.getMontant_enchere()) {
+		        	plusHauteEnchere = enchere;
+		        }
+		    }
+		    if(plusHauteEnchere.getUtilisateur().getNo_utilisateur() == utilisateur.getNo_utilisateur()) {
+		    	return true;
+		    }
+		    return false;
+	}
 
 }

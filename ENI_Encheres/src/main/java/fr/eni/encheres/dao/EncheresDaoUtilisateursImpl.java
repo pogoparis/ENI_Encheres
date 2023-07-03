@@ -1,5 +1,7 @@
 package fr.eni.encheres.dao;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -7,16 +9,12 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-
+import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 
@@ -34,12 +32,17 @@ public class EncheresDaoUtilisateursImpl implements EncheresDaoUtilisateurs {
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
+	
+	
+
 	@Autowired 
 	public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		this.namedParameterJdbcTemplate=namedParameterJdbcTemplate;
 	}
 	
-	
+
+
+	// Pour le moment cette méthode ne crée pas les listes d'articles et d'encheres propres a l'utilisateur
 	@Override
 	public List<Utilisateur> getAllUtilisateurs() {
 		List<Utilisateur> utilisateurs;

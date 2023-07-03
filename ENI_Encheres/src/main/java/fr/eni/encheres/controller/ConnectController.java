@@ -27,10 +27,10 @@ public class ConnectController {
 	// CONSTRUCTEUR
 	public ConnectController(EncheresServiceUtilisateur encheresServiceUtilisateur,
 			EncheresServiceEncheres encheresServiceEncheres) {
-		super();
 		this.encheresServiceUtilisateur = encheresServiceUtilisateur;
 		this.encheresServiceEncheres = encheresServiceEncheres;
 	}
+	
 	
 
 	/*********** AFFICHAGE PAGE LOGIN ****************/
@@ -105,7 +105,8 @@ public class ConnectController {
 		public String afficherMonCompte(Principal principal, Utilisateur utilisateur, Model model) {
 			utilisateur = encheresServiceUtilisateur.findUserByPseudo(principal.getName());
 		model.addAttribute("utilisateur" , utilisateur);
-		model.addAttribute("listeEncheres", encheresServiceEncheres.getEncheresByUser(utilisateur));
+		model.addAttribute("listeEncheres", utilisateur.getListeEncheres());
+		model.addAttribute("articlesAchetes", utilisateur.getListeArticlesAchetes());
 		model.addAttribute("serviceEncheres", encheresServiceEncheres);
 			return "moncompte";
 			

@@ -63,7 +63,7 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 		// IL FAUT FAIRE LES OPTIONS VENTE ET ACHAT
 		if (categorie.getNo_categorie() == 99) {
 			if (optionArticle.equals("ventes") ) {
-				return encheresDaoArticlesVendus.getArticlesByUser(utilisateur, rechercheNom);
+				return encheresDaoArticlesVendus.getArticlesByUserAndSearch(utilisateur, rechercheNom);
 			} else if (optionArticle.equals("achats") ) {
 				//**************************** A FAIRE************************************** //
 				return null;

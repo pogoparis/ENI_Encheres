@@ -56,6 +56,24 @@
 	</div> 
 </div>
 
+<h2>Articles achetés</h2>
+<div class="container-fluid">
+<div class="row">
+<div class="d-inline-flex col-6"  th:each="article:${articlesAchetes}">
+<a class="lien" th:href="@{/article(id=${article.getNo_article()})}">
+	<img style="width: 150px"
+					class="pull-left img-responsive col-3  p-2 img-thumbnail"
+					th:src="'/Images/'+${article.getNo_article()}+'.jpg'">
+					</a>
+					<div class="d-block">
+			<h3 th:text="${article.getNom_article()}"></h3>
+			<p> Prix d'achat : <span th:text="${article.getPrix_vente()}"></span> crédits</p>
+			<p> Vendeur : <span th:text="${article.getUtilisateur().getPseudo()}"></span></p>
+			</div>
+			</div>
+		</div>
+		</div>
+
 <h2>Encheres en cours</h2>
 <div class="container-fluid">
 <div class="row">

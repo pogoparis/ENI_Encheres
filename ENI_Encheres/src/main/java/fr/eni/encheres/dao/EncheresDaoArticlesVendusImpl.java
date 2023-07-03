@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -27,10 +28,26 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 	private EncheresDaoCategories encheresDaoCategories;
 	private EncheresDaoUtilisateurs encheresDaoUtilisateurs;
 
-	public EncheresDaoArticlesVendusImpl(NamedParameterJdbcTemplate namedParameterjdbcTemplate,
-			EncheresDaoCategories encheresDaoCategories, EncheresDaoUtilisateurs encheresDaoUtilisateurs) {
+//	public EncheresDaoArticlesVendusImpl(NamedParameterJdbcTemplate namedParameterjdbcTemplate,
+//			EncheresDaoCategories encheresDaoCategories, EncheresDaoUtilisateurs encheresDaoUtilisateurs) {
+//		this.namedParameterjdbcTemplate = namedParameterjdbcTemplate;
+//		this.encheresDaoCategories = encheresDaoCategories;
+//		this.encheresDaoUtilisateurs = encheresDaoUtilisateurs;
+//	}
+	
+	
+	@Autowired
+	public void setNamedParameterjdbcTemplate(NamedParameterJdbcTemplate namedParameterjdbcTemplate) {
 		this.namedParameterjdbcTemplate = namedParameterjdbcTemplate;
+	}
+
+	@Autowired
+	public void setEncheresDaoCategories(EncheresDaoCategories encheresDaoCategories) {
 		this.encheresDaoCategories = encheresDaoCategories;
+	}
+	
+	@Autowired
+	public void setEncheresDaoUtilisateurs(EncheresDaoUtilisateurs encheresDaoUtilisateurs) {
 		this.encheresDaoUtilisateurs = encheresDaoUtilisateurs;
 	}
 
@@ -105,12 +122,22 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 
 	// recherche article par utilisateur
 	@Override
-	public List<ArticleVendu> getArticlesByUser(Utilisateur utilisateur, String rechercheNom) {
+	public List<ArticleVendu> getArticlesByUserAndSearch(Utilisateur utilisateur, String rechercheNom) {
 		List<ArticleVendu> listeArticleUser;
 		String sql = "SELECT * from ARTICLES_VENDUS WHERE no_utilisateur=:no_utilisateur AND nom_article LIKE :rechercheNom";
 		Map<String, Object> params = new HashMap<>();
 		params.put("no_utilisateur", utilisateur.getNo_utilisateur());
 		params.put("rechercheNom", "%" + rechercheNom + "%");
+		listeArticleUser = namedParameterjdbcTemplate.query(sql, params,
+	            new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
+	    return listeArticleUser;
+	}
+	
+	public List<ArticleVendu> getArticlesByUser (Utilisateur utilisateur){
+		List<ArticleVendu> listeArticleUser;
+		String sql = "SELECT * from ARTICLES_VENDUS WHERE no_utilisateur=:no_utilisateur";
+		Map<String, Object> params = new HashMap<>();
+		params.put("no_utilisateur", utilisateur.getNo_utilisateur());
 		listeArticleUser = namedParameterjdbcTemplate.query(sql, params,
 	            new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
 	    return listeArticleUser;
