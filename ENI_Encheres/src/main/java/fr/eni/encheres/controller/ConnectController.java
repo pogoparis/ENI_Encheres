@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.eni.encheres.bo.Utilisateur;
+import fr.eni.encheres.service.EncheresServiceEncheres;
 import fr.eni.encheres.service.EncheresServiceUtilisateur;
 import jakarta.validation.Valid;
 
@@ -19,12 +20,17 @@ import jakarta.validation.Valid;
 public class ConnectController {
 
 	EncheresServiceUtilisateur encheresServiceUtilisateur;
+	EncheresServiceEncheres encheresServiceEncheres;
+
 
 	// CONSTRUCTEUR
-	public ConnectController(EncheresServiceUtilisateur encheresServiceUtilisateur) {
+	public ConnectController(EncheresServiceUtilisateur encheresServiceUtilisateur,
+			EncheresServiceEncheres encheresServiceEncheres) {
 		super();
 		this.encheresServiceUtilisateur = encheresServiceUtilisateur;
+		this.encheresServiceEncheres = encheresServiceEncheres;
 	}
+	
 
 	/*********** AFFICHAGE PAGE LOGIN ****************/
 	@GetMapping("/login")
@@ -88,6 +94,7 @@ public class ConnectController {
 		public String afficherMonCompte(Principal principal, Utilisateur utilisateur, Model model) {
 			utilisateur = encheresServiceUtilisateur.findUserByPseudo(principal.getName());
 		model.addAttribute("utilisateur" , utilisateur);
+		model.addAttribute("listeEncheres", encheresServiceEncheres.getEncheresByUser(utilisateur));
 			return "moncompte";
 			
 		}

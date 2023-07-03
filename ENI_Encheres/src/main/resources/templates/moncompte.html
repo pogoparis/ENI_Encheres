@@ -47,20 +47,20 @@
 				<th class="border" scope="row">Téléphone</th>
 				<td class="border" th:text="${utilisateur.telephone}"></td>
 			</tr>
-			
-			
-			
+						
 		</table>
+		
+		<div th:each="enchere:${listeEncheres}">
+			<p th:text="${enchere.getArticle().getNom_article()}"></p>
+		</div>
 		
 		
 	</div> 
 </div>
-<!-- 	<div th:if="${utilisateur.pseudo == pseudoConnecte}"> -->
-<!-- 		<div class="text-center m-3"> -->
-<!-- 			<form th:action="@{/profil}" method="get"> -->
-<!-- 				<button class="btn btn-dark" type="submit">Modifier</button> -->
-<!-- 		</div> -->
-<!-- 		</form> -->
-<!-- 	</div> -->
+		<div class="text-center m-3">
+			<form th:action="@{/profil}" method="get">
+				<button class="btn btn-dark" type="submit">Modifier</button>
+		</div>
+		</form>
 </body>
 </html>
