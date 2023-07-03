@@ -80,6 +80,6 @@ public class ConnectController {
 	public String deleteUtilisateur(@RequestParam Integer id, Model modele) {
 		
 		encheresServiceUtilisateur.deleteUser(id);
-		return "redirect:/encheres";
+		return "redirect:/logout";
 	}
 }
