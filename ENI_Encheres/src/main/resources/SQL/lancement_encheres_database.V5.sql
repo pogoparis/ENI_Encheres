@@ -111,16 +111,22 @@ insert into UTILISATEURS (pseudo,nom,prenom,email,telephone,rue,code_postal,vill
 
 
 insert into ARTICLES_VENDUS (nom_article, description, date_debut_encheres,date_fin_encheres,prix_initial, prix_vente, no_utilisateur,no_categorie) values 
-('Fauteuil', 'Voilà un fauteuil qu''il est bien', '03/07/2023', '05/07/2023', 210, 300,1,1)
-,('Ordinateur', 'Pour gank mid-lane lvl 4', '20/06/2023', '11/07/2023', 100, 100,1,2)
-,('Patrick Balkany', 'Danseur de talent', '13/06/2023', '02/07/2023', 110, 190, 1,3)
+('Fauteuil', 'Voilà un fauteuil qu''il est bien', '03/07/2023', '05/07/2023', 210, 300,1,2)
+,('Ordinateur', 'Pour gank mid-lane lvl 4', '20/06/2023', '11/07/2023', 200, 100,1,2)
+,('Manette', 'La manette de la mort qui tue !', '02/07/2023', '03/07/2023', 110, 190, 2,2)
 ,('Souris du futur', 'Ya un click droit ET un click gauche. ET une MOLETTE', '12/06/2023', '08/07/2023', 400, 430, 1, 2)
+,('General Lee', 'Hyyyhhy houhouhou !', '02/07/2023', '03/07/2023', 320, 190, 3,1)
+,('Mercedes', 'J''pouvais pas la conduire, bien sûre j''étais trop petit', '23/06/2023', '02/07/2023', 110, 190, 4,1)
+,('Patrick Balkany', 'Danseur de talent', '13/06/2023', '02/07/2023', 110, 190, 4,3)
 ;
 
-insert into RETRAITS (no_article, rue, code_postal, ville) values (1, 'rue de la confusion', '29000', 'Brest');
+insert into RETRAITS (no_article, rue, code_postal, ville) values (1, 'rue du confort', '29000', 'Brest');
 insert into RETRAITS (no_article, rue, code_postal, ville) values (2, 'rue de la carte mère', '99000', 'Silicon Valley');
-insert into RETRAITS (no_article, rue, code_postal, ville) values (3, 'rue de la samba', '62000', 'Levallois-Perret');
+insert into RETRAITS (no_article, rue, code_postal, ville) values (7, 'rue de la samba', '62000', 'Levallois-Perret');
 insert into RETRAITS (no_article, rue, code_postal, ville) values (4, 'rue du click', '12000', 'Logitech');
+insert into RETRAITS (no_article, rue, code_postal, ville) values (5, 'rue de la peur du sheriff', '99000', 'Texas');
+insert into RETRAITS (no_article, rue, code_postal, ville) values (6, 'rue de la caisse', '72000', 'Le Mans');
+insert into RETRAITS (no_article, rue, code_postal, ville) values (3, 'rue du croc mort', '66600', 'Santa Muerte');
 
 insert into ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) values 
 (2, 1, '28/06/2023', 300),
