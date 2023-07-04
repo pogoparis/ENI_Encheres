@@ -89,7 +89,10 @@ public class ConnectController {
 		}
 		//-----------
 		//triche: pas reussi a faire 1 et 2 en même temps
-
+		if(utilisateur.getPseudo()!= principal.getName()) {
+			encheresServiceUtilisateur.createUtilisateur(utilisateur);
+			return "redirect:/logout";
+		}
 			
 			System.out.println("Controller bon passage");
 			encheresServiceUtilisateur.createUtilisateur(utilisateur);
