@@ -59,7 +59,6 @@ public class ArticleVendu {
 		this.categorie = categorie;
 	}
 
-
 	public ArticleVendu(Integer id) {
 		this.no_article = id;
 	}
