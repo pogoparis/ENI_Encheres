@@ -77,6 +77,14 @@ public class ConnectController {
 		System.out.println(principal);
 		//2-----------------------
 		if (principal == null) {
+			if (!encheresServiceUtilisateur.isPseudoUnique(utilisateur.getPseudo())){
+				 validationResult.rejectValue("pseudo", "pseudo.alreadyTaken", "Le pseudo est déjà pris");
+			}
+			
+			if (!encheresServiceUtilisateur.isMailUnique(utilisateur.getEmail())){
+				validationResult.rejectValue("email", "email.alreadyTaken", "Ce mail est deja associé à un compte");
+			}
+			
 			if(validationResult.hasErrors()) {
 				return "profil";		
 			}
