@@ -62,9 +62,12 @@ public class EncheresController {
 
 	/************* AFFICHAGE CREATION ARTICLE ******************/
 	@GetMapping("/creerarticle")
-	public String creerArticle(@ModelAttribute ArticleVendu articleVendu, @ModelAttribute Retrait retrait,
+	public String creerArticle(@ModelAttribute ArticleVendu articleVendu, Principal principal,
 			Model model) {
 		model.addAttribute("categories", encheresServiceCategorie.findAllCategorie());
+		Retrait retrait = new Retrait();
+		encheresServiceRetrait.setRetraitParDefaut(retrait, encheresServiceUtilisateur.findUserByPseudo(principal.getName()));
+		model.addAttribute("retrait", retrait);
 		return "creerarticle";
 	}
 

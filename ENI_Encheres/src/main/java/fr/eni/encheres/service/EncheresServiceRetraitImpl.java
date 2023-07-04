@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Retrait;
+import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dao.EncheresDaoRetraits;
 
 @Service
@@ -26,6 +27,12 @@ public class EncheresServiceRetraitImpl implements EncheresServiceRetrait {
 	
 	public Retrait findRetraitByArticle (ArticleVendu article) {
 		return encheresDaoRetraits.getRetraitByArticle(article);
+	}
+	
+	public void setRetraitParDefaut(Retrait retrait, Utilisateur utilisateur) {
+		retrait.setRue(utilisateur.getRue());
+		retrait.setCode_postal(utilisateur.getCodePostal());
+		retrait.setVille(utilisateur.getVille());
 	}
 	
 }
