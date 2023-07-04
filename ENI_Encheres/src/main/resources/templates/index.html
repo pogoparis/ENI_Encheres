@@ -150,11 +150,7 @@
 		var checkboxes2 = document.querySelectorAll('.disable2');
 
 		optionVentes.addEventListener('change', function () {
-			if (optionVentes.checked) {
-				selectCategorie.style.pointerEvents = "none";
-				selectCategorie.style.opacity = "0.5";
-				inputRecherche.style.pointerEvents = "none";
-				inputRecherche.style.opacity = "0.5";
+			if (optionVentes.checked) {	
 				checkboxes.forEach(function (checkbox) {
 					checkbox.disabled = false;
 				});
@@ -166,10 +162,6 @@
 
 		optionAchats.addEventListener('change', function () {
 			if (optionAchats.checked) {
-				selectCategorie.style.pointerEvents = "none";
-				selectCategorie.style.opacity = "0.5";
-				inputRecherche.style.pointerEvents = "none";
-				inputRecherche.style.opacity = "0.5";
 				checkboxes.forEach(function (checkbox) {
 					checkbox.disabled = true;
 				});

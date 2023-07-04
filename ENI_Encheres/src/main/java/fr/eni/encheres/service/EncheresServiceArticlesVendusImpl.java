@@ -57,7 +57,6 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 	@Override
 	public List<ArticleVendu> rechercheNonConnecte(String rechercheNom, Categorie categorie) {
 		// l'option 99 du select indique qu'aucune catégorie n'a été choisie
-
 		if (categorie != null) {
 			if (categorie.getNo_categorie() == 99) {
 				return encheresDaoArticlesVendus.getArticleContainNom(rechercheNom);
@@ -72,60 +71,85 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 	@Override
 	public List<ArticleVendu> rechercheConnecte(String rechercheNom, Categorie categorie, Utilisateur utilisateur,
 			String optionArticle, String ventesEnCours, String ventesTerminees, String ventesNonDebutees) {
-		System.out.println("entrée de la méthode ventes terminees=" + ventesTerminees);
-		System.out.println("entrée de la méthode ventes en cours=" + ventesEnCours);
-		System.out.println("entrée de la méthode  ventesNonDebutees=" + ventesNonDebutees);
-		datedujour = LocalDate.now();
-
-		if (optionArticle != null) {
-			if (optionArticle.equals("ventes")) {
-				if (ventesEnCours != null) {
-					if (ventesEnCours.equals("venteencours")) {
-						List<ArticleVendu> newList = new ArrayList<>();
-						for (ArticleVendu articleAtrier : encheresDaoArticlesVendus.getArticlesByUser(utilisateur)) {
-							if ((articleAtrier.getDate_debut_encheres().isBefore(datedujour))
-									&& (articleAtrier.getDate_fin_encheres().isAfter(datedujour))) {
-								newList.add(articleAtrier);
-							}
-						}
-						return newList;
-					}
-				}
-				if (ventesTerminees != null) {
-					if (ventesTerminees.equals("ventesterminees")) {
-						List<ArticleVendu> newList2 = new ArrayList<>();
-						for (ArticleVendu articleAtrier : encheresDaoArticlesVendus.getArticlesByUser(utilisateur)) {
-							if ((articleAtrier.getDate_fin_encheres().isBefore(datedujour))) {
-								newList2.add(articleAtrier);
-							}
-						}
-						return newList2;
-					}
-				}
-				if (ventesNonDebutees != null) {
-					if (ventesNonDebutees.equals("ventesnondebutees")) {
-						List<ArticleVendu> newList = new ArrayList<>();
-						for (ArticleVendu articleAtrier : encheresDaoArticlesVendus.getArticlesByUser(utilisateur)) {
-							if ((articleAtrier.getDate_debut_encheres().isAfter(datedujour))) {
-								newList.add(articleAtrier);
-							}
-						}
-						return newList;
-					}
-				} 
-				return encheresDaoArticlesVendus.getArticlesByUser(utilisateur);
-			}
-			/// A FAIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			if (optionArticle.equals("achats")) {
-				List<Enchere> listEncheres = utilisateur.getListeEncheres();
-				List<ArticleVendu> listeArticleAchete = new ArrayList<>();
-				for (Enchere enchere : listEncheres) {
-					listeArticleAchete.add(enchere.getArticle());
-				}
-				return listeArticleAchete;
-			}
+		if (categorie.getNo_categorie() == 99) {
+			System.out.println("categorie 99");
+			return methodedeRecherche(encheresDaoArticlesVendus.getArticlesByUserAndSearch(utilisateur, rechercheNom),
+					rechercheNom, categorie, utilisateur, optionArticle, ventesEnCours, ventesTerminees,
+					ventesNonDebutees);
+		} else {
+			return methodedeRecherche(
+					encheresDaoArticlesVendus.getArticlesByUserByCategorie(utilisateur, categorie, rechercheNom),
+					rechercheNom, categorie, utilisateur, optionArticle, ventesEnCours, ventesTerminees,
+					ventesNonDebutees);
 		}
-		return rechercheNonConnecte(rechercheNom, categorie);
 	}
+	
+	
+	public List<ArticleVendu> methodedeRecherche(List<ArticleVendu> param, String rechercheNom, Categorie categorie,
+		    Utilisateur utilisateur, String optionArticle, String ventesEnCours, String ventesTerminees,
+		    String ventesNonDebutees) {
+		    datedujour = LocalDate.now();
+		    if (optionArticle != null) {
+		        if (optionArticle.equals("ventes")) {
+		            if (ventesEnCours != null && ventesEnCours.equals("venteencours")) {
+		                return filterArticlesEnCours(param);
+		            }
+		            if (ventesTerminees != null && ventesTerminees.equals("ventesterminees")) {
+		                return filterArticlesTerminees(param);
+		            }
+		            if (ventesNonDebutees != null && ventesNonDebutees.equals("ventesnondebutees")) {
+		                return filterArticlesNonDebutees(param);
+		            }
+		            return encheresDaoArticlesVendus.getArticlesByUser(utilisateur);
+		        }
+		        if (optionArticle.equals("achats")) {
+		            return getArticlesAchete(utilisateur);
+		        }
+		    }
+		    //A FAIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		    return rechercheNonConnecte(rechercheNom, categorie);
+		}
+
+		private List<ArticleVendu> filterArticlesEnCours(List<ArticleVendu> articles) {
+		    List<ArticleVendu> newList = new ArrayList<>();
+		    for (ArticleVendu article : articles) {
+		        if (article.getDate_debut_encheres().isBefore(datedujour) &&
+		            article.getDate_fin_encheres().isAfter(datedujour)) {
+		            newList.add(article);
+		        }
+		    }
+		    return newList;
+		}
+
+		private List<ArticleVendu> filterArticlesTerminees(List<ArticleVendu> articles) {
+		    List<ArticleVendu> newList = new ArrayList<>();
+		    for (ArticleVendu article : articles) {
+		        if (article.getDate_fin_encheres().isBefore(datedujour)) {
+		            newList.add(article);
+		        }
+		    }
+		    return newList;
+		}
+
+		private List<ArticleVendu> filterArticlesNonDebutees(List<ArticleVendu> articles) {
+		    List<ArticleVendu> newList = new ArrayList<>();
+		    for (ArticleVendu article : articles) {
+		        if (article.getDate_debut_encheres().isAfter(datedujour)) {
+		            newList.add(article);
+		        }
+		    }
+		    return newList;
+		}
+
+		private List<ArticleVendu> getArticlesAchete(Utilisateur utilisateur) {
+		    List<Enchere> listEncheres = utilisateur.getListeEncheres();
+		    List<ArticleVendu> listeArticleAchete = new ArrayList<>();
+		    for (Enchere enchere : listEncheres) {
+		        listeArticleAchete.add(enchere.getArticle());
+		    }
+		    return listeArticleAchete;
+		}
+
+	
 
 }
