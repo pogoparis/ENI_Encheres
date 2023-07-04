@@ -1,6 +1,10 @@
 package fr.eni.encheres.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import javax.swing.event.ListSelectionEvent;
 
 import org.springframework.stereotype.Service;
 
@@ -16,10 +20,11 @@ import fr.eni.encheres.dao.EncheresDaoUtilisateurs;
 public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticlesVendus {
 
 	EncheresDaoArticlesVendus encheresDaoArticlesVendus;
+	EncheresDaoEncheres enchereDaoEncheres;
 
-	public EncheresServiceArticlesVendusImpl(EncheresDaoArticlesVendus encheresDaoArticlesVendus) {
+	public EncheresServiceArticlesVendusImpl(EncheresDaoArticlesVendus encheresDaoArticlesVendus, EncheresDaoEncheres enchereDaoEncheres) {
 		this.encheresDaoArticlesVendus = encheresDaoArticlesVendus;
-
+		this.enchereDaoEncheres = enchereDaoEncheres;
 	}
 
 	@Override
@@ -66,7 +71,12 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 				return encheresDaoArticlesVendus.getArticlesByUserAndSearch(utilisateur, rechercheNom);
 			} else if (optionArticle.equals("achats") ) {
 				//**************************** A FAIRE************************************** //
-				return null;
+				List<Enchere> listEncheres = utilisateur.getListeEncheres();
+				List<ArticleVendu> listeArticleAchete = new ArrayList<>();
+				for (Enchere enchere : listEncheres) {	
+					listeArticleAchete.add(enchere.getArticle());
+				}
+				return listeArticleAchete;
 			} else {
 				return encheresDaoArticlesVendus.getArticleContainNom(rechercheNom);
 			}
@@ -75,12 +85,16 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 				return encheresDaoArticlesVendus.getArticlesByUserByCategorie(utilisateur, categorie, rechercheNom);
 			} else if (optionArticle.equals("achats")) {
 				//************************** A FAIRE *******************************************// 			
-				return null;
+				List<Enchere> listEncheres = utilisateur.getListeEncheres();
+				List<ArticleVendu> listeArticleAchete = new ArrayList<>();
+				for (Enchere enchere : listEncheres) {	
+					listeArticleAchete.add(enchere.getArticle());
+				}
+				return listeArticleAchete;
 			} else {
 				return encheresDaoArticlesVendus.getArticleByCategorieContainNom(rechercheNom, categorie);
 			}
 		}
 	}
-	
 	
 }
