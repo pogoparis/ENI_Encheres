@@ -83,7 +83,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="d-inline-flex col-6"  th:each="enchere:${listeEncheres}">
-<a class="lien" th:href="@{/article(id=${enchere.getArticle() .getNo_article()})}">
+<a class="lien" th:href="@{/article(id=${enchere.getArticle().getNo_article()})}">
 	<img style="width: 150px"
 					class="pull-left img-responsive col-3  p-2 img-thumbnail"
 					th:src="'/Images/'+${enchere.getArticle().getNo_article()}+'.jpg'">
@@ -102,7 +102,27 @@
 		</div>
 		</div>
 		
-		
+<h2>Articles en vente</h2>
+<div class="container-fluid">
+<div class="row">
+<div class="d-inline-flex col-6"  th:each="article:${articlesVendus}">
+<a class="lien" th:href="@{/article(id=${article.getNo_article()})}">
+	<img style="width: 150px"
+					class="pull-left img-responsive col-3  p-2 img-thumbnail"
+					th:src="'/Images/'+${article.getNo_article()}+'.jpg'">
+					</a>
+					<div class="d-block">
+			<h3 th:text="${article.getNom_article()}"></h3>
+			<p>Fin de la vente le : <span th:text="${article.getDate_fin_encheres()}"></span></p>
+			<p th:if="${!serviceEncheres.getEncheresByArticle(article).isEmpty()}"> Meilleure enchère : <span th:text="${article.getPrix_vente()}"></span> crédits</p>
+			<p th:if="${!serviceEncheres.getEncheresByArticle(article).isEmpty()}"> Dernier enchérisseur : <span th:text="${serviceEncheres.getMeilleureEnchereByArticle(article).getUtilisateur().getPseudo()}"></span></p>
+			<p th:if="${serviceEncheres.getEncheresByArticle(article).isEmpty()}"> Prix proposé : <span th:text="${article.getPrix_vente()}"></span> crédits</p>
+			<p th:if="${serviceEncheres.getEncheresByArticle(article).isEmpty()}"> Aucun enchérisseur pour le moment</p>
+			
+			</div>
+			</div>
+		</div>
+		</div>		
 		
 </body>
 </html>
