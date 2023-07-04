@@ -59,21 +59,32 @@ public class ConnectController {
 	@PostMapping("/register")
 	public String register(@Valid @ModelAttribute Utilisateur utilisateur, BindingResult validationResult, RedirectAttributes redirectAttributes, Principal principal)  {
 		
-		System.out.println("debut controller");
-		if ((!encheresServiceUtilisateur.isPseudoUnique(utilisateur.getPseudo())) && (utilisateur.getPseudo() == principal.getName())) {
-			validationResult.rejectValue("pseudo", "pseudo.alreadyTaken", "Le pseudo est déjà pris");
-			System.out.println("if pseudo");
-			
+	//1-----------	
+	if(principal!=null) {
+
+		if ((!encheresServiceUtilisateur.isPseudoUnique(utilisateur.getPseudo())) && (utilisateur.getPseudo().equals(principal.getName()))) {
+		    validationResult.rejectValue("pseudo", "pseudo.alreadyTaken", "Le pseudo est déjà pris");
+		    System.out.println("if pseudo");
+		}
+
+		if ((!encheresServiceUtilisateur.isMailUnique(utilisateur.getEmail())) && (utilisateur.getEmail().equals(encheresServiceUtilisateur.findUserByPseudo(principal.getName()).getEmail()))) {
+		    validationResult.rejectValue("email", "email.alreadyTaken", "Ce mail est deja associé à un compte");
+		    System.out.println("if mail");
+		}
+	}
+	//------
 		
+		System.out.println(principal);
+		//2-----------------------
+		if (principal == null) {
+			if(validationResult.hasErrors()) {
+				return "profil";		
+			}
 		}
-		if ((!encheresServiceUtilisateur.isMailUnique(utilisateur.getEmail())) && (utilisateur.getEmail() == encheresServiceUtilisateur.findUserByPseudo(principal.getName()).getEmail())) {
-			validationResult.rejectValue("email", "email.alreadyTaken", "Ce mail est deja associé à un compte");
-			System.out.println("if mail");
+		//-----------
+		//triche: pas reussi a faire 1 et 2 en même temps
+
 			
-		}
-//			if(validationResult.hasErrors()) {
-//				return "profil";		
-//			}
 			System.out.println("Controller bon passage");
 			encheresServiceUtilisateur.createUtilisateur(utilisateur);
 			redirectAttributes.addFlashAttribute("successMessage", "L'enregistrement a réussi. Veuillez vous connecter avec vos identifiants.");
