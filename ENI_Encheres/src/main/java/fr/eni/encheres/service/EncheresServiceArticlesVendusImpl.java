@@ -67,12 +67,11 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 		return encheresDaoArticlesVendus.getArticleContainNom(rechercheNom);
 	}
 
-	// RECHERCHE AVEC UTILISATEUR CONNECTE
+	// RECHERCHE AVEC UTILISATEUR CONNECTE QUI APPELLE LA METHODE DU DESSOUS
 	@Override
 	public List<ArticleVendu> rechercheConnecte(String rechercheNom, Categorie categorie, Utilisateur utilisateur,
 			String optionArticle, String ventesEnCours, String ventesTerminees, String ventesNonDebutees) {
 		if (categorie.getNo_categorie() == 99) {
-			System.out.println("categorie 99");
 			return methodedeRecherche(encheresDaoArticlesVendus.getArticlesByUserAndSearch(utilisateur, rechercheNom),
 					rechercheNom, categorie, utilisateur, optionArticle, ventesEnCours, ventesTerminees,
 					ventesNonDebutees);
@@ -84,34 +83,38 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 		}
 	}
 	
-	
+	// Methode de recherche qui prend en paramtetre une requete differente selon si categorie est select
 	public List<ArticleVendu> methodedeRecherche(List<ArticleVendu> param, String rechercheNom, Categorie categorie,
 		    Utilisateur utilisateur, String optionArticle, String ventesEnCours, String ventesTerminees,
 		    String ventesNonDebutees) {
 		    datedujour = LocalDate.now();
+		    List<ArticleVendu> newList = new ArrayList<>();
 		    if (optionArticle != null) {
 		        if (optionArticle.equals("ventes")) {
 		            if (ventesEnCours != null && ventesEnCours.equals("venteencours")) {
-		                return filterArticlesEnCours(param);
+		                 filterArticlesEnCours(param, newList);
 		            }
 		            if (ventesTerminees != null && ventesTerminees.equals("ventesterminees")) {
-		                return filterArticlesTerminees(param);
+		                 filterArticlesTerminees(param, newList);
 		            }
 		            if (ventesNonDebutees != null && ventesNonDebutees.equals("ventesnondebutees")) {
-		                return filterArticlesNonDebutees(param);
+		                 filterArticlesNonDebutees(param, newList);
+		            } if (ventesNonDebutees == null && ventesEnCours == null && ventesTerminees == null) {
+		            	return encheresDaoArticlesVendus.getArticlesByUser(utilisateur);
 		            }
-		            return encheresDaoArticlesVendus.getArticlesByUser(utilisateur);
+		            return newList;
 		        }
+		        
+		      //A FAIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		        if (optionArticle.equals("achats")) {
 		            return getArticlesAchete(utilisateur);
 		        }
 		    }
-		    //A FAIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		    
 		    return rechercheNonConnecte(rechercheNom, categorie);
 		}
 
-		private List<ArticleVendu> filterArticlesEnCours(List<ArticleVendu> articles) {
-		    List<ArticleVendu> newList = new ArrayList<>();
+		private List<ArticleVendu> filterArticlesEnCours(List<ArticleVendu> articles, List<ArticleVendu> newList) {   
 		    for (ArticleVendu article : articles) {
 		        if (article.getDate_debut_encheres().isBefore(datedujour) &&
 		            article.getDate_fin_encheres().isAfter(datedujour)) {
@@ -121,8 +124,7 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 		    return newList;
 		}
 
-		private List<ArticleVendu> filterArticlesTerminees(List<ArticleVendu> articles) {
-		    List<ArticleVendu> newList = new ArrayList<>();
+		private List<ArticleVendu> filterArticlesTerminees(List<ArticleVendu> articles, List<ArticleVendu> newList) {
 		    for (ArticleVendu article : articles) {
 		        if (article.getDate_fin_encheres().isBefore(datedujour)) {
 		            newList.add(article);
@@ -131,8 +133,7 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 		    return newList;
 		}
 
-		private List<ArticleVendu> filterArticlesNonDebutees(List<ArticleVendu> articles) {
-		    List<ArticleVendu> newList = new ArrayList<>();
+		private List<ArticleVendu> filterArticlesNonDebutees(List<ArticleVendu> articles, List<ArticleVendu> newList) {
 		    for (ArticleVendu article : articles) {
 		        if (article.getDate_debut_encheres().isAfter(datedujour)) {
 		            newList.add(article);
