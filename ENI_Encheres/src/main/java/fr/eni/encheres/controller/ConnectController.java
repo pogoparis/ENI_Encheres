@@ -138,6 +138,7 @@ public class ConnectController {
 		model.addAttribute("utilisateur" , utilisateur);
 		model.addAttribute("listeEncheres", utilisateur.getListeEncheres());
 		model.addAttribute("articlesAchetes", utilisateur.getListeArticlesAchetes());
+		model.addAttribute("articlesVendus", utilisateur.getListeArticlesVendus());
 		model.addAttribute("serviceEncheres", encheresServiceEncheres);
 			return "moncompte";
 			
