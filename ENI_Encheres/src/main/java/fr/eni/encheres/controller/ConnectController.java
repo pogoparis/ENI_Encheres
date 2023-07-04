@@ -57,7 +57,7 @@ public class ConnectController {
 	@PostMapping("/register")
 	public String register(@Valid @ModelAttribute Utilisateur utilisateur, BindingResult validationResult, RedirectAttributes redirectAttributes, Principal principal)  {
 		
-	//1-----------	
+	
 	if(principal!=null) {
 
 		if ((!encheresServiceUtilisateur.isPseudoUnique(utilisateur.getPseudo())) && (utilisateur.getPseudo().equals(principal.getName()))) {
@@ -70,10 +70,10 @@ public class ConnectController {
 		    System.out.println("if mail");
 		}
 	}
-	//------
+	
 		
 		System.out.println(principal);
-		//2-----------------------
+		
 		if (principal == null) {
 			if (!encheresServiceUtilisateur.isPseudoUnique(utilisateur.getPseudo())){
 				 validationResult.rejectValue("pseudo", "pseudo.alreadyTaken", "Le pseudo est déjà pris");
@@ -87,9 +87,13 @@ public class ConnectController {
 				return "profil";		
 			}
 		}
-		//-----------
-		//triche: pas reussi a faire 1 et 2 en même temps
-
+		
+		
+		
+		if(utilisateur.getPseudo()!= principal.getName()) {
+			encheresServiceUtilisateur.createUtilisateur(utilisateur);
+			return "redirect:/logout";
+		}
 			
 			System.out.println("Controller bon passage");
 			encheresServiceUtilisateur.createUtilisateur(utilisateur);
