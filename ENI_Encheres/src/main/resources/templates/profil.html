@@ -24,8 +24,13 @@
 					<div class="col-sm-5">
 						<div class="form-group">
 						
-						<span style="display:block; height: 40px" class="text-danger col-6"></span>
-						<p>Pseudo : <span th:text="*{pseudo}"></span> </p>
+						<label class="form-label mt-2" for="inputNom"> Pseudo</label> <input type="text"
+								class="form-control" placeholder="Nom" id="inputPseudo" data-th-field="*{pseudo}"> <span
+								style="display:block; height: 40px" class="text-danger col-6">
+								<ul data-th-if="${#fields.hasErrors('pseudo')}">
+									<li data-th-each="erreur: ${#fields.errors('nom')}" data-th-text="${erreur}"></li>
+								</ul>
+								</span>
 							
 <!-- 							<div th:if="${errorMessage}" class="error-message"> -->
 <!--     							<span th:text="${errorMessage}"></span> -->
