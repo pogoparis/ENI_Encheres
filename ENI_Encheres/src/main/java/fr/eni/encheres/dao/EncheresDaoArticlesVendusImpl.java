@@ -23,6 +23,7 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 	final static String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie, etat) VALUES (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial, :prix_vente, :no_utilisateur, :no_categorie, :etat)";
 	final static String SELECT_ARTICLE_BY_ID = "SELECT * from ARTICLES_VENDUS WHERE no_article = :no_article";
 	final static String UPDATE_PRIX_VENTE_ARTICLE_APRES_ENCHERE = "UPDATE ARTICLES_VENDUS set prix_vente=:prix_vente where no_article = :no_article"; 
+	final static String UPDATE_ETAT_ARTICLE = "UPDATE ARTICLES_VENDUS set etat=:etat where no_article=:no_article";
 	
 	private NamedParameterJdbcTemplate namedParameterjdbcTemplate;
 	private EncheresDaoCategories encheresDaoCategories;
@@ -155,6 +156,15 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 		listeArticleUserCat = namedParameterjdbcTemplate.query(sql, params,
 	            new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
 	    return listeArticleUserCat;
+	}
+
+	@Override
+	public void miseAJourEtat(ArticleVendu article) {
+		article.setVenteTermine(true);
+		MapSqlParameterSource articleMap = new MapSqlParameterSource();
+		articleMap.addValue("etat", article.isVenteTermine());
+		articleMap.addValue("no_article", article.getNo_article());
+		namedParameterjdbcTemplate.update(UPDATE_ETAT_ARTICLE,  articleMap);
 	}
 
 }

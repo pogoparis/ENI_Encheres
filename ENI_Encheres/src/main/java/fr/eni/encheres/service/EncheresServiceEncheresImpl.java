@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
+import fr.eni.encheres.dao.EncheresDaoArticlesVendus;
 import fr.eni.encheres.dao.EncheresDaoEncheres;
 
 @Service
@@ -21,6 +22,7 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 	EncheresDaoEncheres enchereDaoEncheres;
 	EncheresServiceUtilisateur encheresServiceUtilisateur;
 	EncheresServiceArticlesVendus encheresServiceArticlesVendus;
+	EncheresDaoArticlesVendus encheresDaoArticlesVendus;
 //	private final TaskScheduler taskScheduler;
 
 //	 private void verifierEncheresTerminees() {
@@ -31,10 +33,11 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 	// et appeler la méthode planifierVerificationEncheresTerminees();
 	public EncheresServiceEncheresImpl(EncheresDaoEncheres enchereDaoEncheres,
 			EncheresServiceUtilisateur encheresServiceUtilisateur,
-			EncheresServiceArticlesVendus encheresServiceArticlesVendus) {
+			EncheresServiceArticlesVendus encheresServiceArticlesVendus, EncheresDaoArticlesVendus encheresDaoArticlesVendus) {
 		this.enchereDaoEncheres = enchereDaoEncheres;
 		this.encheresServiceUtilisateur = encheresServiceUtilisateur;
 		this.encheresServiceArticlesVendus = encheresServiceArticlesVendus;
+		this.encheresDaoArticlesVendus = encheresDaoArticlesVendus;
 	}
 
 //	private void planifierVerificationEncheresTerminees() {
@@ -44,6 +47,7 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 	
 	public Boolean affichageDuBouton(ArticleVendu article, Principal user) {
 		datedujour = LocalDate.now();
+		if (article.isVenteTermine()) return false;
 		Boolean verifVendeur = verificationVendeur(article, user);
 		Boolean verifDate = verificationDatesEnchereEnCours(article);
 		Boolean verifDernierEncherisseur = verificationDernierEncherisseur(article, user);
@@ -55,6 +59,7 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 	}
 	
 	public Boolean affichageBoutonCloture(ArticleVendu article, Principal user) {
+		if (article.isVenteTermine()) return false;
 		Boolean verifMeilleurEncherisseur = verificationMeilleurEncherisseur(article, user);
 		System.out.println(verifMeilleurEncherisseur);
 		Boolean verifDate = verificationDatesEnchereTerminee(article);
@@ -68,11 +73,9 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 		
 	}
 
-	
-	
-	
 	private Boolean verificationMeilleurEncherisseur(ArticleVendu article, Principal user) {
 		if (user == null) return false;
+		if (getMeilleureEnchereByArticle(article) == null) return false;
 		if (encheresServiceUtilisateur.findUserByPseudo(user.getName()).getNo_utilisateur() == getMeilleureEnchereByArticle(article).getUtilisateur().getNo_utilisateur())
 		{return true;}
 		return false;
@@ -168,18 +171,18 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 	public void surencherir(Enchere enchere) {
 		Enchere ancienneMeilleureEnchere = getMeilleureEnchereByArticle(enchere.getArticle());
 		if (ancienneMeilleureEnchere != null) {
-			encheresServiceUtilisateur.remboursementDernierEncherisseur(ancienneMeilleureEnchere);
+			encheresServiceUtilisateur.miseAJourCredit(ancienneMeilleureEnchere.getMontant_enchere(), ancienneMeilleureEnchere.getUtilisateur());
 		}
 		creationEncheres(enchere);
 		encheresServiceArticlesVendus.majPrixArticle(enchere);
-		encheresServiceUtilisateur.majCreditUtilisateur(enchere);
+		encheresServiceUtilisateur.miseAJourCredit(enchere.getMontant_enchere()*-1, enchere.getUtilisateur());
 	}
 
 	@Override
 	public void conclureVente(ArticleVendu article) {
-		article.setVenteTermine(true);
-		article.getUtilisateur().setCredit(article.getUtilisateur().getCredit()+ article.getPrix_vente());
-		
+		encheresDaoArticlesVendus.miseAJourEtat(article);
+		int gainVendeur = article.getPrix_vente();
+		encheresServiceUtilisateur.miseAJourCredit(gainVendeur, article.getUtilisateur());
 }
 
 

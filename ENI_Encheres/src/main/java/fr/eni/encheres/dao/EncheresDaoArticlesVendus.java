@@ -27,5 +27,7 @@ public interface EncheresDaoArticlesVendus {
 	List<ArticleVendu> getArticlesByUserAndSearch(Utilisateur utilisateur, String rechercheNom );
 	List<ArticleVendu> getArticlesByUserByCategorie(Utilisateur utilisateur, Categorie categorie, String rechercheNom);
 
+	void miseAJourEtat(ArticleVendu article);
+
 
 }

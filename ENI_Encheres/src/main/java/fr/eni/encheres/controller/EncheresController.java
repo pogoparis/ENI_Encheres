@@ -134,6 +134,11 @@ public class EncheresController {
 		}	
 	}
 	
-
+	@GetMapping("/cloturer")
+	public String cloturerVente(Integer id, Principal principal) {
+		ArticleVendu article = encheresServiceArticlesVendus.findArticleById(id);
+		encheresServiceEncheres.conclureVente(article);
+		return "redirect:/encheres";
+	}
 
 }

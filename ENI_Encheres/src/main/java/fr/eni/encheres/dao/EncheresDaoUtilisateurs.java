@@ -16,13 +16,14 @@ public interface EncheresDaoUtilisateurs {
 
 	void saveUtilisateur(Utilisateur utilisateur);
 
-	void majCreditUtilisateur(Enchere enchere);
+
 	void delete(Integer id);
 
-	void remboursementCreditUtilisateur(Enchere ancienneMeilleureEnchere);
 	
 	public boolean isPseudoUnique(String pseudo);
 	
 	public boolean isMailUnique(String email);
+
+	void majCredit(int valeur, Utilisateur utilisateur);
 
 }

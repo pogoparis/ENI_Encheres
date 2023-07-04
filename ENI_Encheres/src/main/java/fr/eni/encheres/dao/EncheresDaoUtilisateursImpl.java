@@ -25,7 +25,7 @@ public class EncheresDaoUtilisateursImpl implements EncheresDaoUtilisateurs {
 	final static String SELECT_USER_BY_USERNAME = "select * from UTILISATEURS where pseudo=:pseudo";
 	final static String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, rue, code_postal, ville,mot_de_passe, credit, telephone, administrateur) VALUES (:pseudo, :nom, :prenom, :email, :rue, :code_postal, :ville,:mot_de_passe, :credit,:telephone, :administrateur)";
 	final static String UPDATE_UTILISATEUR = "update UTILISATEURS set pseudo=:pseudo, nom=:nom, prenom=:prenom, email=:email, rue=:rue, code_postal=:code_postal, ville=:ville, credit=:credit,telephone=:telephone, administrateur=:administrateur where no_utilisateur=:no_utilisateur";
-	final static String UPDATE_CREDIT_UTILISATEUR_APRES_ENCHERE = "UPDATE UTILISATEURS set credit=:credit where no_utilisateur = :no_utilisateur"; 
+	final static String UPDATE_CREDIT_UTILISATEUR = "UPDATE UTILISATEURS set credit=:credit where no_utilisateur = :no_utilisateur"; 
 	final static String DELETE_USER = "delete UTILISATEURS where no_utilisateur = :no_utilisateur";
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -111,15 +111,7 @@ public class EncheresDaoUtilisateursImpl implements EncheresDaoUtilisateurs {
 	}
 
 
-	@Override
-	public void majCreditUtilisateur(Enchere enchere) {
-		MapSqlParameterSource utilisateurMap = new MapSqlParameterSource();
-		utilisateurMap.addValue("no_utilisateur",enchere.getUtilisateur().getNo_utilisateur());
-		utilisateurMap.addValue("credit",
-							(enchere.getUtilisateur().getCredit()-enchere.getMontant_enchere())
-							);
-		namedParameterJdbcTemplate.update(UPDATE_CREDIT_UTILISATEUR_APRES_ENCHERE,  utilisateurMap);
-	}
+	
 	
 	@Override
 	public void delete(Integer id) {
@@ -129,14 +121,18 @@ public class EncheresDaoUtilisateursImpl implements EncheresDaoUtilisateurs {
 	}
 
 
+	
+
+
 	@Override
-	public void remboursementCreditUtilisateur(Enchere ancienneMeilleureEnchere) {
+	public void majCredit(int valeur, Utilisateur utilisateur) {
 		MapSqlParameterSource utilisateurMap = new MapSqlParameterSource();
-		utilisateurMap.addValue("no_utilisateur",ancienneMeilleureEnchere.getUtilisateur().getNo_utilisateur());
-		utilisateurMap.addValue("credit",
-							(ancienneMeilleureEnchere.getUtilisateur().getCredit()+ancienneMeilleureEnchere.getMontant_enchere())
-							);
-		namedParameterJdbcTemplate.update(UPDATE_CREDIT_UTILISATEUR_APRES_ENCHERE,  utilisateurMap);
+		int nouveauCredit = utilisateur.getCredit()+valeur;
+		utilisateur.setCredit(nouveauCredit);
+		utilisateurMap.addValue("no_utilisateur", utilisateur.getNo_utilisateur());
+		utilisateurMap.addValue("credit", utilisateur.getCredit());
+		namedParameterJdbcTemplate.update(UPDATE_CREDIT_UTILISATEUR, utilisateurMap);
+		
 	}
 
 }

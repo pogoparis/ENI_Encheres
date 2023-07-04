@@ -12,9 +12,8 @@ public interface EncheresServiceUtilisateur {
 	void createUtilisateur(Utilisateur utilisateur) ;
 	Utilisateur findUtilisateurById(Integer id);
 	public Utilisateur findUserByPseudo(String pseudo);
-	void majCreditUtilisateur(Enchere enchere);
-	void remboursementDernierEncherisseur(Enchere ancienneMeilleureEnchere);
 	void deleteUser(Integer id);
 	public Boolean isPseudoUnique(String pseudo);
 	public Boolean isMailUnique(String email);
+	void miseAJourCredit(int valeur, Utilisateur utilisateur);
 }

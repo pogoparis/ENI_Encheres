@@ -62,17 +62,6 @@ public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateu
 		miseEnPlaceDesListes(utilisateur);
 		return utilisateur;
 	}
-
-	@Override
-	public void majCreditUtilisateur(Enchere enchere) {
-		encheresDaoUtilisateurs.majCreditUtilisateur(enchere);
-		
-	}
-
-	@Override
-	public void remboursementDernierEncherisseur(Enchere ancienneMeilleureEnchere) {
-		encheresDaoUtilisateurs.remboursementCreditUtilisateur(ancienneMeilleureEnchere);
-	}
 	
 	
 	public void deleteUser(Integer id) {
@@ -127,6 +116,12 @@ public void miseEnPlaceDesListes (Utilisateur utilisateur) {
 		    	return true;
 		    }
 		    return false;
+	}
+
+	@Override
+	public void miseAJourCredit(int valeur, Utilisateur utilisateur) {
+		encheresDaoUtilisateurs.majCredit(valeur, utilisateur);
+		
 	}
 
 }
