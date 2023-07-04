@@ -10,8 +10,8 @@ public class ArticleVendu {
 
 	//constantes etatVente
 	
-	private final static int EN_COURS = 0;
-	private final static int ENCHERES_TERMINEES = 1;
+	private boolean venteTermine = false;
+	
 	
 	
 	private Integer no_article;
@@ -32,7 +32,7 @@ public class ArticleVendu {
 	@Min(0)
 	private Integer prix_vente;
 	
-	private String etatVente;
+	
 	
 	@NotBlank
 	private Categorie categorie;
@@ -124,13 +124,7 @@ public class ArticleVendu {
 		this.prix_vente = prix_vente;
 	}
 
-	public String getEtatVente() {
-		return etatVente;
-	}
-
-	public void setEtatVente(String etatVente) {
-		this.etatVente = etatVente;
-	}
+	
 //Fin getter setter
 
 
@@ -153,12 +147,22 @@ public class ArticleVendu {
 		this.utilisateur = utilisateur;
 	}
 
+	public boolean isVenteTermine() {
+		return venteTermine;
+	}
+
+
+	public void setVenteTermine(boolean venteTermine) {
+		this.venteTermine = venteTermine;
+	}
+
+
 	@Override
 	public String toString() {
 		return "ArticleVendu [no_article=" + no_article + ", nom_article=" + nom_article + ", description="
 				+ description + ", date_debut_encheres=" + date_debut_encheres + ", date_fin_encheres="
-				+ date_fin_encheres + ", prix_initial=" + prix_initial + ", prix_vente=" + prix_vente + ", etatVente="
-				+ etatVente + ", categorie=" + categorie + ", utilisateur=" + utilisateur + "]";
+				+ date_fin_encheres + ", prix_initial=" + prix_initial + ", prix_vente=" + prix_vente 
+				+ ", categorie=" + categorie + ", utilisateur=" + utilisateur + "]";
 	}
 
 	

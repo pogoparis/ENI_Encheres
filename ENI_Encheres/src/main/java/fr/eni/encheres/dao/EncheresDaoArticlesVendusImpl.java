@@ -20,7 +20,7 @@ import fr.eni.encheres.bo.Utilisateur;
 public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus {
 
 	final static String SELECT_ALL_ARTICLEVENDU = "SELECT * from ARTICLES_VENDUS";
-	final static String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial, :prix_vente, :no_utilisateur, :no_categorie)";
+	final static String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie, etat) VALUES (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial, :prix_vente, :no_utilisateur, :no_categorie, :etat)";
 	final static String SELECT_ARTICLE_BY_ID = "SELECT * from ARTICLES_VENDUS WHERE no_article = :no_article";
 	final static String UPDATE_PRIX_VENTE_ARTICLE_APRES_ENCHERE = "UPDATE ARTICLES_VENDUS set prix_vente=:prix_vente where no_article = :no_article"; 
 	
@@ -73,6 +73,7 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 		articleMap.addValue("prix_vente", article.getPrix_initial());
 		articleMap.addValue("no_utilisateur", article.getUtilisateur().getNo_utilisateur());
 		articleMap.addValue("no_categorie", article.getCategorie().getNo_categorie());
+		articleMap.addValue("etat", false);
 		namedParameterjdbcTemplate.update(INSERT_ARTICLE, articleMap, keyHolder);
 		article.setNo_article(keyHolder.getKey().intValue());
 	}

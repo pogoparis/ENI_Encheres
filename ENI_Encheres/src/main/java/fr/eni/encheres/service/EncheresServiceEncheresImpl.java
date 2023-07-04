@@ -60,8 +60,10 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 		Boolean verifDate = verificationDatesEnchereTerminee(article);
 		System.out.println(verifDate);
 		if (verifDate && verifMeilleurEncherisseur) {
+			
 			return true;
 		}
+		
 		return false;
 		
 	}
