@@ -103,8 +103,7 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 	    listeArticleTrouve = namedParameterjdbcTemplate.query(sql, params,
 	            new ArticleVenduRowMapper(this, encheresDaoCategories, encheresDaoUtilisateurs));
 	    return listeArticleTrouve;
-	}
-	 
+	} 
 	
 	/******************************  RECHERCHE *******************************************/
 	// recherche par categorie et contenant la recherche

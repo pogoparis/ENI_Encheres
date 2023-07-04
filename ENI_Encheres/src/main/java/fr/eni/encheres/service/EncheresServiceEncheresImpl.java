@@ -36,9 +36,9 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 		this.encheresServiceUtilisateur = encheresServiceUtilisateur;
 		this.encheresServiceArticlesVendus = encheresServiceArticlesVendus;
 	}
-//
+
 //	private void planifierVerificationEncheresTerminees() {
-//        // Exemple de planification avec un délai fixe de 60 secondes
+//        // Exemple de planification avec un délai fixe de 2 secondes
 //        taskScheduler.schedule(this::verifierEncheresTerminees, new PeriodicTrigger(2, TimeUnit.SECONDS));
 //    }
 	
