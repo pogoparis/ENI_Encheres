@@ -68,6 +68,9 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 		
 	}
 
+	
+	
+	
 	private Boolean verificationMeilleurEncherisseur(ArticleVendu article, Principal user) {
 		if (user == null) return false;
 		if (encheresServiceUtilisateur.findUserByPseudo(user.getName()).getNo_utilisateur() == getMeilleureEnchereByArticle(article).getUtilisateur().getNo_utilisateur())
@@ -172,9 +175,14 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 		encheresServiceUtilisateur.majCreditUtilisateur(enchere);
 	}
 
+	@Override
+	public void conclureVente(ArticleVendu article) {
+		article.setVenteTermine(true);
+		article.getUtilisateur().setCredit(article.getUtilisateur().getCredit()+ article.getPrix_vente());
+		
+}
 
 
-	
 
 	
 	

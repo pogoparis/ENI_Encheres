@@ -30,6 +30,8 @@ public interface EncheresServiceEncheres {
 	
 	public void surencherir(Enchere enchere);
 	
+	public void conclureVente(ArticleVendu article);
+	
 	//Récupération de toutes les enchères d'un utilisateur sur un article en particulier
 	//List<Enchere> getEncheresByArticleByUser(ArticleVendu article, Utilisateur utilisateur);
 }
