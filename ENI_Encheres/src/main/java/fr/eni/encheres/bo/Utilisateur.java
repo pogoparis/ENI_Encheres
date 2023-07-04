@@ -17,7 +17,8 @@ public class Utilisateur implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	private Integer no_utilisateur;
 	
-	@NotBlank
+	//@NotBlank
+//	@Pattern( regexp = "^[a-zA-Z0-9]+$")
 	private String pseudo;
 	
 	@NotBlank

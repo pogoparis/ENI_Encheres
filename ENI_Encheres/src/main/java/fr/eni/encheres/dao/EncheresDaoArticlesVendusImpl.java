@@ -94,7 +94,7 @@ public class EncheresDaoArticlesVendusImpl implements EncheresDaoArticlesVendus 
 		namedParameterjdbcTemplate.update(UPDATE_PRIX_VENTE_ARTICLE_APRES_ENCHERE,  articleMap);	
 	}
 
-	
+ 
 	// RECHERCHE ARTICLES PAR NOM
 	@Override
 	public List<ArticleVendu> getArticleContainNom(String rechercheNom) {
