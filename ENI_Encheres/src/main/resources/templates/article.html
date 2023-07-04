@@ -72,6 +72,13 @@
 			</form>
 		</div>
 	</div>
+	
+	<div class="container">
+		<div th:if="${tokenCloture}" class="text-center">
+			<p>Félicitations, vous avez remporté cette vente !</p>
+			<button><a class="lien" th:href="@{/cloturer(id=${article.getNo_article()})}">CONCLURE LA VENTE</a></button>
+		</div>
+	</div>
 
 </body>
 

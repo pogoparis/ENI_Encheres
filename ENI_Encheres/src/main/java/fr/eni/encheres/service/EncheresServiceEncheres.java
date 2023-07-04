@@ -11,6 +11,10 @@ public interface EncheresServiceEncheres {
 	
 	// On peut enchérir (apparition du bouton selon) certaines conditions
 	public Boolean affichageDuBouton(ArticleVendu article, Principal user);
+	
+	//On peut cloturer la vente si les conditions sont reunies
+	public Boolean affichageBoutonCloture(ArticleVendu article, Principal user);
+	
 	//création enchère
 	public void creationEncheres(Enchere enchere);
 	

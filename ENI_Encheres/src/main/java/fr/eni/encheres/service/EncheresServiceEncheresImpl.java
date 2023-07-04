@@ -45,12 +45,38 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 	public Boolean affichageDuBouton(ArticleVendu article, Principal user) {
 		datedujour = LocalDate.now();
 		Boolean verifVendeur = verificationVendeur(article, user);
-		Boolean verifDate = verificationDates(article);
+		Boolean verifDate = verificationDatesEnchereEnCours(article);
 		Boolean verifDernierEncherisseur = verificationDernierEncherisseur(article, user);
 		Boolean verifSoldeSuffisant = verificationSoldeSuffisant(article, user);
 		if (verifVendeur && verifDate && verifDernierEncherisseur && verifSoldeSuffisant) {
 			return true;
 		}
+		return false;
+	}
+	
+	public Boolean affichageBoutonCloture(ArticleVendu article, Principal user) {
+		Boolean verifMeilleurEncherisseur = verificationMeilleurEncherisseur(article, user);
+		System.out.println(verifMeilleurEncherisseur);
+		Boolean verifDate = verificationDatesEnchereTerminee(article);
+		System.out.println(verifDate);
+		if (verifDate && verifMeilleurEncherisseur) {
+			return true;
+		}
+		return false;
+		
+	}
+
+	private Boolean verificationMeilleurEncherisseur(ArticleVendu article, Principal user) {
+		if (user == null) return false;
+		if (encheresServiceUtilisateur.findUserByPseudo(user.getName()).getNo_utilisateur() == getMeilleureEnchereByArticle(article).getUtilisateur().getNo_utilisateur())
+		{return true;}
+		return false;
+	}
+
+	private Boolean verificationDatesEnchereTerminee(ArticleVendu article) {
+		if (datedujour.isAfter(article.getDate_fin_encheres())) {
+			return true;
+			}
 		return false;
 	}
 
@@ -80,7 +106,7 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 		return true;
 	}
 
-	private Boolean verificationDates(ArticleVendu article) {
+	private Boolean verificationDatesEnchereEnCours(ArticleVendu article) {
 		if (datedujour.isEqual(article.getDate_debut_encheres())) {
 			return true;
 		}

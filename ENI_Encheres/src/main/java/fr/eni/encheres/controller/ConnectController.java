@@ -2,7 +2,6 @@ package fr.eni.encheres.controller;
 
 import java.security.Principal;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.service.EncheresServiceEncheres;
 import fr.eni.encheres.service.EncheresServiceUtilisateur;
@@ -96,13 +94,8 @@ public class ConnectController {
 			System.out.println("Controller bon passage");
 			encheresServiceUtilisateur.createUtilisateur(utilisateur);
 			redirectAttributes.addFlashAttribute("successMessage", "L'enregistrement a réussi. Veuillez vous connecter avec vos identifiants.");
-			return "redirect:/login";	
-			
+			return "redirect:/login";				
 	}
-	
-	
-
-
 
 	/****************** AFFICHAGE DETAIL UTILISATEUR (DETAIL) *******************/
 	@GetMapping("/details")
