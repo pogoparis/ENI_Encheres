@@ -69,6 +69,9 @@ public class ConnectController {
 		    validationResult.rejectValue("email", "email.alreadyTaken", "Ce mail est deja associé à un compte");
 		    System.out.println("if mail");
 		}
+//		if(validationResult.hasErrors()) {
+//			return "profil";		
+//		}
 	}
 	
 		
