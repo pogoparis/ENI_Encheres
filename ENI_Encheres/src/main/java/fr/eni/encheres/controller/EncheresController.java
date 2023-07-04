@@ -111,6 +111,7 @@ public class EncheresController {
 		model.addAttribute("meilleureEnchere", meilleureEnchere);
 		Boolean tokenAffichage = encheresServiceEncheres.affichageDuBouton(article, principal);
 		model.addAttribute("tokenAffichage", tokenAffichage);
+		model.addAttribute("messageEnchereIndisponible", encheresServiceEncheres.messageBoutonEncherirIndisponible(article, principal));
 		Boolean tokenBoutonCloture = encheresServiceEncheres.affichageBoutonCloture(article, principal);
 		model.addAttribute("tokenCloture", tokenBoutonCloture);
 		return "article";

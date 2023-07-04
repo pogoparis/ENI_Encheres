@@ -58,6 +58,16 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 		return false;
 	}
 	
+	public String messageBoutonEncherirIndisponible(ArticleVendu article, Principal user) {
+		if (article.isVenteTermine()) return "Cette vente est terminée !";
+		if (user == null) return "Connectez-vous pour enchérir sur cet article";
+		if (!verificationVendeur(article, user)) return "Vous êtes le vendeur de cet article";
+		if (!verificationDatesEnchereEnCours(article)) return "Cette enchère n'est pas en cours";
+		if (!verificationDernierEncherisseur(article, user)) return "Vous avez déjà enchérit sur cet article !";
+		if (!verificationSoldeSuffisant(article, user)) return "Vous n'avez pas assez de crédits pour enchérir sur ce produit";
+		return null;
+	}
+	
 	public Boolean affichageBoutonCloture(ArticleVendu article, Principal user) {
 		if (article.isVenteTermine()) return false;
 		Boolean verifMeilleurEncherisseur = verificationMeilleurEncherisseur(article, user);
