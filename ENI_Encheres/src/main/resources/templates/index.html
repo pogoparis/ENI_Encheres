@@ -31,9 +31,9 @@
 </div>
 <!-- Background image -->
 
-
-	<div data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
-
+<div id="page2" >
+	<div  data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
+</div>
 
 	<div class="container">
 		<div class="container">
@@ -163,6 +163,25 @@
 	</div>
 
 	<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		  const isFirstVisit = !document.cookie.includes('visited=true');
+		  const targetElement = document.querySelector('#page2');
+		  const currentURL = window.location.href;
+
+		  // Vérifier si l'URL contient des segments supplémentaires après l'URL de base
+		  const hasAdditionalSegments = currentURL !== window.location.origin + window.location.pathname;
+
+		  if (!isFirstVisit && targetElement && hasAdditionalSegments) {
+		    targetElement.scrollIntoView();
+		  }
+
+		  // Définir le cookie pour indiquer que l'utilisateur a visité le site
+		  if (isFirstVisit) {
+		    document.cookie = 'visited=true; max-age=31536000'; // Expire après 1 an
+		  }
+		});
+
+	
 		var optionVentes = document.querySelector('input[value="ventes"]');
 		var optionAchats = document.querySelector('input[value="achats"]');
 		var selectCategorie = document.getElementById("cat");
