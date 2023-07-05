@@ -108,14 +108,14 @@
 			<div th:if="${listeArticles.isEmpty()}" class="row">La liste
 				d'article est vide.</div>
 			<div class="row">
+			
 				<div class="d-inline-flex col-6" th:each="article:${listeArticles}">
 					<a class="lien" th:href="@{/article(id=${article.getNo_article()})}">
 						<img style="width: 150px" class="pull-left img-responsive col-3  m-2 img-thumbnail"
 							th:src="'/Images/'+${article.getNo_article()}+'.jpg'">
-					</a>
+					
 					<div class="d-block">
 
-						<!--						Article n°<span th:text="${article.getNo_article()}"></span>-->
 						<h3>
 							<span th:text="${article.getNom_article()}"></span>
 						</h3>
@@ -125,18 +125,16 @@
 						</p>
 						<p>
 							Prix de vente : <span th:text="${article.getPrix_vente()}"></span>
-							pts
+							crédits
 						</p>
-						<!--     			<p> Prix de départ : <span th:text="${article.getPrix_initial()}"></span> pts</p> -->
-						<!--     			<p> Début de l'enchère : <div th:text="${article.getDate_debut_encheres()}"></div></p> -->
-						<!--                <p>Description : <span th:text="${article.getDescription()}"></span></p><br> -->
-						<!--     			<p> Categorie : <span th:text="${article.getCategorie()}"></span></p>	 -->
 						<p>
-							Utilisateur : <a th:href="@{/details(pseudo=${article.getUtilisateur().getPseudo()})}"><span
+							Vendeur : <a th:href="@{/details(pseudo=${article.getUtilisateur().getPseudo()})}"><span
 									th:text="${article.getUtilisateur().getPseudo()}"></span></a>
 						</p>
 					</div>
+					</a>
 				</div>
+				
 			</div>
 		</div>
 	</div>
