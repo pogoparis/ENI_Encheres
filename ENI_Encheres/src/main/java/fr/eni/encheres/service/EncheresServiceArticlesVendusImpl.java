@@ -63,7 +63,8 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 	// RECHERCHE AVEC UTILISATEUR CONNECTE QUI APPELLE LA METHODE DU DESSOUS
 	@Override
 	public List<ArticleVendu> rechercheConnecte(String rechercheNom, Categorie categorie, Utilisateur utilisateur,
-			String optionArticle, String ventesEnCours, String ventesTerminees, String ventesNonDebutees) {
+			String optionArticle, String ventesEnCours, String ventesTerminees, String ventesNonDebutees,
+			String encheresEnCours, String encheresOuvertes, String encheresGagnees) {
 		if (categorie != null) {
 			if (categorie.getNo_categorie() == 99) {
 				if (optionArticle != null) {
@@ -75,7 +76,11 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 								ventesNonDebutees);
 					}
 					if (optionArticle.equals("achats")) {
-						return getArticlesAchete(utilisateur);
+						System.out.println("pas de categorie !!!! et ACHAT coché ");
+						return methodedeRechercheAchat(
+								enchereDaoEncheres.getEncheresByUser(utilisateur),
+								rechercheNom, categorie, utilisateur, optionArticle, encheresEnCours, encheresOuvertes,
+								encheresGagnees);
 					}
 				}
 				return encheresDaoArticlesVendus.getArticleContainNom(rechercheNom);
@@ -117,6 +122,43 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 		}
 		return newList;
 	}
+	
+	public List<ArticleVendu> methodedeRechercheAchat(List<Enchere> param, String rechercheNom,
+			Categorie categorie, Utilisateur utilisateur, String optionArticle, String encheresEnCours,
+			String encheresOuvertes, String encheresGagnees) {
+		datedujour = LocalDate.now();
+		List<ArticleVendu> newList = new ArrayList<>();
+		if (encheresEnCours != null && encheresEnCours.equals("encheresencours")) {
+			filterEncheresEnCours(param, newList);
+	
+		}
+		if (encheresOuvertes != null && encheresOuvertes.equals("encheresouvertes")) {
+			filterEncheresEnCours(param, newList);
+		}
+		if (encheresGagnees != null && encheresGagnees.equals("encheresgagnees")) {
+			//filterArticlesNonDebutees(param, newList);
+		}
+		if (encheresGagnees == null && encheresOuvertes == null && encheresEnCours == null) {
+			filtrerAllEncheres(param, newList);
+		}
+		return newList;
+	}
+
+	private List<ArticleVendu> filtrerAllEncheres(List<Enchere> param, List<ArticleVendu> newList) {
+		for (Enchere enchereUser : param) {
+			newList.add(enchereUser.getArticle());
+		}
+		return newList;
+	}
+
+	private List<ArticleVendu> filterEncheresEnCours(List<Enchere> param, List<ArticleVendu> newList) {
+			for (Enchere enchereUser : param) {
+				if (enchereUser.getArticle().getDate_debut_encheres().isBefore(datedujour)
+						&& enchereUser.getArticle().getDate_fin_encheres().isAfter(datedujour)) 
+					newList.add(enchereUser.getArticle());
+				}
+				return newList;
+			}
 
 	private List<ArticleVendu> filtrerAllArticle(List<ArticleVendu> param, List<ArticleVendu> newList) {
 		for (ArticleVendu article : param) {

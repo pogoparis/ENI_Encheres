@@ -120,12 +120,14 @@ public class EncheresController {
 	/************** BOUTON RECHERCHE GET *****************/
 	@GetMapping("/recherche")
 	public String recherche(String rechercheNom, Model model, Categorie categorie, Utilisateur utilisateur,
-	        Principal principal, String optionArticle, String ventesEnCours, String ventesTerminees, String ventesNonDebutees) {
+	        Principal principal, String optionArticle, String ventesEnCours, String ventesTerminees, String ventesNonDebutees, String encheresEnCours,
+			String encheresOuvertes, String encheresGagnees) {
 	    model.addAttribute("listeCategorie", encheresServiceCategorie.findAllCategorie());
 	    if (principal != null) {
 	        utilisateur = encheresServiceUtilisateur.findUserByPseudo(principal.getName());
 	        List<ArticleVendu> listeArticlesVendeur = encheresServiceArticlesVendus.rechercheConnecte(rechercheNom,
-	                categorie, utilisateur, optionArticle, ventesEnCours, ventesTerminees, ventesNonDebutees);
+	                categorie, utilisateur, optionArticle, ventesEnCours, ventesTerminees, ventesNonDebutees,encheresEnCours, encheresOuvertes,
+					encheresGagnees);
 	        model.addAttribute("listeArticles", listeArticlesVendeur);
 	        return "index";
 	    } else {

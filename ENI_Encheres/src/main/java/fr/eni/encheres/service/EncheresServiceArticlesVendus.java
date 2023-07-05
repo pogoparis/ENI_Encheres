@@ -14,6 +14,9 @@ public interface EncheresServiceArticlesVendus {
 	ArticleVendu findArticleById(Integer id);
 	void majPrixArticle(Enchere enchere);
 	List<ArticleVendu> rechercheNonConnecte(String rechercheNom, Categorie categorie);
-	List<ArticleVendu> rechercheConnecte(String rechercheNom, Categorie categorie, Utilisateur utilisateur, String optionArticle, String ventesEnCours, String ventesTerminees, String ventesNonDebutees);
+	List<ArticleVendu> rechercheConnecte(String rechercheNom, Categorie categorie, Utilisateur utilisateur,
+			String optionArticle, String ventesEnCours, String ventesTerminees, String ventesNonDebutees,
+			String encheresEnCours,
+			String encheresOuvertes, String encheresGagnees);
 
 }
