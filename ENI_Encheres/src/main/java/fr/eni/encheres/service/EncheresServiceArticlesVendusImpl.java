@@ -94,6 +94,13 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 								rechercheNom, categorie, utilisateur, optionArticle, ventesEnCours, ventesTerminees,
 								ventesNonDebutees);
 					} 
+					if (optionArticle.equals("achats")) {
+						System.out.println(" J'AI une Categorie !!!! et ACHAT coché ");
+						return methodedeRechercheAchat(
+								enchereDaoEncheres.getEncheresByUserByCategorie(utilisateur, categorie),
+								rechercheNom, categorie, utilisateur, optionArticle, encheresEnCours, encheresOuvertes,
+								encheresGagnees);
+					}
 				} 
 				return encheresDaoArticlesVendus.getArticleByCategorieContainNom(rechercheNom, categorie);
 			}
@@ -132,14 +139,23 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 			filterEncheresEnCours(param, newList);
 	
 		}
-		if (encheresOuvertes != null && encheresOuvertes.equals("encheresouvertes")) {
+		if (encheresOuvertes != null && encheresOuvertes.equals("encheresouvertes")) {		
+			// ******************************************* A FAIRE *************************************!!!!!
 			filterEncheresEnCours(param, newList);
 		}
 		if (encheresGagnees != null && encheresGagnees.equals("encheresgagnees")) {
-			//filterArticlesNonDebutees(param, newList);
+			filterEncheresGagnees(param, newList);
 		}
 		if (encheresGagnees == null && encheresOuvertes == null && encheresEnCours == null) {
 			filtrerAllEncheres(param, newList);
+		}
+		return newList;
+	}
+
+	private List<ArticleVendu> filterEncheresGagnees(List<Enchere> param, List<ArticleVendu> newList) {
+		for (Enchere enchereAtrier : param) {
+			if(enchereAtrier.getArticle().getDate_fin_encheres().isBefore(datedujour) ) 
+				newList.add(enchereAtrier.getArticle());			
 		}
 		return newList;
 	}
@@ -195,16 +211,16 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 		return newList;
 	}
 
-	private List<ArticleVendu> getArticlesAchete(Utilisateur utilisateur) {
-		List<Enchere> listEncheres = utilisateur.getListeEncheres();
-		System.out.println(listEncheres);
-		List<ArticleVendu> listeArticleAchete = new ArrayList<>();
-		for (Enchere enchere : listEncheres) {
-			listeArticleAchete.add(enchere.getArticle());
-			System.out.println(enchere.getArticle());
-		}
-		System.out.println(listeArticleAchete);
-		return listeArticleAchete;
-	}
+//	private List<ArticleVendu> getArticlesAchete(Utilisateur utilisateur) {
+//		List<Enchere> listEncheres = utilisateur.getListeEncheres();
+//		System.out.println(listEncheres);
+//		List<ArticleVendu> listeArticleAchete = new ArrayList<>();
+//		for (Enchere enchere : listEncheres) {
+//			listeArticleAchete.add(enchere.getArticle());
+//			System.out.println(enchere.getArticle());
+//		}
+//		System.out.println(listeArticleAchete);
+//		return listeArticleAchete;
+//	}
 
 }

@@ -1,6 +1,8 @@
 package fr.eni.encheres.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -8,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 
@@ -19,6 +22,10 @@ public class EncheresDaoEncheresImpl implements EncheresDaoEncheres {
 	public final static String SELECT_ENCHERES_BY_ARTICLE = "select encheres.no_utilisateur, encheres.no_article, date_enchere, montant_enchere from ENCHERES inner join ARTICLES_VENDUS on ENCHERES.no_article = ARTICLES_VENDUS.no_article where ARTICLES_VENDUS.no_article =:no_article";
 	public final static String UPDATE_ENCHERE = "update ENCHERES set date_enchere=:date_enchere, montant_enchere=:montant_enchere where no_utilisateur=:no_utilisateur";
 	private static final String SELECT_ENCHERES_BY_USER = "SELECT ENCHERES.no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES INNER JOIN UTILISATEURS ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur WHERE UTILISATEURS.no_utilisateur =:no_utilisateur";
+	private static final String SELECT_ENCHERES_BY_USER_BY_CATEGORIE = "  SELECT ENCHERES.* FROM ENCHERES \r\n"
+			+ "  INNER JOIN UTILISATEURS ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur \r\n"
+			+ "  INNER JOIN ARTICLES_VENDUS ON ENCHERES.no_article = ARTICLES_VENDUS.no_article\r\n"
+			+ "  WHERE UTILISATEURS.no_utilisateur =:no_utilisateur AND ARTICLES_VENDUS.no_categorie = :no_categorie;";
 	
 	private EncheresDaoUtilisateurs encheresDaoUtilisateurs;
 	private EncheresDaoArticlesVendus encheresDaoArticlesVendus;
@@ -71,5 +78,26 @@ public class EncheresDaoEncheresImpl implements EncheresDaoEncheres {
 		liste = namedParameterJdbcTemplate.query(SELECT_ENCHERES_BY_USER, new BeanPropertySqlParameterSource(utilisateur) ,new EncheresRowMapper(encheresDaoArticlesVendus, encheresDaoUtilisateurs));
 		return liste;
 	}
+
+
+	@Override
+	public List<Enchere> getEncheresByUserByCategorie(Utilisateur utilisateur, Categorie categorie) {
+		List<Enchere> liste;
+		String sql =  "SELECT ENCHERES.* FROM ENCHERES INNER JOIN UTILISATEURS ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur INNER JOIN ARTICLES_VENDUS ON ENCHERES.no_article = ARTICLES_VENDUS.no_article WHERE UTILISATEURS.no_utilisateur =:no_utilisateur AND ARTICLES_VENDUS.no_categorie = :no_categorie" ;
+		
+		Map<String, Object> params = new HashMap<>();
+	    params.put("no_utilisateur", utilisateur.getNo_utilisateur());
+	    params.put("no_categorie", categorie.getNo_categorie());
+	    liste = namedParameterJdbcTemplate.query(sql, params,
+	            new EncheresRowMapper(encheresDaoArticlesVendus, encheresDaoUtilisateurs));
+		return liste;
+	}
+	
+//	@Override
+//	public List<Enchere> getEncheresByUser(Utilisateur utilisateur) {
+//		List<Enchere> liste;
+//		liste = namedParameterJdbcTemplate.query(SELECT_ENCHERES_BY_USER, new BeanPropertySqlParameterSource(utilisateur) ,new EncheresRowMapper(encheresDaoArticlesVendus, encheresDaoUtilisateurs));
+//		return liste;
+//	}
 
 }
