@@ -144,7 +144,7 @@
 						</h3>
 
 						<p>
-							Fin de l'enchère : <span th:text="${article.getDate_fin_encheres()}"></span>
+							Fin de l'enchère : <span th:text="${#temporals.format(article.getDate_fin_encheres(),'dd MMMM yyyy')}"></span>
 						</p>
 						<p>
 							Prix de vente : <span th:text="${article.getPrix_vente()}"></span>
