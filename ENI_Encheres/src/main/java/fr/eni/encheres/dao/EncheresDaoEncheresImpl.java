@@ -22,10 +22,7 @@ public class EncheresDaoEncheresImpl implements EncheresDaoEncheres {
 	public final static String SELECT_ENCHERES_BY_ARTICLE = "select encheres.no_utilisateur, encheres.no_article, date_enchere, montant_enchere from ENCHERES inner join ARTICLES_VENDUS on ENCHERES.no_article = ARTICLES_VENDUS.no_article where ARTICLES_VENDUS.no_article =:no_article";
 	public final static String UPDATE_ENCHERE = "update ENCHERES set date_enchere=:date_enchere, montant_enchere=:montant_enchere where no_utilisateur=:no_utilisateur";
 	private static final String SELECT_ENCHERES_BY_USER = "SELECT ENCHERES.no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES INNER JOIN UTILISATEURS ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur WHERE UTILISATEURS.no_utilisateur =:no_utilisateur";
-	private static final String SELECT_ENCHERES_BY_USER_BY_CATEGORIE = "  SELECT ENCHERES.* FROM ENCHERES \r\n"
-			+ "  INNER JOIN UTILISATEURS ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur \r\n"
-			+ "  INNER JOIN ARTICLES_VENDUS ON ENCHERES.no_article = ARTICLES_VENDUS.no_article\r\n"
-			+ "  WHERE UTILISATEURS.no_utilisateur =:no_utilisateur AND ARTICLES_VENDUS.no_categorie = :no_categorie;";
+	private static final String SELECT_ENCHERES_BY_USER_BY_CATEGORIE = "SELECT ENCHERES.* FROM ENCHERES INNER JOIN UTILISATEURS ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur INNER JOIN ARTICLES_VENDUS ON ENCHERES.no_article = ARTICLES_VENDUS.no_article WHERE UTILISATEURS.no_utilisateur =:no_utilisateur AND ARTICLES_VENDUS.no_categorie = :no_categorie";
 	
 	private EncheresDaoUtilisateurs encheresDaoUtilisateurs;
 	private EncheresDaoArticlesVendus encheresDaoArticlesVendus;
@@ -83,12 +80,10 @@ public class EncheresDaoEncheresImpl implements EncheresDaoEncheres {
 	@Override
 	public List<Enchere> getEncheresByUserByCategorie(Utilisateur utilisateur, Categorie categorie) {
 		List<Enchere> liste;
-		String sql =  "SELECT ENCHERES.* FROM ENCHERES INNER JOIN UTILISATEURS ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur INNER JOIN ARTICLES_VENDUS ON ENCHERES.no_article = ARTICLES_VENDUS.no_article WHERE UTILISATEURS.no_utilisateur =:no_utilisateur AND ARTICLES_VENDUS.no_categorie = :no_categorie" ;
-		
 		Map<String, Object> params = new HashMap<>();
 	    params.put("no_utilisateur", utilisateur.getNo_utilisateur());
 	    params.put("no_categorie", categorie.getNo_categorie());
-	    liste = namedParameterJdbcTemplate.query(sql, params,
+	    liste = namedParameterJdbcTemplate.query(SELECT_ENCHERES_BY_USER_BY_CATEGORIE, params,
 	            new EncheresRowMapper(encheresDaoArticlesVendus, encheresDaoUtilisateurs));
 		return liste;
 	}
