@@ -100,7 +100,7 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 		            if (ventesNonDebutees != null && ventesNonDebutees.equals("ventesnondebutees")) {
 		                 filterArticlesNonDebutees(param, newList);
 		            } if (ventesNonDebutees == null && ventesEnCours == null && ventesTerminees == null) {
-		            	return encheresDaoArticlesVendus.getArticlesByUser(utilisateur);
+		            	return encheresDaoArticlesVendus.getArticlesByUserByCategorie(utilisateur, categorie, rechercheNom);
 		            }
 		            return newList;
 		        }
