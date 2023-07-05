@@ -21,10 +21,10 @@
 			th:text="'Crédit actuel : '+${user.getCredit()}"></p>
 
 		<div class="row">
-			<div class="col-3">
+			<div class="col-12 col-sm-12 col-md-6 col-lg-3">
 				<img style="width:200px" class="img-thumbnail" th:src="'/Images/'+${article.getNo_article()}+'.jpg'">
 			</div>
-			<div class="col-3">
+			<div class="col-12 col-sm-12 col-md-6 col-lg-3">
 				<h2>Article n°<span th:text="${article.getNo_article()}"></span> : <span
 						th:text="${article.getNom_article()}"></span></h2>
 				<p> Description : <span th:text="${article.getDescription()}"></span></p>
@@ -34,7 +34,7 @@
 				<p> Prix de vente : <span th:text="${article.getPrix_vente()}"></span> pts</p>
 				<p> Categorie : <span th:text="${article.getCategorie()}"></span></p>
 			</div>
-			<div class="col-3">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-3">
 				<h4>Lieu de retrait : </h4>
 				<p>
 					<span th:text="${retrait.getRue()}"></span></br>
