@@ -69,14 +69,12 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 			if (categorie.getNo_categorie() == 99) {
 				if (optionArticle != null) {
 					if (optionArticle.equals("ventes")) {
-						System.out.println("pas de categorie !!!! et vente coché ");
 						return methodedeRechercheVente(
 								encheresDaoArticlesVendus.getArticlesByUserAndSearch(utilisateur, rechercheNom),
 								rechercheNom, categorie, utilisateur, optionArticle, ventesEnCours, ventesTerminees,
 								ventesNonDebutees);
 					}
 					if (optionArticle.equals("achats")) {
-						System.out.println("pas de categorie !!!! et ACHAT coché ");
 						return methodedeRechercheAchat(
 								enchereDaoEncheres.getEncheresByUser(utilisateur),
 								rechercheNom, categorie, utilisateur, optionArticle, encheresEnCours, encheresOuvertes,
@@ -87,7 +85,6 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 			} else {
 				if (optionArticle != null) {
 					if (optionArticle.equals("ventes")) {
-						System.out.println("j'ai une categorie et ventes de coché");
 						return methodedeRechercheVente(
 								encheresDaoArticlesVendus.getArticlesByUserByCategorie(utilisateur, categorie,
 										rechercheNom),
@@ -95,7 +92,6 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 								ventesNonDebutees);
 					} 
 					if (optionArticle.equals("achats")) {
-						System.out.println(" J'AI une Categorie !!!! et ACHAT coché ");
 						return methodedeRechercheAchat(
 								enchereDaoEncheres.getEncheresByUserByCategorie(utilisateur, categorie),
 								rechercheNom, categorie, utilisateur, optionArticle, encheresEnCours, encheresOuvertes,
@@ -140,7 +136,7 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 		}
 		if (encheresOuvertes != null && encheresOuvertes.equals("encheresouvertes")) {		
 			// ******************************************* A FAIRE *************************************!!!!!
-			filterEncheresOuvertes(encheresDaoArticlesVendus.getArticleContainNom(rechercheNom), newList);
+			filterEncheresOuvertes(encheresDaoArticlesVendus.getArticleByCategorieContainNom(rechercheNom, categorie), newList);
 		}
 		if (encheresGagnees != null && encheresGagnees.equals("encheresgagnees")) {
 			filterEncheresGagnees(param, newList);

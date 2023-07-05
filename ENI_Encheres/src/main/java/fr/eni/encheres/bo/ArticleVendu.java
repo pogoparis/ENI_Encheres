@@ -164,6 +164,19 @@ public class ArticleVendu {
 				+ date_fin_encheres + ", prix_initial=" + prix_initial + ", prix_vente=" + prix_vente 
 				+ ", categorie=" + categorie + ", utilisateur=" + utilisateur + "]";
 	}
+	
+	@Override
+	public boolean equals(Object article) {
+	    if (this == article) {
+	        return true;
+	    }
+	    if (article == null || getClass() != article.getClass()) {
+	        return false;
+	    }
+	    ArticleVendu monArticle = (ArticleVendu) article;
+	    return this.no_article.equals(monArticle.no_article) && this.nom_article.equals(monArticle.nom_article);
+	}
+
 
 	
 	

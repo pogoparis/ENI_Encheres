@@ -18,5 +18,4 @@ public interface EncheresServiceArticlesVendus {
 			String optionArticle, String ventesEnCours, String ventesTerminees, String ventesNonDebutees,
 			String encheresEnCours,
 			String encheresOuvertes, String encheresGagnees);
-
 }
