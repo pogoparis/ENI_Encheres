@@ -144,10 +144,13 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 
 		private List<ArticleVendu> getArticlesAchete(Utilisateur utilisateur) {
 		    List<Enchere> listEncheres = utilisateur.getListeEncheres();
+		    System.out.println(listEncheres);
 		    List<ArticleVendu> listeArticleAchete = new ArrayList<>();
 		    for (Enchere enchere : listEncheres) {
 		        listeArticleAchete.add(enchere.getArticle());
+		        System.out.println(enchere.getArticle());
 		    }
+		    System.out.println(listeArticleAchete);
 		    return listeArticleAchete;
 		}
 

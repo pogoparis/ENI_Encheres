@@ -71,9 +71,7 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 	public Boolean affichageBoutonCloture(ArticleVendu article, Principal user) {
 		if (article.isVenteTermine()) return false;
 		Boolean verifMeilleurEncherisseur = verificationMeilleurEncherisseur(article, user);
-		System.out.println(verifMeilleurEncherisseur);
 		Boolean verifDate = verificationDatesEnchereTerminee(article);
-		System.out.println(verifDate);
 		if (verifDate && verifMeilleurEncherisseur) {
 			
 			return true;

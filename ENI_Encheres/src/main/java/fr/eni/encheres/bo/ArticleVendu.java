@@ -159,7 +159,7 @@ public class ArticleVendu {
 
 	@Override
 	public String toString() {
-		return "ArticleVendu [no_article=" + no_article + ", nom_article=" + nom_article + ", description="
+		return "ArticleVendu [no_article=" + no_article + ", etat="+ venteTermine +", nom_article=" + nom_article + ", description="
 				+ description + ", date_debut_encheres=" + date_debut_encheres + ", date_fin_encheres="
 				+ date_fin_encheres + ", prix_initial=" + prix_initial + ", prix_vente=" + prix_vente 
 				+ ", categorie=" + categorie + ", utilisateur=" + utilisateur + "]";

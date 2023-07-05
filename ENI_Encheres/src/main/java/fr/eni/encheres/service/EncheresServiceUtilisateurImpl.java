@@ -84,7 +84,7 @@ public void miseEnPlaceDesListes (Utilisateur utilisateur) {
 		
 		List<Enchere> listeEncheres = new ArrayList<>();
 		for (Enchere enchere : encheresDaoEncheres.getEncheresByUser(utilisateur)) {
-			if (enchere.getArticle().getDate_fin_encheres().isAfter(LocalDate.now())){
+			if (enchere.getArticle().getDate_fin_encheres().isAfter(LocalDate.now()) || enchere.getArticle().getDate_fin_encheres().isEqual(LocalDate.now())){
 				listeEncheres.add(enchere);
 			}
 		}

@@ -140,7 +140,9 @@ public class EncheresController {
 	
 	@GetMapping("/cloturer")
 	public String cloturerVente(Integer id, Principal principal) {
+		System.out.println("On entre dans la methode cloturer");
 		ArticleVendu article = encheresServiceArticlesVendus.findArticleById(id);
+		System.out.println(article);
 		encheresServiceEncheres.conclureVente(article);
 		return "redirect:/encheres";
 	}
