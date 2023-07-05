@@ -146,22 +146,18 @@
 							</span>
 						</div>
 					</div>
-				</div>
-				<div data-th-if="${utilisateur.getNo_utilisateur() != null}" hidden class="form-group row">
+				
 					<div class="col-sm-5">
 						<div class="form-group">
-							<label for="inputPassword" class="form-label mt-2">Password</label>
-							<input type="password" class="form-control" id="inputPassword" placeholder="Password"
-								data-th-field="*{motDePasse}" value="*{motDePasse}">
+							<label for="confirmPassword" class="form-label mt-2">Confirmation Password</label>
+							<input type="password" class="form-control" id="confirmPassword" placeholder="Password" name="confirmPassword">
 							<span style="display:block; height: 40px" class="text-danger col-6">
-								<ul data-th-if="${#fields.hasErrors('motDePasse')}">
-									<li data-th-each="erreur: ${#fields.errors('motDePasse')}" data-th-text="${erreur}">
-									</li>
-								</ul>
 							</span>
 						</div>
 					</div>
 				</div>
+			
+				
 				<a  th:href="@{/delete(id=${utilisateur.no_utilisateur})}" data-th-if="${#authorization.expression('isAuthenticated()')}">Supprimer</a>
 				
 				<div class="text-center m-4 col-10">

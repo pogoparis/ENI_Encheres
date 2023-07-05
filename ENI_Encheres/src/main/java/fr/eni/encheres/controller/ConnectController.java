@@ -54,9 +54,12 @@ public class ConnectController {
 	/************* BOUTON VALIDATION REGISTER *****************/
 	@PostMapping("/register")
 	public String register(@Valid @ModelAttribute Utilisateur utilisateur, BindingResult validationResult,
-			RedirectAttributes redirectAttributes, Principal principal) {
+			RedirectAttributes redirectAttributes, Principal principal, @RequestParam("confirmPassword")String confirmation) {
 
-		
+		if (!utilisateur.getMotDePasse().equals(confirmation)) {
+			validationResult.rejectValue("motDePasse", "confirmation.incorrecte", "Les deux saisies doivent être identiques");
+			return "profil";
+		}
 
 		if (principal != null) { // connecté
 			
