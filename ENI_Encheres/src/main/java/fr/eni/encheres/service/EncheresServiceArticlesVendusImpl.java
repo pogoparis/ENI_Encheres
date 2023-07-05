@@ -137,11 +137,10 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 		List<ArticleVendu> newList = new ArrayList<>();
 		if (encheresEnCours != null && encheresEnCours.equals("encheresencours")) {
 			filterEncheresEnCours(param, newList);
-	
 		}
 		if (encheresOuvertes != null && encheresOuvertes.equals("encheresouvertes")) {		
 			// ******************************************* A FAIRE *************************************!!!!!
-			filterEncheresEnCours(param, newList);
+			filterEncheresOuvertes(encheresDaoArticlesVendus.getArticleContainNom(rechercheNom), newList);
 		}
 		if (encheresGagnees != null && encheresGagnees.equals("encheresgagnees")) {
 			filterEncheresGagnees(param, newList);
@@ -150,6 +149,16 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 			filtrerAllEncheres(param, newList);
 		}
 		return newList;
+	}
+
+	private List<ArticleVendu> filterEncheresOuvertes(List<ArticleVendu> param, List<ArticleVendu> newList) {
+		for (ArticleVendu articles : param) {
+			if(   (articles.getDate_debut_encheres().isBefore(datedujour) &&
+					articles.getDate_fin_encheres().isAfter(datedujour) ) && !newList.contains(articles)  ) {
+				newList.add(articles);
+			}
+		}
+		return newList;			
 	}
 
 	private List<ArticleVendu> filterEncheresGagnees(List<Enchere> param, List<ArticleVendu> newList) {
@@ -210,17 +219,5 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 		}
 		return newList;
 	}
-
-//	private List<ArticleVendu> getArticlesAchete(Utilisateur utilisateur) {
-//		List<Enchere> listEncheres = utilisateur.getListeEncheres();
-//		System.out.println(listEncheres);
-//		List<ArticleVendu> listeArticleAchete = new ArrayList<>();
-//		for (Enchere enchere : listEncheres) {
-//			listeArticleAchete.add(enchere.getArticle());
-//			System.out.println(enchere.getArticle());
-//		}
-//		System.out.println(listeArticleAchete);
-//		return listeArticleAchete;
-//	}
 
 }
