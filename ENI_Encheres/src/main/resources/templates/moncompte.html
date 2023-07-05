@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="icon" type="image/x-icon" href="/Images/images.ico">
+	<script src="/javascript/ongletsMonCompte.js"></script>
 </head>
 
 <body>
@@ -58,11 +59,20 @@
 				<button class="btn btn-dark" type="submit">Modifier</button>
 		</div>
 		</form>
-
-<h2>Articles achetés</h2>
-<div class="container-fluid">
+		
+		<div class="container-fluid">
 <div class="row">
-<div class="d-inline-flex col-6"  th:each="article:${articlesAchetes}">
+<div class="d-inline-flex col-12">
+		<div id="ongletArticlesAchetes" class="ongletMonCompte d-inline-flex col-4" ><h2 id="titre1">Articles achetés</h2></div>
+		<div id="ongletEncheres"  class="ongletMonCompte d-inline-flex col-4" style="background-color : #f8c0c2; color : white;"><h2 id="titre2" style="color : white">Encheres en cours</h2></div>
+		<div id="ongletArticlesVendus" class="ongletMonCompte d-inline-flex col-4" ><h2 id="titre3">Articles en vente</h2></div>
+		</div>
+		</div>
+		</div>
+
+<div id="listeArticlesAchetes" style="display : none;" class="container-fluid">
+<div class="row">
+<div class="d-inline-flex col-4"  th:each="article:${articlesAchetes}">
 <a class="lien" th:href="@{/article(id=${article.getNo_article()})}">
 	<img style="width: 150px"
 					class="pull-left img-responsive col-3  p-2 img-thumbnail"
@@ -77,10 +87,9 @@
 		</div>
 		</div>
 
-<h2>Encheres en cours</h2>
-<div class="container-fluid">
+<div id="listeEncheres" style="display : block;" class="container-fluid">
 <div class="row">
-<div class="d-inline-flex col-6"  th:each="enchere:${listeEncheres}">
+<div class="d-inline-flex col-4"  th:each="enchere:${listeEncheres}">
 <a class="lien" th:href="@{/article(id=${enchere.getArticle().getNo_article()})}">
 	<img style="width: 150px"
 					class="pull-left img-responsive col-3  p-2 img-thumbnail"
@@ -100,10 +109,9 @@
 		</div>
 		</div>
 		
-<h2>Articles en vente</h2>
-<div class="container-fluid">
+<div id="listeArticlesVendus" style="display : none;" class="container-fluid">
 <div class="row">
-<div class="d-inline-flex col-6"  th:each="article:${articlesVendus}">
+<div class="d-inline-flex col-4"  th:each="article:${articlesVendus}">
 <a class="lien" th:href="@{/article(id=${article.getNo_article()})}">
 	<img style="width: 150px"
 					class="pull-left img-responsive col-3  p-2 img-thumbnail"
@@ -120,7 +128,11 @@
 			</div>
 			</div>
 		</div>
-		</div>		
+		</div>	
+		
+<div data-th-replace="~{fragments/fragment-footer :: frag-footer}"></div>	
 		
 </body>
+
+
 </html>

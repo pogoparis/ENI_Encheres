@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+.ongletMonCompte {
+	border: var(--bs-border-width) solid var(--bs-border-color); 
+	border-top-right-radius: 30%;
+}
+
+.ongletMonCompte:hover {
+	background-color : #d9d9d9;
+}
+
 /* @import */
 /* 	url('https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap') */
 /* 	; */
