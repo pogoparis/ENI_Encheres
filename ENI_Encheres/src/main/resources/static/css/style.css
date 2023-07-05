@@ -11,6 +11,7 @@
 
 .lien {
 	text-decoration: none;
+	color : inherit;
 /* 	border : solid black; */
 /* 	display : block; */
 }

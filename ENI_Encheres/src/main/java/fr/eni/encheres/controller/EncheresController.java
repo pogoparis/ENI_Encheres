@@ -97,17 +97,19 @@ public class EncheresController {
 
 	/****************** AFFICHAGE PAGE DETAIL ARTICLE ***************/
 	@GetMapping("/article")
-	public String afficherDetailsArticles(Integer id, Model model, Principal principal,
-			@ModelAttribute Enchere enchere) {
+	public String afficherDetailsArticles(Integer id, Model model, Principal principal) {
 		ArticleVendu article = encheresServiceArticlesVendus.findArticleById(id);
 		Retrait retrait = encheresServiceRetrait.findRetraitByArticle(article);
 		Enchere meilleureEnchere = encheresServiceEncheres.getMeilleureEnchereByArticle(article);
+		Enchere enchere = new Enchere();
+		enchere.setMontant_enchere(article.getPrix_vente()+10);
 		
 		if (principal != null) {
 			model.addAttribute("user", encheresServiceUtilisateur.findUserByPseudo(principal.getName()));
 		}
 		model.addAttribute("article", article);
 		model.addAttribute("retrait", retrait);
+		model.addAttribute("enchere", enchere);
 		model.addAttribute("meilleureEnchere", meilleureEnchere);
 		Boolean tokenAffichage = encheresServiceEncheres.affichageDuBouton(article, principal);
 		model.addAttribute("tokenAffichage", tokenAffichage);
