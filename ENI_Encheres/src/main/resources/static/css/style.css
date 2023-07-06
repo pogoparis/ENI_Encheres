@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+html {
+  scroll-behavior: smooth;
+}
+      
+
 .ongletMonCompte {
 	border: var(--bs-border-width) solid var(--bs-border-color); 
 	border-top-right-radius: 30%;

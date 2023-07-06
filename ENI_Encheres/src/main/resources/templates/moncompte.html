@@ -103,7 +103,7 @@
 				
 			</p>
 			<p> Montant proposé : <span th:text="${enchere.getMontant_enchere()}"></span> crédits</p>
-			<p> Date de l'enchère : <span th:text="${enchere.getDate_enchere()}"></span></p>
+			<p> Date de l'enchère : <span th:text="${#temporals.format(enchere.getDate_enchere(),'dd MMMM yyyy')}"></span></p>
 			</div>
 			</div>
 		</div>
@@ -119,7 +119,7 @@
 					</a>
 					<div class="d-block">
 			<h3 th:text="${article.getNom_article()}"></h3>
-			<p>Fin de la vente le : <span th:text="${article.getDate_fin_encheres()}"></span></p>
+			<p>Fin de la vente le : <span th:text="${#temporals.format(article.getDate_fin_encheres(),'dd MMMM yyyy')}"></span></p>
 			<p th:if="${!serviceEncheres.getEncheresByArticle(article).isEmpty()}"> Meilleure enchère : <span th:text="${article.getPrix_vente()}"></span> crédits</p>
 			<p th:if="${!serviceEncheres.getEncheresByArticle(article).isEmpty()}"> Dernier enchérisseur : <span th:text="${serviceEncheres.getMeilleureEnchereByArticle(article).getUtilisateur().getPseudo()}"></span></p>
 			<p th:if="${serviceEncheres.getEncheresByArticle(article).isEmpty()}"> Prix proposé : <span th:text="${article.getPrix_vente()}"></span> crédits</p>
