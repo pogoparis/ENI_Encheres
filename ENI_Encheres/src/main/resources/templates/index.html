@@ -146,7 +146,7 @@ function scrollWin() {
 			
 				<div class="d-inline-flex justify-content-center col-sx-12 col-sm-12 col-lg-6 ficheArticle" th:each="article:${listeArticles}">
 					<a class="lien" th:href="@{/article(id=${article.getNo_article()})}">
-						<img style="width: 150px" class="pull-left img-responsive col-3  m-2 img-thumbnail"
+						<img style="width: 150px" class="pull-left img-responsive col-3  m-2"
 							th:src="'/Images/'+${article.getNo_article()}+'.jpg'">
 					
 					<div class="d-block">

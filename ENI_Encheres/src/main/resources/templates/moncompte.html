@@ -76,7 +76,7 @@
 <div class="d-inline-flex justify-content-center col-4 ficheArticle"  th:each="article:${articlesAchetes}">
 <a class="lien" th:href="@{/article(id=${article.getNo_article()})}">
 	<img style="width: 130px"
-					class="pull-left img-responsive col-3  p-2 img-thumbnail"
+					class="pull-left img-responsive col-3  p-2 "
 					th:src="'/Images/'+${article.getNo_article()}+'.jpg'">
 					
 					<div class="d-inline-block">
@@ -94,7 +94,7 @@
 <div class="d-inline-flex justify-content-center col-4 ficheArticle"  th:each="enchere:${listeEncheres}">
 <a class="lien" th:href="@{/article(id=${enchere.getArticle().getNo_article()})}">
 	<img style="width: 100px"
-					class="pull-left img-responsive col-3  p-2 img-thumbnail"
+					class="pull-left img-responsive col-3  p-2 "
 					th:src="'/Images/'+${enchere.getArticle().getNo_article()}+'.jpg'">
 					
 					<div class="d-inline-block">
@@ -118,7 +118,7 @@
 <div class="d-inline-flex justify-content-center align-items-center col-4 ficheArticle"  th:each="article:${articlesVendus}">
 <a class="lien" th:href="@{/article(id=${article.getNo_article()})}">
 	<img style="width: 100px"
-					class="pull-left img-responsive col-3  p-2 img-thumbnail"
+					class="pull-left img-responsive col-3  p-2 "
 					th:src="'/Images/'+${article.getNo_article()}+'.jpg'">
 					
 					<div class="d-inline-block">
