@@ -18,7 +18,7 @@ html {
 }
 
 .ficheArticle{
-	border: 1px solid #F3969A;
+	border: 1px solid rgb(247, 176, 180);
 	width : 400px!important;
 	margin : 4px;
 	border-radius : 10px;
