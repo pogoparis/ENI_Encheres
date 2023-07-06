@@ -1,8 +1,6 @@
 window.onload = init;
 
-  function scrollWin() {
-          window.scrollTo(0, 960);
-        }
+
 
 function init(){
 
