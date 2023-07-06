@@ -32,6 +32,32 @@ html {
 	background-color : #f7f7f7;
 }
 
+.titre{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+
+
+i.fa-solid.fa-angle-up.fa-xl{
+transition: all .35s;
+color: #04aa6d;
+
+
+}
+
+
+i.fa-solid.fa-angle-up.fa-xl:hover{
+
+cursor: pointer;
+transform: scale(1.3);
+transform : rotate(180deg);
+color: red;
+
+}
+
+
 
 
 /* @import */
