@@ -2,181 +2,167 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
-	<meta charset="UTF-8">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
-	<title>Cherry</title>
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/css/style.css">
-	<link rel="icon" type="image/x-icon" href="/Images/images.ico">
-	<script src="https://kit.fontawesome.com/a7dbd1cbd9.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+  <title>Cherry</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/Images/images.ico">
+  <script src="https://kit.fontawesome.com/a7dbd1cbd9.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-<!-- Background image -->
-<div
-  class="bg-image d-flex justify-content-center align-items-center"
-         
-  style="
-    background-image: url('/Images/fondEcranCerise.png');
-    background-size : cover;
-    height: 100vh;
-    
-  "
->
-<div class="titre">
-  <h1  class="text-red" style="font-size: 100px; color: #f3969a; ">Encherry </h1>
-  
-  <h3 class="text-red" style="color: #e04c4a">Surenchérir, c'est la cerise sur le gâteau !</h3>
-  
-  <a onclick="scrollWin()"  ><i class="fa-solid fa-angle-up fa-xl" ></i></a>
-<script>
-	function scrollWin() {
-		  window.scrollTo(0, 960);
-		}
-	</script>		
+  <!-- Background image -->
+  <div class="bg-image d-flex justify-content-center align-items-center"
+    style=" background-image: url('/Images/fondEcranCerise.png'); background-size : cover; height: 100vh;">
+    <div class="titre">
+      <h1 class="text-red" style="font-size: 100px; color: #f3969a; ">Encherry </h1>
+      <h3 class="text-red" style="color: #e04c4a">Surenchérir, c'est la cerise sur le gâteau !</h3>
+      <a onclick="scrollWin()"><i class="fa-solid fa-angle-up fa-xl"></i></a>
+      <script>
+        function scrollWin() {
+          window.scrollTo(0, 960);
+        }
+      </script>
+    </div>
   </div>
-</div>
-<!-- Background image -->
+  <!-- Background image -->
 
-<div id="page2" >
-	<div  data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
-</div>
+  <div id="page2">
+    <div data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
+  </div> 
+  
+<!--   Alert de deconnection -->
+  <div th:if="${param.logout}" class="alert alert-success col-6 text-center mx-auto m-2">
+    <p th:text="${logoutMessage}"></p>
+  </div> 
 
-<div th:if="${param.logout}" class="alert alert-success col-6">
-			<p th:text="${logoutMessage}"></p>
-</div>
+<!-- Contatiner principal -->
+  <div class="container">
+    <div class="container">
+      <form action="/recherche" method="get">
+        <div class="row m-4">
+          <div class="col-6">
+            <div class="form-group">
+              <select class="form-select col-3" id="cat" name="no_categorie">
+                <option value="99">Choisir une Catégorie</option>
+                <option data-th-each="cat: ${listeCategorie}" data-th-text="${cat.getLibelle()}"
+                  data-th-value="${cat.getNo_categorie()}" th:selected></option>
+              </select>
+            </div>
+          </div>
+          <div class="d-flex col-6">
+            <input id="inputRecherche" name="rechercheNom" class="form-control me-sm-2" type="search"
+              placeholder="Recherche">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Recherche</button>
+            <br>
+          </div>
+        </div>
 
-	<div class="container">
-		<div class="container">
-			<form action="/recherche" method="get">
-				<div class="row m-4">
-					<div class="col-6">
-						<div class="form-group">
-							<select class="form-select col-3" id="cat" name="no_categorie">
-								<option value="99">Choisir une Catégorie</option>
-								<option data-th-each="cat: ${listeCategorie}" data-th-text="${cat.getLibelle()}"
-									data-th-value="${cat.getNo_categorie()}" th:selected></option>
-							</select>
-						</div>
-					</div>
-					<div class="d-flex col-6">
-						<input id="inputRecherche" name="rechercheNom" class="form-control me-sm-2" type="search"
-							placeholder="Recherche">
-							
-						<button class="btn btn-secondary my-2 my-sm-0" type="submit">Recherche</button>
-						
-						<br>
-					</div>
-				</div>
+        <div class="row" data-th-if="${#authorization.expression('isAuthenticated()')}">
+          <div class="col-6 p-3">
+            <fieldset class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="optionArticle" id="optionsRadios1"
+                  data-th-value="achats"> <label class="form-check-label" for="optionsRadios1"> Achats
+                </label>
+              </div>
+            </fieldset>
+            <div class="container pl-3 ml-3">
+              <fieldset class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input disable2" type="checkbox" disabled name="encheresOuvertes"
+                    value="encheresouvertes">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Enchères ouvertes </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input disable2" type="checkbox" disabled name="encheresEnCours"
+                    value="encheresencours">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Mes enchères en cours </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input disable2" type="checkbox" disabled name="encheresGagnees"
+                    value="encheresgagnees">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Mes enchères remportées </label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
 
-				<div class="row" data-th-if="${#authorization.expression('isAuthenticated()')}">
-					<div class="col-6 p-3">
-						<fieldset class="form-group">
-							<div class="form-check">
-								<input class="form-check-input" type="radio" name="optionArticle" id="optionsRadios1"
-									data-th-value="achats"> <label class="form-check-label" for="optionsRadios1"> Achats
-								</label>
-							</div>
-						</fieldset>
-						<div class="container pl-3 ml-3">
-							<fieldset class="form-group">
-								<div class="form-check">
-									<input class="form-check-input disable2" type="checkbox" disabled
-										name="encheresOuvertes" value="encheresouvertes">
-									<label class="form-check-label" for="flexCheckDefault">
-										Enchères ouvertes </label>
-								</div>
-								<div class="form-check">
-									<input class="form-check-input disable2" type="checkbox" disabled
-										name="encheresEnCours" value="encheresencours">
-									<label class="form-check-label" for="flexCheckDefault">
-										Mes enchères en cours </label>
-								</div>
-								<div class="form-check">
-									<input class="form-check-input disable2" type="checkbox" disabled
-										name="encheresGagnees" value="encheresgagnees">
-									<label class="form-check-label" for="flexCheckDefault">
-										Mes enchères remportées </label>
-								</div>
-							</fieldset>
-						</div>
-					</div>
+          <div class="col-6 p-3">
+            <fieldset class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="optionArticle" id="optionsRadios1"
+                  data-th-value="ventes"> <label class="form-check-label" for="optionsRadios1"> Mes
+                  ventes
+                </label>
+              </div>
+            </fieldset>
+            <div class="container pl-3 ml-3">
+              <fieldset class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input pl-3 venteCheck" type="checkbox" disabled name="ventesEnCours"
+                    th:value="venteencours">
+                  <label class="form-check-label pl-3" for="flexCheckDefault">
+                    Mises en ventes en cours </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input pl-3 venteCheck" type="checkbox" disabled name="ventesNonDebutees"
+                    th:value="ventesnondebutees">
+                  <label class="form-check-label pl-3" for="flexCheckDefault">
+                    Ventes non débutées </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input pl-3 venteCheck" type="checkbox" disabled name="ventesTerminees"
+                    th:value="ventesterminees">
+                  <label class="form-check-label pl-3" for="flexCheckDefault">
+                    Ventes terminées </label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
 
-					<div class="col-6 p-3">
-						<fieldset class="form-group">
-							<div class="form-check">
-								<input class="form-check-input" type="radio" name="optionArticle" id="optionsRadios1"
-									data-th-value="ventes"> <label class="form-check-label" for="optionsRadios1"> Mes
-									ventes
-								</label>
-							</div>
-						</fieldset>
-						<div class="container pl-3 ml-3">
-							<fieldset class="form-group">
-								<div class="form-check">
-									<input class="form-check-input pl-3 venteCheck" type="checkbox" disabled
-										name="ventesEnCours" th:value="venteencours">
-									<label class="form-check-label pl-3" for="flexCheckDefault">
-										Mises en ventes en cours </label>
-								</div>
-								<div class="form-check">
-									<input class="form-check-input pl-3 venteCheck" type="checkbox" disabled
-										name="ventesNonDebutees" th:value="ventesnondebutees">
-									<label class="form-check-label pl-3" for="flexCheckDefault">
-										Ventes non débutées </label>
-								</div>
-								<div class="form-check">
-									<input class="form-check-input pl-3 venteCheck" type="checkbox" disabled
-										name="ventesTerminees" th:value="ventesterminees">
-									<label class="form-check-label pl-3" for="flexCheckDefault">
-										Ventes terminées </label>
-								</div>
-							</fieldset>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
+    <div class="container-fluid">
+      <div th:if="${listeArticles.isEmpty()}" class="row">La liste
+        d'article est vide.</div>
+      <div class="row">
+      
+        <div class="d-inline-flex justify-content-center col-sx-12 col-sm-12 col-lg-6 ficheArticle"
+          th:each="article:${listeArticles}">
+          <a class="lien" th:href="@{/article(id=${article.getNo_article()})}">
+            <img style="width: 150px" class="pull-left img-responsive col-3  m-2"
+              th:src="'/Images/'+${article.getNo_article()}+'.jpg'">
+            <div class="d-block">
+              <h3>
+                <span th:text="${article.getNom_article()}"></span>
+              </h3>
 
-		<div class="container-fluid">
-			<div th:if="${listeArticles.isEmpty()}" class="row">La liste
-				d'article est vide.</div>
-			<div class="row">
-			
-				<div class="d-inline-flex justify-content-center col-sx-12 col-sm-12 col-lg-6 ficheArticle" th:each="article:${listeArticles}">
-					<a class="lien" th:href="@{/article(id=${article.getNo_article()})}">
-						<img style="width: 150px" class="pull-left img-responsive col-3  m-2"
-							th:src="'/Images/'+${article.getNo_article()}+'.jpg'">
-					
-					<div class="d-block">
+              <p>
+                Fin de l'enchère : <span
+                  th:text="${#temporals.format(article.getDate_fin_encheres(),'dd MMMM yyyy')}"></span>
+              </p>
+              <p>
+                Prix de vente : <span th:text="${article.getPrix_vente()}"></span>
+                Cherrys
+              </p>
+              <p>
+                Vendeur : <a th:href="@{/details(pseudo=${article.getUtilisateur().getPseudo()})}"><span
+                    th:text="${article.getUtilisateur().getPseudo()}"></span></a>
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-						<h3>
-							<span th:text="${article.getNom_article()}"></span>
-						</h3>
-
-						<p>
-							Fin de l'enchère : <span th:text="${#temporals.format(article.getDate_fin_encheres(),'dd MMMM yyyy')}"></span>
-						</p>
-						<p>
-							Prix de vente : <span th:text="${article.getPrix_vente()}"></span>
-							Cherrys
-						</p>
-						<p>
-							Vendeur : <a th:href="@{/details(pseudo=${article.getUtilisateur().getPseudo()})}"><span
-									th:text="${article.getUtilisateur().getPseudo()}"></span></a>
-						</p>
-					</div>
-					</a>
-				</div>
-				
-			</div>
-		</div>
-	</div>
-
-<div data-th-replace="~{fragments/fragment-footer :: frag-footer}"></div>
+  <div data-th-replace="~{fragments/fragment-footer :: frag-footer}"></div>
 
 </body>
-
-
 </html>
