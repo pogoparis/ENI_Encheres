@@ -23,18 +23,34 @@
     
   "
 >
-<div>
+<div class="titre">
   <h1  class="text-red" style="font-size: 80px; color: #f3969a; ">Encherry </h1>
   
   <h3 class="text-red" style="color: #e04c4a">Surenchérir, c'est la cerise sur le gâteau !</h3>
   
-  <a onclick="scrollWin()" style="display: flex;" ><i class="fa-solid fa-angle-down" style="justify-content: center;"></i></a>
+  <a onclick="scrollWin()"  ><i class="fa-solid fa-angle-down fa-xl" style="color: #eb023f;"></i></a>
   <script>
 function scrollWin() {
   window.scrollTo(0, 960);
-  behavior: 'smooth';
 }
 </script>
+<style>
+.titre{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+i.fa-solid.fa-angle-down.fa-xl{
+transition: all .35s;
+}
+
+i.fa-solid.fa-angle-down.fa-xl:hover{
+cursor: pointer;
+transform: scale(1.3);
+
+}
+</style>
   
   </div>
 </div>
