@@ -109,12 +109,14 @@ public class ConnectController {
 			
 			
 			
+			
+			
+		}
 			encheresServiceUtilisateur.createUtilisateur(utilisateur);
 			redirectAttributes.addFlashAttribute("successMessage",
 					"L'enregistrement a réussi. Veuillez vous connecter avec vos identifiants.");
 			return "redirect:/login";
 			
-		}
 		
 		
 		
