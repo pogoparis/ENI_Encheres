@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.service.EncheresServiceEncheres;
 import fr.eni.encheres.service.EncheresServiceUtilisateur;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -41,9 +42,9 @@ public class ConnectController {
 		if (model.containsAttribute("successMessage")) {
 			String successMessage = (String) model.getAttribute("successMessage");
 			model.addAttribute("successMessage", successMessage);
-		}
+		} 
 		return "login";
-	}
+	}	
 
 	/************** AFFICHAGE PAGE INSCRIPTION **************/
 	@GetMapping("/inscription")
@@ -106,6 +107,8 @@ public class ConnectController {
 				return "profil";
 			}
 			
+			
+			
 			encheresServiceUtilisateur.createUtilisateur(utilisateur);
 			redirectAttributes.addFlashAttribute("successMessage",
 					"L'enregistrement a réussi. Veuillez vous connecter avec vos identifiants.");
@@ -113,9 +116,6 @@ public class ConnectController {
 			
 		}
 		
-			
-		
-
 		
 		
 	}

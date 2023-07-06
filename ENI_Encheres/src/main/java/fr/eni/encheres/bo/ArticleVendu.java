@@ -13,7 +13,6 @@ public class ArticleVendu {
 	private boolean venteTermine = false;
 	
 	
-	
 	private Integer no_article;
 	@NotBlank
 	private String nom_article;
@@ -32,8 +31,7 @@ public class ArticleVendu {
 	@Min(0)
 	private Integer prix_vente;
 	
-	
-	
+
 	@NotBlank
 	private Categorie categorie;
 	
@@ -62,10 +60,6 @@ public class ArticleVendu {
 	public ArticleVendu(Integer id) {
 		this.no_article = id;
 	}
-
-
-
-
 
 	//Getter Setter
 	public Integer getNo_article() {

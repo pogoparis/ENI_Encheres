@@ -73,8 +73,11 @@ public class SecurityConfig {
 	        });
 
 		// /logout --> vider la session et le contexte de sécurité
-		http.logout(logout -> logout.invalidateHttpSession(true).clearAuthentication(true).deleteCookies("JSESSIONID")
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll());
+		http.logout(logout -> logout.invalidateHttpSession(true)
+				.clearAuthentication(true)
+				.deleteCookies("JSESSIONID")
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/encheres?logout=true").permitAll());
 
 		return http.build();
 
