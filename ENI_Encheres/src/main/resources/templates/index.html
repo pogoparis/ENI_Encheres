@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
 	<meta charset="UTF-8">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
 	<title>Cherry</title>
@@ -24,11 +25,15 @@
   "
 >
 <div class="titre">
-  <h1  class="text-red" style="font-size: 80px; color: #f3969a; ">Encherry </h1>
+  <h1  class="text-red" style="font-size: 100px; color: #f3969a; ">Encherry </h1>
   
   <h3 class="text-red" style="color: #e04c4a">Surenchérir, c'est la cerise sur le gâteau !</h3>
   
-  <a onclick="scrollWin()"  ><i class="fa-solid fa-angle-down fa-xl" style="color: #eb023f;"></i></a>
+  <a onclick="scrollWin()"  ><i class="fa-solid fa-angle-up fa-xl" ></i></a>
+ 
+  
+ 
+ 
   <script>
 function scrollWin() {
   window.scrollTo(0, 960);
@@ -41,15 +46,27 @@ flex-direction: column;
 align-items: center;
 }
 
-i.fa-solid.fa-angle-down.fa-xl{
+
+
+i.fa-solid.fa-angle-up.fa-xl{
 transition: all .35s;
+color: #04aa6d;
+
+
 }
 
-i.fa-solid.fa-angle-down.fa-xl:hover{
+
+i.fa-solid.fa-angle-up.fa-xl:hover{
+
 cursor: pointer;
 transform: scale(1.3);
+transform : rotate(180deg);
+color: red;
 
 }
+
+
+
 </style>
   
   </div>
