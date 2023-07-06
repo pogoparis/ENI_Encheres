@@ -6,9 +6,6 @@ import java.util.List;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;

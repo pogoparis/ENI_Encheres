@@ -56,9 +56,10 @@ public class SecurityConfig {
 					.requestMatchers(HttpMethod.POST, "/encherir").permitAll()
 					.requestMatchers("/").permitAll()
 					
-					// Permettre à tous d'afficher correctement les images et CSS
-					.requestMatchers("/css/*").permitAll().requestMatchers("/Images/*").permitAll()
-					
+					// Permettre à tous d'afficher correctement ressources
+					.requestMatchers("/css/*").permitAll()
+					.requestMatchers("/Images/*").permitAll()
+					.requestMatchers("/javascript/*").permitAll()
 					// Il faut être connecté pour toutes autres URLs
 					.anyRequest().authenticated();
 		});
