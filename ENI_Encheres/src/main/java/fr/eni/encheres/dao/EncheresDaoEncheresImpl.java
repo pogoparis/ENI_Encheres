@@ -22,7 +22,8 @@ public class EncheresDaoEncheresImpl implements EncheresDaoEncheres {
 	public final static String SELECT_ENCHERES_BY_ARTICLE = "select encheres.no_utilisateur, encheres.no_article, date_enchere, montant_enchere from ENCHERES inner join ARTICLES_VENDUS on ENCHERES.no_article = ARTICLES_VENDUS.no_article where ARTICLES_VENDUS.no_article =:no_article";
 	public final static String UPDATE_ENCHERE = "update ENCHERES set date_enchere=:date_enchere, montant_enchere=:montant_enchere where no_utilisateur=:no_utilisateur";
 	private static final String SELECT_ENCHERES_BY_USER = "SELECT ENCHERES.no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES INNER JOIN UTILISATEURS ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur WHERE UTILISATEURS.no_utilisateur =:no_utilisateur";
-	private static final String SELECT_ENCHERES_BY_USER_BY_CATEGORIE = "SELECT ENCHERES.* FROM ENCHERES INNER JOIN UTILISATEURS ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur INNER JOIN ARTICLES_VENDUS ON ENCHERES.no_article = ARTICLES_VENDUS.no_article WHERE UTILISATEURS.no_utilisateur =:no_utilisateur AND ARTICLES_VENDUS.no_categorie = :no_categorie";
+	private static final String SELECT_ENCHERES_BY_USER_AND_SEARCH = "SELECT ENCHERES.no_utilisateur, ARTICLES_VENDUS.no_article, date_enchere, montant_enchere FROM ENCHERES INNER JOIN ARTICLES_VENDUS ON ENCHERES.no_article = ARTICLES_VENDUS.no_article INNER JOIN UTILISATEURS ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur WHERE UTILISATEURS.no_utilisateur =:no_utilisateur AND ARTICLES_VENDUS.nom_article LIKE :rechercheNom";
+	private static final String SELECT_ENCHERES_BY_USER_BY_CATEGORIE = "SELECT ENCHERES.* FROM ENCHERES INNER JOIN UTILISATEURS ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur INNER JOIN ARTICLES_VENDUS ON ENCHERES.no_article = ARTICLES_VENDUS.no_article WHERE UTILISATEURS.no_utilisateur =:no_utilisateur AND ARTICLES_VENDUS.no_categorie = :no_categorie AND ARTICLES_VENDUS.nom_article LIKE :rechercheNom";
 	
 	private EncheresDaoUtilisateurs encheresDaoUtilisateurs;
 	private EncheresDaoArticlesVendus encheresDaoArticlesVendus;
@@ -64,7 +65,8 @@ public class EncheresDaoEncheresImpl implements EncheresDaoEncheres {
 	
 	public List<Enchere> findEncheresByArticle(ArticleVendu article){
 		List<Enchere> liste;
-		liste = namedParameterJdbcTemplate.query(SELECT_ENCHERES_BY_ARTICLE, new BeanPropertySqlParameterSource(article) ,new EncheresRowMapper(encheresDaoArticlesVendus, encheresDaoUtilisateurs));
+		liste = namedParameterJdbcTemplate.query(SELECT_ENCHERES_BY_ARTICLE, new BeanPropertySqlParameterSource(article),
+				new EncheresRowMapper(encheresDaoArticlesVendus, encheresDaoUtilisateurs));
 		return liste;
 	}
 
@@ -72,27 +74,34 @@ public class EncheresDaoEncheresImpl implements EncheresDaoEncheres {
 	@Override
 	public List<Enchere> getEncheresByUser(Utilisateur utilisateur) {
 		List<Enchere> liste;
-		liste = namedParameterJdbcTemplate.query(SELECT_ENCHERES_BY_USER, new BeanPropertySqlParameterSource(utilisateur) ,new EncheresRowMapper(encheresDaoArticlesVendus, encheresDaoUtilisateurs));
+		liste = namedParameterJdbcTemplate.query(SELECT_ENCHERES_BY_USER, new BeanPropertySqlParameterSource(utilisateur) ,
+				new EncheresRowMapper(encheresDaoArticlesVendus, encheresDaoUtilisateurs));
 		return liste;
 	}
 
 
 	@Override
-	public List<Enchere> getEncheresByUserByCategorie(Utilisateur utilisateur, Categorie categorie) {
+	public List<Enchere> getEncheresByUserByCategorie(Utilisateur utilisateur, Categorie categorie, String rechercheNom) {
 		List<Enchere> liste;
 		Map<String, Object> params = new HashMap<>();
 	    params.put("no_utilisateur", utilisateur.getNo_utilisateur());
 	    params.put("no_categorie", categorie.getNo_categorie());
+	    params.put("rechercheNom", "%" + rechercheNom + "%");
 	    liste = namedParameterJdbcTemplate.query(SELECT_ENCHERES_BY_USER_BY_CATEGORIE, params,
 	            new EncheresRowMapper(encheresDaoArticlesVendus, encheresDaoUtilisateurs));
 		return liste;
 	}
-	
-//	@Override
-//	public List<Enchere> getEncheresByUser(Utilisateur utilisateur) {
-//		List<Enchere> liste;
-//		liste = namedParameterJdbcTemplate.query(SELECT_ENCHERES_BY_USER, new BeanPropertySqlParameterSource(utilisateur) ,new EncheresRowMapper(encheresDaoArticlesVendus, encheresDaoUtilisateurs));
-//		return liste;
-//	}
 
+
+	@Override
+	public List<Enchere> getEncheresByUserAndSearch(Utilisateur utilisateur, String rechercheNom) {
+		List<Enchere> liste;
+		Map<String, Object> params = new HashMap<>();
+	    params.put("no_utilisateur", utilisateur.getNo_utilisateur());
+	    params.put("rechercheNom", "%" + rechercheNom + "%");
+		liste = namedParameterJdbcTemplate.query(SELECT_ENCHERES_BY_USER_AND_SEARCH, params ,
+				new EncheresRowMapper(encheresDaoArticlesVendus, encheresDaoUtilisateurs));
+		return liste;
+	}
+	
 }

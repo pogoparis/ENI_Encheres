@@ -50,7 +50,7 @@ public class EncheresController {
 	/************ AFFICHAGE ACCUEIL LISTE ARTICLE********************/
 	@GetMapping("/encheres")
 	public String afficherAccueil(Model model) {
-		model.addAttribute("logoutMessage", "déconnecté avec Succès");
+		model.addAttribute("logoutMessage", "Déconnecté avec succès");
 		model.addAttribute("listeCategorie", encheresServiceCategorie.findAllCategorie());
 		model.addAttribute("listeArticles", encheresServiceArticlesVendus.findAllArticleVendu());
 		return "index";

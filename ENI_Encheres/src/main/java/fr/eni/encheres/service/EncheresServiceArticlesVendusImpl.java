@@ -60,6 +60,8 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 		return encheresDaoArticlesVendus.getArticleContainNom(rechercheNom);
 	}
 
+	
+	
 	// RECHERCHE AVEC UTILISATEUR CONNECTE QUI APPELLE LA METHODE DU DESSOUS
 	@Override
 	public List<ArticleVendu> rechercheConnecte(String rechercheNom, Categorie categorie, Utilisateur utilisateur,
@@ -76,7 +78,7 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 					}
 					if (optionArticle.equals("achats")) {
 						return methodedeRechercheAchat(
-								enchereDaoEncheres.getEncheresByUser(utilisateur),
+								enchereDaoEncheres.getEncheresByUserAndSearch(utilisateur, rechercheNom),
 								rechercheNom, categorie, utilisateur, optionArticle, encheresEnCours, encheresOuvertes,
 								encheresGagnees);
 					}
@@ -93,7 +95,7 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 					} 
 					if (optionArticle.equals("achats")) {
 						return methodedeRechercheAchat(
-								enchereDaoEncheres.getEncheresByUserByCategorie(utilisateur, categorie),
+								enchereDaoEncheres.getEncheresByUserByCategorie(utilisateur, categorie, rechercheNom),
 								rechercheNom, categorie, utilisateur, optionArticle, encheresEnCours, encheresOuvertes,
 								encheresGagnees);
 					}

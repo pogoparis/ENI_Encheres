@@ -12,5 +12,6 @@ public interface EncheresDaoEncheres {
 	void saveEnchere(Enchere enchere);
 	 List<Enchere> findEncheresByArticle(ArticleVendu article);
 	List<Enchere> getEncheresByUser(Utilisateur utilisateur);
-	List<Enchere> getEncheresByUserByCategorie(Utilisateur utilisateur, Categorie categorie);
+	List<Enchere> getEncheresByUserByCategorie(Utilisateur utilisateur, Categorie categorie, String rechercheNom);
+	List<Enchere> getEncheresByUserAndSearch(Utilisateur utilisateur, String rechercheNom);
 }
