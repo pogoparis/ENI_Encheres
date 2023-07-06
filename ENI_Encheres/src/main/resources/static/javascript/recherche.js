@@ -1,5 +1,6 @@
 window.onload = init;
 
+
 function init(){
 
 
@@ -49,9 +50,5 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		});
 		
-		
-		function scrollWin() {
-  window.scrollTo(0, 960);
-}
 		
 		}
