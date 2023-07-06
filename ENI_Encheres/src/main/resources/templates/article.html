@@ -27,8 +27,8 @@
 				<p> Description : <span th:text="${article.getDescription()}"></span></p>
 				<p> Début de l'enchère : <span th:text="${#temporals.format(article.getDate_debut_encheres(),'dd MMMM yyyy')}"></span></p>
 				<p> Fin de l'enchère : <span th:text="${#temporals.format(article.getDate_fin_encheres(),'dd MMMM yyyy')}"></span></p>
-				<p> Mise à prix : <span th:text="${article.getPrix_initial()}"></span> pts</p>
-				<p> Prix de vente : <span th:text="${article.getPrix_vente()}"></span> pts</p>
+				<p> Mise à prix : <span th:text="${article.getPrix_initial()}"></span> Cherrys</p>
+				<p> Prix de vente : <span th:text="${article.getPrix_vente()}"></span> Cherrys</p>
 				<p> Categorie : <span th:text="${article.getCategorie()}"></span></p>
 			</div>
 			<div class="col-12 col-sm-12 col-md-12 col-lg-3">
