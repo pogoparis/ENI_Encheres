@@ -43,7 +43,7 @@
 				<p th:if="${meilleureEnchere != null}">
 					<span style="font-weight: bold;">Meilleure offre :</span>
 					<span style="font-weight: bold;" th:text="${meilleureEnchere.getMontant_enchere()}"></span>
-					<span style="font-weight: bold;" >crédits</span>, par :
+					<span style="font-weight: bold;" >Cherrys</span>, par :
 					<a th:href="@{/details(pseudo=${meilleureEnchere.getUtilisateur().getPseudo()})}"><span
 							th:text="${meilleureEnchere.getUtilisateur().getPseudo()}"></span></a>
 				</p>
