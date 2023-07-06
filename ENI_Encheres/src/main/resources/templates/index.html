@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="icon" type="image/x-icon" href="/Images/images.ico">
+	<script src="https://kit.fontawesome.com/a7dbd1cbd9.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -26,6 +27,14 @@
   <h1  class="text-red" style="font-size: 80px; color: #f3969a; ">Encherry </h1>
   
   <h3 class="text-red" style="color: #e04c4a">Surenchérir, c'est la cerise sur le gâteau !</h3>
+  
+  <a onclick="scrollWin()" style="display: flex;" ><i class="fa-solid fa-angle-down" style="justify-content: center;"></i></a>
+  <script>
+function scrollWin() {
+  window.scrollTo(0, 960);
+  behavior: 'smooth';
+}
+</script>
   
   </div>
 </div>
@@ -132,7 +141,7 @@
 				d'article est vide.</div>
 			<div class="row">
 			
-				<div class="d-inline-flex justify-content-center col-sx-12 col-sm-12 col-lg-6" th:each="article:${listeArticles}">
+				<div class="d-inline-flex justify-content-center col-sx-12 col-sm-12 col-lg-6 ficheArticle" th:each="article:${listeArticles}">
 					<a class="lien" th:href="@{/article(id=${article.getNo_article()})}">
 						<img style="width: 150px" class="pull-left img-responsive col-3  m-2 img-thumbnail"
 							th:src="'/Images/'+${article.getNo_article()}+'.jpg'">
