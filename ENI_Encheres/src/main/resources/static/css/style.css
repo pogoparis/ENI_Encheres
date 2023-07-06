@@ -17,9 +17,22 @@ html {
 .lien {
 	text-decoration: none;
 	color : inherit;
-/* 	border : solid black; */
-/* 	display : block; */
 }
+
+.ficheArticle{
+	border: 1px solid #F3969A;
+	width : 400px!important;
+	margin : 4px;
+	border-radius : 10px;
+	transition : background-color 0.2s;
+}
+
+.ficheArticle:hover{
+	border-style : inset;
+	background-color : #f7f7f7;
+}
+
+
 
 /* @import */
 /* 	url('https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap') */
