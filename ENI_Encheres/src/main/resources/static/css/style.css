@@ -5,13 +5,11 @@ html {
 }
       
 
-.ongletMonCompte {
-	border: var(--bs-border-width) solid var(--bs-border-color); 
-	border-top-right-radius: 30%;
-}
+
 
 .ongletMonCompte:hover {
 	background-color : #d9d9d9;
+	cursor : pointer;
 }
 
 .lien {
