@@ -24,7 +24,7 @@
  		   <p th:text="${errorMessage}"></p>
 		</div>
 		<div class="form-group d-block col-12 col-sm-12 col-md-12 col-lg-9 justify-content-center">
-			<form th:action="@{/login}" method="post">
+			<form th:action="@{/login#focus}" method="post">
 				<label for="inputUsername">Login</label> <input class="form-control"
 					id="inputUsername" type="text" name="username" /> <label
 					for="inputPwd">Mot de Passe</label> <input class="form-control"
