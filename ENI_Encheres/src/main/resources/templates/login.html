@@ -11,6 +11,10 @@
 </head>
 <body>
 	<div data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
+
+<!-- A FINIR -->
+
+
 	<br>
 	<div class="container">
 		<div th:if="${successMessage}" class="alert alert-success col-6">
@@ -32,7 +36,10 @@
 	
 	<div data-th-replace="~{fragments/fragment-footer :: frag-footer}"></div>
 	
-	
+	<div th:if="${param.logout}">
+LOGOUT
+<span th:text="LOGOUT log out log out"></span>
+</div>
 	
 </body>
 </html>

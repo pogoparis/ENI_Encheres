@@ -135,8 +135,12 @@ public class EncheresServiceArticlesVendusImpl implements EncheresServiceArticle
 			filterEncheresEnCours(param, newList);
 		}
 		if (encheresOuvertes != null && encheresOuvertes.equals("encheresouvertes")) {		
-			// ******************************************* A FAIRE *************************************!!!!!
-			filterEncheresOuvertes(encheresDaoArticlesVendus.getArticleByCategorieContainNom(rechercheNom, categorie), newList);
+			if (categorie.getNo_categorie() == 99) {
+				filterEncheresOuvertes(encheresDaoArticlesVendus.getArticleContainNom(rechercheNom), newList);
+			} else {
+				filterEncheresOuvertes(encheresDaoArticlesVendus.getArticleByCategorieContainNom(rechercheNom, categorie), newList);
+			}
+			
 		}
 		if (encheresGagnees != null && encheresGagnees.equals("encheresgagnees")) {
 			filterEncheresGagnees(param, newList);
