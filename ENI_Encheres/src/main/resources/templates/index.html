@@ -47,8 +47,8 @@ function scrollWin() {
 	<div  data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
 </div>
 
-<div th:if="${param.logout}">
-LOGOUT
+<div th:if="${param.logout}" class="alert alert-success col-6">
+			<p th:text="${logoutMessage}"></p>
 </div>
 
 	<div class="container">
