@@ -63,7 +63,7 @@
 				</select>
 				<input th:min="${article.getPrix_vente()+10}" th:max="${user.getCredit()}" step="10" type="number"
 					th:placeholder="${article.getPrix_vente()+10}" th:field="*{montant_enchere}">
-				<button type="submit">ENCHERIR</button>
+				<button type="submit" class="btn btn-primary">ENCHERIR</button>
 			</form>
 		</div>
 	</div>
