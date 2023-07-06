@@ -69,7 +69,7 @@ public class SecurityConfig {
 	        // Customiser le formulaire
 	        http.formLogin(form -> {
 	            form.loginPage("/login").permitAll();
-	            form.defaultSuccessUrl("/encheres").permitAll();
+	            form.defaultSuccessUrl("/encheres?newLog=true").permitAll();
 	            form.failureUrl("/login?error");
 	        });
 
