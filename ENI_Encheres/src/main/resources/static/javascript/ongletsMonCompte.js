@@ -9,12 +9,12 @@ document.getElementById("ongletArticlesVendus").addEventListener('click', onglet
 
 function onglet1(event){
 	document.getElementById("ongletArticlesAchetes").style.backgroundColor = "#f8c0c2";
-	document.getElementById("ongletEncheres").style.backgroundColor = "white";
-	document.getElementById("ongletArticlesVendus").style.backgroundColor = "white";
+	document.getElementById("ongletEncheres").style.backgroundColor = null;
+	document.getElementById("ongletArticlesVendus").style.backgroundColor = null;
 	
 	document.getElementById("titre1").style.color = "white";
-	document.getElementById("titre2").style.color = "black";
-	document.getElementById("titre3").style.color = "black";
+	document.getElementById("titre2").style.color = null;
+	document.getElementById("titre3").style.color = null;
 	
 	document.getElementById("listeArticlesAchetes").style.display = "block";
 	document.getElementById("listeEncheres").style.display = "none";
@@ -22,13 +22,13 @@ function onglet1(event){
 }
 
 function onglet2(event){
-	document.getElementById("ongletArticlesAchetes").style.backgroundColor = "white";
+	document.getElementById("ongletArticlesAchetes").style.backgroundColor = null;
 	document.getElementById("ongletEncheres").style.backgroundColor = "#f8c0c2";
-	document.getElementById("ongletArticlesVendus").style.backgroundColor = "white";
+	document.getElementById("ongletArticlesVendus").style.backgroundColor = null;
 	
-	document.getElementById("titre1").style.color = "black";
+	document.getElementById("titre1").style.color = null;
 	document.getElementById("titre2").style.color = "white";
-	document.getElementById("titre3").style.color = "black";
+	document.getElementById("titre3").style.color = null;
 	
 	document.getElementById("listeArticlesAchetes").style.display = "none";
 	document.getElementById("listeEncheres").style.display = "block";
@@ -36,12 +36,12 @@ function onglet2(event){
 }
 
 function onglet3(event){
-	document.getElementById("ongletArticlesAchetes").style.backgroundColor = "white";
-	document.getElementById("ongletEncheres").style.backgroundColor = "white";
+	document.getElementById("ongletArticlesAchetes").style.backgroundColor = null;
+	document.getElementById("ongletEncheres").style.backgroundColor = null;
 	document.getElementById("ongletArticlesVendus").style.backgroundColor = "#f8c0c2";
 	
-	document.getElementById("titre1").style.color = "black";
-	document.getElementById("titre2").style.color = "black";
+	document.getElementById("titre1").style.color = null;
+	document.getElementById("titre2").style.color = null;
 	document.getElementById("titre3").style.color = "white";
 	
 	document.getElementById("listeArticlesAchetes").style.display = "none";
