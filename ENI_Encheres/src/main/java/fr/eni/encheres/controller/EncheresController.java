@@ -82,6 +82,9 @@ public class EncheresController {
 		if(validationResult.hasFieldErrors()) {
 			return("redirect:/article?id="+ enchere.getArticle().getNo_article() +"&mess=true" );
 		}
+		if (enchere.getMontant_enchere() < enchere.getArticle().getPrix_vente()) {
+			return("redirect:/article?id="+ enchere.getArticle().getNo_article() +"&mess=true" );
+		}
 		encheresServiceEncheres.surencherir(enchere);
 		return "redirect:/article?id=" + enchere.getArticle().getNo_article();
 	}
