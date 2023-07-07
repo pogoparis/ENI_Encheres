@@ -14,14 +14,12 @@ import fr.eni.encheres.dao.EncheresDaoEncheres;
 import fr.eni.encheres.dao.EncheresDaoUtilisateurs;
 
 @Service
-public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateur{
+public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateur {
 
 	EncheresDaoUtilisateurs encheresDaoUtilisateurs;
 	EncheresDaoEncheres encheresDaoEncheres;
 	EncheresDaoArticlesVendus encheresDaoArticlesVendus;
-	PasswordEncoder passwordEncoder ;
-
-	
+	PasswordEncoder passwordEncoder;
 
 	public EncheresServiceUtilisateurImpl(EncheresDaoUtilisateurs encheresDaoUtilisateurs,
 			EncheresDaoEncheres encheresDaoEncheres, EncheresDaoArticlesVendus encheresDaoArticlesVendus,
@@ -36,12 +34,12 @@ public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateu
 	public List<Utilisateur> findAllUtilisateurs() {
 		return encheresDaoUtilisateurs.getAllUtilisateurs();
 	}
-	
+
 	@Override
 	public void createUtilisateur(Utilisateur utilisateur) {
 		utilisateur.setMotDePasse(passwordEncoder.encode(utilisateur.getMotDePasse()));
 		encheresDaoUtilisateurs.saveUtilisateur(utilisateur);
-		
+
 	}
 
 	@Override
@@ -50,72 +48,71 @@ public class EncheresServiceUtilisateurImpl implements EncheresServiceUtilisateu
 		miseEnPlaceDesListes(utilisateur);
 		return utilisateur;
 	}
-	
+
 	public Utilisateur findUserByPseudo(String pseudo) {
 		Utilisateur utilisateur = encheresDaoUtilisateurs.getUserByPseudo(pseudo);
 		miseEnPlaceDesListes(utilisateur);
 		return utilisateur;
 	}
-	
-	
+
 	public void deleteUser(Integer id) {
 		encheresDaoUtilisateurs.delete(id);
-		
+
 	}
 
 	public Boolean isPseudoUnique(String pseudo) {
-		return encheresDaoUtilisateurs.isPseudoUnique(pseudo);	
+		return encheresDaoUtilisateurs.isPseudoUnique(pseudo);
 	}
-	
+
 	public Boolean isMailUnique(String email) {
 		return encheresDaoUtilisateurs.isMailUnique(email);
 	}
-	
-public void miseEnPlaceDesListes (Utilisateur utilisateur) {
-		
+
+	public void miseEnPlaceDesListes(Utilisateur utilisateur) {
+
 		List<ArticleVendu> listeArticlesVendus = encheresDaoArticlesVendus.getArticlesByUser(utilisateur);
 		utilisateur.setListeArticlesVendus(listeArticlesVendus);
-		
+
 		List<Enchere> listeEncheres = new ArrayList<>();
 		for (Enchere enchere : encheresDaoEncheres.getEncheresByUser(utilisateur)) {
-			if (enchere.getArticle().getDate_fin_encheres().isAfter(LocalDate.now()) || enchere.getArticle().getDate_fin_encheres().isEqual(LocalDate.now())){
+			if (enchere.getArticle().getDate_fin_encheres().isAfter(LocalDate.now())
+					|| enchere.getArticle().getDate_fin_encheres().isEqual(LocalDate.now())) {
 				listeEncheres.add(enchere);
 			}
 		}
 		utilisateur.setListeEncheres(listeEncheres);
-		
+
 		List<ArticleVendu> listeArticlesAchetes = new ArrayList<>();
 		for (Enchere enchere : encheresDaoEncheres.getEncheresByUser(utilisateur)) {
-			if ((enchere.getArticle().getDate_fin_encheres().isBefore(LocalDate.now())) 
-					&& 
-				(isMeilleurEncherisseur(utilisateur, enchere.getArticle())) ) {
-				listeArticlesAchetes.add(enchere.getArticle());	
-			}	
+			if ((enchere.getArticle().getDate_fin_encheres().isBefore(LocalDate.now()))
+					&& (isMeilleurEncherisseur(utilisateur, enchere.getArticle()))) {
+				listeArticlesAchetes.add(enchere.getArticle());
+			}
 		}
 		utilisateur.setListeArticlesAchetes(listeArticlesAchetes);
 	}
 
 	public Boolean isMeilleurEncherisseur(Utilisateur utilisateur, ArticleVendu article) {
 		List<Enchere> listeDesEncheres = encheresDaoEncheres.findEncheresByArticle(article);
-		 if (listeDesEncheres.isEmpty()) {
-		        return false;
-		    }
-		    Enchere plusHauteEnchere = listeDesEncheres.get(0);
-		    for (Enchere enchere : listeDesEncheres) {
-		        if (enchere.getMontant_enchere() > plusHauteEnchere.getMontant_enchere()) {
-		        	plusHauteEnchere = enchere;
-		        }
-		    }
-		    if(plusHauteEnchere.getUtilisateur().getNo_utilisateur() == utilisateur.getNo_utilisateur()) {
-		    	return true;
-		    }
-		    return false;
+		if (listeDesEncheres.isEmpty()) {
+			return false;
+		}
+		Enchere plusHauteEnchere = listeDesEncheres.get(0);
+		for (Enchere enchere : listeDesEncheres) {
+			if (enchere.getMontant_enchere() > plusHauteEnchere.getMontant_enchere()) {
+				plusHauteEnchere = enchere;
+			}
+		}
+		if (plusHauteEnchere.getUtilisateur().getNo_utilisateur() == utilisateur.getNo_utilisateur()) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public void miseAJourCredit(int valeur, Utilisateur utilisateur) {
 		encheresDaoUtilisateurs.majCredit(valeur, utilisateur);
-		
+
 	}
 
 }

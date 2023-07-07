@@ -10,18 +10,14 @@ import fr.eni.encheres.service.EncheresServiceUtilisateur;
 public class StringToUtilisateurConverter implements Converter<String, Utilisateur> {
 
 	EncheresServiceUtilisateur encheresServiceUtilisateur;
-	
-	
-	
+
 	public StringToUtilisateurConverter(EncheresServiceUtilisateur encheresServiceUtilisateur) {
 		this.encheresServiceUtilisateur = encheresServiceUtilisateur;
 	}
 
-
-
 	@Override
 	public Utilisateur convert(String source) {
-		
+
 		return encheresServiceUtilisateur.findUtilisateurById(Integer.parseInt(source));
 	}
 

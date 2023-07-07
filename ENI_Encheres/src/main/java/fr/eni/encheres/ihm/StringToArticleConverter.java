@@ -10,18 +10,14 @@ import fr.eni.encheres.service.EncheresServiceArticlesVendus;
 public class StringToArticleConverter implements Converter<String, ArticleVendu> {
 
 	EncheresServiceArticlesVendus encheresServiceArticlesVendus;
-	
-	
-	
+
 	public StringToArticleConverter(EncheresServiceArticlesVendus encheresServiceArticlesVendus) {
 		this.encheresServiceArticlesVendus = encheresServiceArticlesVendus;
 	}
 
-
-
 	@Override
 	public ArticleVendu convert(String source) {
-		
+
 		return encheresServiceArticlesVendus.findArticleById(Integer.parseInt(source));
 	}
 

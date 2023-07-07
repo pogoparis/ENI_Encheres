@@ -1,7 +1,6 @@
 package fr.eni.encheres.controller;
 
 import java.security.Principal;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,7 +12,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.service.EncheresServiceEncheres;
 import fr.eni.encheres.service.EncheresServiceUtilisateur;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -42,9 +40,9 @@ public class ConnectController {
 		if (model.containsAttribute("successMessage")) {
 			String successMessage = (String) model.getAttribute("successMessage");
 			model.addAttribute("successMessage", successMessage);
-		} 
+		}
 		return "login";
-	}	
+	}
 
 	/************** AFFICHAGE PAGE INSCRIPTION **************/
 	@GetMapping("/inscription")
@@ -55,15 +53,17 @@ public class ConnectController {
 	/************* BOUTON VALIDATION REGISTER *****************/
 	@PostMapping("/register")
 	public String register(@Valid @ModelAttribute Utilisateur utilisateur, BindingResult validationResult,
-			RedirectAttributes redirectAttributes, Principal principal, @RequestParam("confirmPassword")String confirmation) {
+			RedirectAttributes redirectAttributes, Principal principal,
+			@RequestParam("confirmPassword") String confirmation) {
 
 		if (!utilisateur.getMotDePasse().equals(confirmation)) {
-			validationResult.rejectValue("motDePasse", "confirmation.incorrecte", "Les deux saisies doivent être identiques");
+			validationResult.rejectValue("motDePasse", "confirmation.incorrecte",
+					"Les deux saisies doivent être identiques");
 			return "profil";
 		}
 
 		if (principal != null) { // connecté
-			
+
 			String pseudoUser = utilisateur.getPseudo();
 			String pseudoPrincipal = principal.getName();
 			String emailUser = utilisateur.getEmail();
@@ -76,8 +76,8 @@ public class ConnectController {
 				return "profil";
 			}
 
-			if ((!encheresServiceUtilisateur.isMailUnique(utilisateur.getEmail())) && (!emailUser
-					.equals(emailPrincipal))&& validationResult.hasErrors()) {
+			if ((!encheresServiceUtilisateur.isMailUnique(utilisateur.getEmail()))
+					&& (!emailUser.equals(emailPrincipal)) && validationResult.hasErrors()) {
 				validationResult.rejectValue("email", "email.alreadyTaken", "Ce mail est deja associé à un compte");
 				System.out.println("if mail");
 				return "profil";
@@ -85,41 +85,31 @@ public class ConnectController {
 
 			encheresServiceUtilisateur.createUtilisateur(utilisateur);
 			return "redirect:/logout";
-			
+
 		}
 
-		
-
-		else{
+		else {
 			if (!encheresServiceUtilisateur.isPseudoUnique(utilisateur.getPseudo())) {
 				validationResult.rejectValue("pseudo", "pseudo.alreadyTaken", "Le pseudo est déjà pris");
 				return "profil";
-				
+
 			}
 
 			if (!encheresServiceUtilisateur.isMailUnique(utilisateur.getEmail())) {
 				validationResult.rejectValue("email", "email.alreadyTaken", "Ce mail est deja associé à un compte");
 				return "profil";
-				
-				
+
 			}
-			if(validationResult.hasErrors()) {
+			if (validationResult.hasErrors()) {
 				return "profil";
 			}
-			
-			
-			
-			
-			
+
 		}
-			encheresServiceUtilisateur.createUtilisateur(utilisateur);
-			redirectAttributes.addFlashAttribute("successMessage",
-					"L'enregistrement a réussi. Veuillez vous connecter avec vos identifiants.");
-			return "redirect:/login";
-			
-		
-		
-		
+		encheresServiceUtilisateur.createUtilisateur(utilisateur);
+		redirectAttributes.addFlashAttribute("successMessage",
+				"L'enregistrement a réussi. Veuillez vous connecter avec vos identifiants.");
+		return "redirect:/login";
+
 	}
 
 	/****************** AFFICHAGE DETAIL UTILISATEUR (DETAIL) *******************/

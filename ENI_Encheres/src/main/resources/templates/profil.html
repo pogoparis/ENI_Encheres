@@ -13,7 +13,6 @@
 
 <body>
 	<div data-th-replace="~{fragments/fragment-entete :: frag-entete}"></div>
-
 	<div class="container">
 		<form th:object="${utilisateur}" method="post" th:action="@{/register}">
 			<fieldset>
@@ -29,10 +28,6 @@
 									<li data-th-each="erreur: ${#fields.errors('pseudo')}" data-th-text="${erreur}"></li>
 								</ul>
 							</span>
-		
-<!-- 							<div th:if="${errorMessage}" class="error-message"> -->
-<!--     							<span th:text="${errorMessage}"></span> -->
-<!-- 							</div> -->
 						</div>
 					</div>
 					<div class="col-sm-5">
@@ -47,7 +42,6 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="form-group row">
 					<div class="col-sm-5">
 						<div class="form-group">
@@ -74,8 +68,6 @@
 						</div>
 					</div>
 				</div>
-
-
 				<div class="form-group row">
 					<div class="col-sm-5">
 						<div class="form-group">
@@ -168,11 +160,6 @@
 				
 			</fieldset>
 		</form>
-		
-				 
-				
-			
-
 	</div>
 	<div data-th-replace="~{fragments/fragment-footer :: frag-footer}"></div>
 </body>

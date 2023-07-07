@@ -4,9 +4,8 @@ public class Categorie {
 
 	private Integer no_categorie;
 	private String libelle;
-	
-	
-	//CONSTRUCTEUR
+
+	// CONSTRUCTEUR
 //	public Categorie(Integer noCategorie, String libelle) {
 //		this.no_categorie = noCategorie;
 //		this.libelle = libelle;
@@ -15,12 +14,12 @@ public class Categorie {
 	public Categorie() {
 		// Constructeur vide
 	}
-	
+
 	public Categorie(Integer idCategorie) {
 		this.no_categorie = idCategorie;
 	}
 
-	//GETTER SETTER
+	// GETTER SETTER
 	public Integer getNo_categorie() {
 		return no_categorie;
 	}
@@ -41,9 +40,5 @@ public class Categorie {
 	public String toString() {
 		return "N°" + no_categorie + " : " + libelle;
 	}
-	
-	
-	
-	
-	
+
 }

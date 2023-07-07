@@ -83,7 +83,10 @@ public class EncheresController {
 		}
 		encheresServiceEncheres.surencherir(enchere);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/pogoparis/ENI_Encheres.git
 		return "redirect:/article?id=" + enchere.getArticle().getNo_article();
 	}
 
@@ -121,9 +124,15 @@ public class EncheresController {
 		model.addAttribute("meilleureEnchere", meilleureEnchere);
 		Boolean tokenAffichage = encheresServiceEncheres.affichageDuBouton(article, principal);
 		model.addAttribute("tokenAffichage", tokenAffichage);
+<<<<<<< HEAD
 			model.addAttribute("messageEnchereIndisponible",
 				encheresServiceEncheres.messageBoutonEncherirIndisponible(article, principal));
 	Boolean tokenBoutonCloture = encheresServiceEncheres.affichageBoutonCloture(article, principal);
+=======
+		model.addAttribute("messageEnchereIndisponible",
+				encheresServiceEncheres.messageBoutonEncherirIndisponible(article, principal));
+		Boolean tokenBoutonCloture = encheresServiceEncheres.affichageBoutonCloture(article, principal);
+>>>>>>> branch 'master' of https://github.com/pogoparis/ENI_Encheres.git
 		model.addAttribute("tokenCloture", tokenBoutonCloture);
 		return "article";
 	}

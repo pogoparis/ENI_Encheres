@@ -11,28 +11,21 @@ import fr.eni.encheres.dao.EncheresDaoCategories;
 public class EncheresServiceCategorieImpl implements EncheresServiceCategorie {
 
 	EncheresDaoCategories encheresDaoCategories;
-	
-	
-	
+
 	public EncheresServiceCategorieImpl(EncheresDaoCategories encheresDaoCategories) {
 		super();
 		this.encheresDaoCategories = encheresDaoCategories;
 	}
 
-
-
 	@Override
 	public List<Categorie> findAllCategorie() {
-		
 
 		return encheresDaoCategories.getAllCategories();
 	}
 
-
-
 	@Override
 	public Categorie findCategorieById(Integer idCategorie) {
-		
+
 		return encheresDaoCategories.getCategorieById(idCategorie);
 	}
 

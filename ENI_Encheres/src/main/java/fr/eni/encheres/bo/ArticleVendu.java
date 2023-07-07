@@ -7,42 +7,37 @@ import jakarta.validation.constraints.NotBlank;
 
 public class ArticleVendu {
 
+	// constantes etatVente
 
-	//constantes etatVente
-	
 	private boolean venteTermine = false;
-	
-	
+
 	private Integer no_article;
 	@NotBlank
 	private String nom_article;
-	
+
 	@NotBlank
 	private String description;
-	
+
 	private LocalDate date_debut_encheres;
 	private LocalDate date_fin_encheres;
-	
+
 	@NotBlank
 	@Min(0)
 	private Integer prix_initial;
-	
+
 	@NotBlank
 	@Min(0)
 	private Integer prix_vente;
-	
 
 	@NotBlank
 	private Categorie categorie;
-	
+
 	private Utilisateur utilisateur;
-	
-	
-	//Constructeur vide
+
+	// Constructeur vide
 	public ArticleVendu() {
 		// TODO Auto-generated constructor stub
 	}
-
 
 	public ArticleVendu(String nom_article, String description, LocalDate date_debut_encheres,
 			LocalDate date_fin_encheres, Integer prix_initial, Integer prix_vente, Utilisateur utilisateur,
@@ -61,7 +56,7 @@ public class ArticleVendu {
 		this.no_article = id;
 	}
 
-	//Getter Setter
+	// Getter Setter
 	public Integer getNo_article() {
 		return no_article;
 	}
@@ -118,24 +113,19 @@ public class ArticleVendu {
 		this.prix_vente = prix_vente;
 	}
 
-	
 //Fin getter setter
-
 
 	public Categorie getCategorie() {
 		return categorie;
 	}
 
-
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
 
-
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
-
 
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
@@ -145,33 +135,28 @@ public class ArticleVendu {
 		return venteTermine;
 	}
 
-
 	public void setVenteTermine(boolean venteTermine) {
 		this.venteTermine = venteTermine;
 	}
 
-
 	@Override
 	public String toString() {
-		return "ArticleVendu [no_article=" + no_article + ", etat="+ venteTermine +", nom_article=" + nom_article + ", description="
-				+ description + ", date_debut_encheres=" + date_debut_encheres + ", date_fin_encheres="
-				+ date_fin_encheres + ", prix_initial=" + prix_initial + ", prix_vente=" + prix_vente 
-				+ ", categorie=" + categorie + ", utilisateur=" + utilisateur + "]";
+		return "ArticleVendu [no_article=" + no_article + ", etat=" + venteTermine + ", nom_article=" + nom_article
+				+ ", description=" + description + ", date_debut_encheres=" + date_debut_encheres
+				+ ", date_fin_encheres=" + date_fin_encheres + ", prix_initial=" + prix_initial + ", prix_vente="
+				+ prix_vente + ", categorie=" + categorie + ", utilisateur=" + utilisateur + "]";
 	}
-	
+
 	@Override
 	public boolean equals(Object article) {
-	    if (this == article) {
-	        return true;
-	    }
-	    if (article == null || getClass() != article.getClass()) {
-	        return false;
-	    }
-	    ArticleVendu monArticle = (ArticleVendu) article;
-	    return this.no_article.equals(monArticle.no_article) && this.nom_article.equals(monArticle.nom_article);
+		if (this == article) {
+			return true;
+		}
+		if (article == null || getClass() != article.getClass()) {
+			return false;
+		}
+		ArticleVendu monArticle = (ArticleVendu) article;
+		return this.no_article.equals(monArticle.no_article) && this.nom_article.equals(monArticle.nom_article);
 	}
 
-
-	
-	
 }
