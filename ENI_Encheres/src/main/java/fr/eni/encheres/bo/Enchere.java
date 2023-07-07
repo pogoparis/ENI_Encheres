@@ -1,9 +1,12 @@
 package fr.eni.encheres.bo;
 
 import java.time.LocalDate;
+
+import jakarta.validation.constraints.NotNull;
 public class Enchere {
 
 	private LocalDate date_enchere;
+	@NotNull
 	private Integer montant_enchere;
 	private Utilisateur utilisateur;
 	private ArticleVendu article;
