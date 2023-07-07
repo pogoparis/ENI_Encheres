@@ -23,14 +23,7 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 	EncheresServiceUtilisateur encheresServiceUtilisateur;
 	EncheresServiceArticlesVendus encheresServiceArticlesVendus;
 	EncheresDaoArticlesVendus encheresDaoArticlesVendus;
-//	private final TaskScheduler taskScheduler;
-
-//	 private void verifierEncheresTerminees() {
-//	        System.out.println("test");
-//	    }
 	
-	//injecter au service TaskScheduler taskScheduler
-	// et appeler la méthode planifierVerificationEncheresTerminees();
 	public EncheresServiceEncheresImpl(EncheresDaoEncheres enchereDaoEncheres,
 			EncheresServiceUtilisateur encheresServiceUtilisateur,
 			EncheresServiceArticlesVendus encheresServiceArticlesVendus, EncheresDaoArticlesVendus encheresDaoArticlesVendus) {
@@ -39,11 +32,6 @@ public class EncheresServiceEncheresImpl implements EncheresServiceEncheres {
 		this.encheresServiceArticlesVendus = encheresServiceArticlesVendus;
 		this.encheresDaoArticlesVendus = encheresDaoArticlesVendus;
 	}
-
-//	private void planifierVerificationEncheresTerminees() {
-//        // Exemple de planification avec un délai fixe de 2 secondes
-//        taskScheduler.schedule(this::verifierEncheresTerminees, new PeriodicTrigger(2, TimeUnit.SECONDS));
-//    }
 	
 	public Boolean affichageDuBouton(ArticleVendu article, Principal user) {
 		datedujour = LocalDate.now();

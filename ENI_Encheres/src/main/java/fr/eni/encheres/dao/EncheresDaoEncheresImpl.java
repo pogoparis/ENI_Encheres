@@ -41,7 +41,6 @@ public class EncheresDaoEncheresImpl implements EncheresDaoEncheres {
 
 	@Override
 	public void saveEnchere(Enchere enchere) {
-		//new EncheresRowMapper(encheresDaoArticlesVendus, encheresDaoUtilisateurs);
 		MapSqlParameterSource enchereMap = new MapSqlParameterSource();	
 		enchereMap.addValue("date_enchere", (enchere.getDate_enchere()));
 		enchereMap.addValue("montant_enchere", enchere.getMontant_enchere());
