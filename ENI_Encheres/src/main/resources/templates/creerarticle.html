@@ -28,6 +28,9 @@
                         <label class="form-label mt-4" for="nom_article">Nom de l'article</label>
                         <input type="text" class="form-control" placeholder="Nom de l'article" id="nom_article" th:field="*{nom_article}" name="nom_article">
                     </div>
+                    <ul data-th-if="${#fields.hasErrors('nom_article')}">
+						<li data-th-each="erreur: ${#fields.errors('nom_article')}" data-th-text="${erreur}"></li>
+					</ul>
                 </div>
                 <div class="col-sm-5">
                     <div class="form-group">
@@ -41,15 +44,21 @@
                 <div class="col-sm-5">
                     <div class="form-group">
                         <label class="form-label mt-4" for="genre">Choisissez une categorie</label> 
-                        <select class="form-control" id="genre" th:field="*{categorie}">
+                        <select class="form-control" required id="genre" th:field="*{categorie}">
 							<option th:each="categorie:${categories}" th:text="${categorie.getLibelle()}" th:value="${categorie.getNo_categorie()}" th:selected></option>
 						</select>
                     </div>
+                    <ul data-th-if="${#fields.hasErrors('categorie')}">
+						<li data-th-each="erreur: ${#fields.errors('categorie')}" data-th-text="${erreur}"></li>
+					</ul>
                 </div>
                 <div class="col-sm-5">
                     <div class="form-group">
                         <label class="form-label mt-4" for="miseaprix">Mise à prix : </label> 
                         <input class="form-control" type="number" th:field="*{prix_initial}" name="miseaprix" id="miseaprix" min="100" max="3000">
+					<ul data-th-if="${#fields.hasErrors('prix_initial')}">
+						<li data-th-each="erreur: ${#fields.errors('prix_initial')}" data-th-text="${erreur}"></li>
+					</ul>                   
                     </div>
                 </div>
             </div>

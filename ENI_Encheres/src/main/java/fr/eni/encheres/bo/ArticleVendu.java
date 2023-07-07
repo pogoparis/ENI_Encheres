@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class ArticleVendu {
 
@@ -12,24 +13,21 @@ public class ArticleVendu {
 	private boolean venteTermine = false;
 
 	private Integer no_article;
+	
 	@NotBlank
 	private String nom_article;
-
-	@NotBlank
 	private String description;
 
 	private LocalDate date_debut_encheres;
 	private LocalDate date_fin_encheres;
 
-	@NotBlank
-	@Min(0)
+	@NotNull
+	@Min(10)
 	private Integer prix_initial;
-
-	@NotBlank
-	@Min(0)
+	
 	private Integer prix_vente;
-
-	@NotBlank
+	
+	@NotNull
 	private Categorie categorie;
 
 	private Utilisateur utilisateur;

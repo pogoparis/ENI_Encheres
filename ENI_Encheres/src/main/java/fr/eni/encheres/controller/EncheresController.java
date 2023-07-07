@@ -87,8 +87,11 @@ public class EncheresController {
 
 	/*********** BOUTON VALIDATION CREATION ARTICLE ***********/
 	@PostMapping("/creationarticle")
-	public String creationArticle(@RequestParam("image") MultipartFile file, @ModelAttribute ArticleVendu articleVendu,
+	public String creationArticle(@Valid @ModelAttribute ArticleVendu articleVendu, BindingResult result, @RequestParam("image") MultipartFile file,
 			@ModelAttribute Retrait retrait, Principal principal, Model model) throws IOException {
+	if(result.hasErrors()) {
+		return("creerarticle");
+	}
 		articleVendu.setUtilisateur(encheresServiceUtilisateur.findUserByPseudo(principal.getName()));
 		encheresServiceArticlesVendus.createArticle(articleVendu);
 		encheresServiceRetrait.createRetrait(retrait, articleVendu);
