@@ -22,13 +22,13 @@ public class SecurityConfig {
 	@Autowired
 	private DataSource dataSource;
 
-    private final PasswordEncoder passwordEncoder  = new BCryptPasswordEncoder() ;
+	private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return passwordEncoder;
-    }
-	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return passwordEncoder;
+	}
+
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(dataSource)
@@ -50,35 +50,30 @@ public class SecurityConfig {
 					.requestMatchers(HttpMethod.GET, "/inscription").permitAll()
 					.requestMatchers(HttpMethod.POST, "/register").permitAll()
 					.requestMatchers(HttpMethod.GET, "/creerarticle").authenticated()
-					.requestMatchers(HttpMethod.GET, "/article").permitAll()
-					.requestMatchers(HttpMethod.GET, "/error").permitAll()
-					.requestMatchers(HttpMethod.POST, "/creationarticle").permitAll()
-					.requestMatchers(HttpMethod.POST, "/encherir").permitAll()
-					.requestMatchers("/").permitAll()
-					
+					.requestMatchers(HttpMethod.GET, "/article").permitAll().requestMatchers(HttpMethod.GET, "/error")
+					.permitAll().requestMatchers(HttpMethod.POST, "/creationarticle").permitAll()
+					.requestMatchers(HttpMethod.POST, "/encherir").permitAll().requestMatchers("/").permitAll()
+
 					// Permettre à tous d'afficher correctement ressources
-					.requestMatchers("/css/*").permitAll()
-					.requestMatchers("/Images/*").permitAll()
+					.requestMatchers("/css/*").permitAll().requestMatchers("/Images/*").permitAll()
 					.requestMatchers("/javascript/*").permitAll()
 					// Il faut être connecté pour toutes autres URLs
 					.anyRequest().authenticated();
 		});
 		// formulaire de connexion par défaut
 		http.formLogin(Customizer.withDefaults());
-	        
-	        // Customiser le formulaire
-	        http.formLogin(form -> {
-	            form.loginPage("/login").permitAll();
-	            form.defaultSuccessUrl("/encheres?newLog=true").permitAll();
-	            form.failureUrl("/login?error");
-	        });
+
+		// Customiser le formulaire
+		http.formLogin(form -> {
+			form.loginPage("/login").permitAll();
+			form.defaultSuccessUrl("/encheres?newLog=true").permitAll();
+			form.failureUrl("/login?error");
+		});
 
 		// /logout --> vider la session et le contexte de sécurité
-		http.logout(logout -> logout.invalidateHttpSession(true)
-				.clearAuthentication(true)
-				.deleteCookies("JSESSIONID")
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/encheres?logout=true").permitAll());
+		http.logout(logout -> logout.invalidateHttpSession(true).clearAuthentication(true).deleteCookies("JSESSIONID")
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/encheres?logout=true")
+				.permitAll());
 
 		return http.build();
 

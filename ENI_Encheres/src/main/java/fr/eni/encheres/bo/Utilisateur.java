@@ -16,32 +16,32 @@ public class Utilisateur implements UserDetails {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer no_utilisateur;
-	
+
 	@NotBlank
-	@Pattern( regexp = "^[a-zA-Z0-9]+$")
+	@Pattern(regexp = "^[a-zA-Z0-9]+$")
 	private String pseudo;
-	
+
 	@NotBlank
 	private String nom;
-	
+
 	@NotBlank
 	private String prenom;
-	
-	@Pattern( regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$" )
+
+	@Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
 	private String email;
 
-	@Pattern(regexp ="^(?:(?:\\+|00)33[\\s.-]{0,3}(?:\\(0\\)[\\s.-]{0,3})?|0)[1-9](?:(?:[\\s.-]?\\d{2}){4}|\\d{2}(?:[\\s.-]?\\d{3}){2})$")
+	@Pattern(regexp = "^(?:(?:\\+|00)33[\\s.-]{0,3}(?:\\(0\\)[\\s.-]{0,3})?|0)[1-9](?:(?:[\\s.-]?\\d{2}){4}|\\d{2}(?:[\\s.-]?\\d{3}){2})$")
 	private String telephone;
-	
+
 	@NotBlank
 	private String rue;
-	
+
 	@Pattern(regexp = "^[0-9-]{5}")
 	private String codePostal;
-	
+
 	@NotBlank
 	private String ville;
-	
+
 	@NotBlank
 	private String motDePasse;
 	private Integer credit;

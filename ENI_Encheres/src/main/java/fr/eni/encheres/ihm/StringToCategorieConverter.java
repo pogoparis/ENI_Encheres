@@ -10,18 +10,14 @@ import fr.eni.encheres.service.EncheresServiceCategorie;
 public class StringToCategorieConverter implements Converter<String, Categorie> {
 
 	EncheresServiceCategorie encheresServiceCategorie;
-	
-	
-	
+
 	public StringToCategorieConverter(EncheresServiceCategorie encheresServiceCategorie) {
 		this.encheresServiceCategorie = encheresServiceCategorie;
 	}
 
-
-
 	@Override
 	public Categorie convert(String source) {
-		
+
 		return encheresServiceCategorie.findCategorieById(Integer.parseInt(source));
 	}
 

@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Enchere;
@@ -47,13 +45,13 @@ public class EncheresController {
 		this.encheresServiceEncheres = encheresServiceEncheres;
 	}
 
-	/************ AFFICHAGE ACCUEIL LISTE ARTICLE********************/
+	/************ AFFICHAGE ACCUEIL LISTE ARTICLE ********************/
 	@GetMapping("/encheres")
 	public String afficherAccueil(Model model, Principal principal) {
 		model.addAttribute("logoutMessage", "Déconnecté avec succès");
 		if (principal != null) {
-			model.addAttribute("loginMessage", "Bonjour "+ principal.getName());
-		}	
+			model.addAttribute("loginMessage", "Bonjour " + principal.getName());
+		}
 		model.addAttribute("listeCategorie", encheresServiceCategorie.findAllCategorie());
 		model.addAttribute("listeArticles", encheresServiceArticlesVendus.findAllArticleVendu());
 		return "index";
@@ -66,11 +64,11 @@ public class EncheresController {
 
 	/************* AFFICHAGE CREATION ARTICLE ******************/
 	@GetMapping("/creerarticle")
-	public String creerArticle(@ModelAttribute ArticleVendu articleVendu, Principal principal,
-			Model model) {
+	public String creerArticle(@ModelAttribute ArticleVendu articleVendu, Principal principal, Model model) {
 		model.addAttribute("categories", encheresServiceCategorie.findAllCategorie());
 		Retrait retrait = new Retrait();
-		encheresServiceRetrait.setRetraitParDefaut(retrait, encheresServiceUtilisateur.findUserByPseudo(principal.getName()));
+		encheresServiceRetrait.setRetraitParDefaut(retrait,
+				encheresServiceUtilisateur.findUserByPseudo(principal.getName()));
 		model.addAttribute("retrait", retrait);
 		return "creerarticle";
 	}
@@ -79,7 +77,7 @@ public class EncheresController {
 	@PostMapping("/encherir")
 	public String encherir(@ModelAttribute Enchere enchere, Model model) {
 		encheresServiceEncheres.surencherir(enchere);
-		
+
 		return "redirect:/article?id=" + enchere.getArticle().getNo_article();
 	}
 
@@ -106,8 +104,8 @@ public class EncheresController {
 		Retrait retrait = encheresServiceRetrait.findRetraitByArticle(article);
 		Enchere meilleureEnchere = encheresServiceEncheres.getMeilleureEnchereByArticle(article);
 		Enchere enchere = new Enchere();
-		enchere.setMontant_enchere(article.getPrix_vente()+10);
-		
+		enchere.setMontant_enchere(article.getPrix_vente() + 10);
+
 		if (principal != null) {
 			model.addAttribute("user", encheresServiceUtilisateur.findUserByPseudo(principal.getName()));
 		}
@@ -117,7 +115,8 @@ public class EncheresController {
 		model.addAttribute("meilleureEnchere", meilleureEnchere);
 		Boolean tokenAffichage = encheresServiceEncheres.affichageDuBouton(article, principal);
 		model.addAttribute("tokenAffichage", tokenAffichage);
-		model.addAttribute("messageEnchereIndisponible", encheresServiceEncheres.messageBoutonEncherirIndisponible(article, principal));
+		model.addAttribute("messageEnchereIndisponible",
+				encheresServiceEncheres.messageBoutonEncherirIndisponible(article, principal));
 		Boolean tokenBoutonCloture = encheresServiceEncheres.affichageBoutonCloture(article, principal);
 		model.addAttribute("tokenCloture", tokenBoutonCloture);
 		return "article";
@@ -126,26 +125,25 @@ public class EncheresController {
 	/************** BOUTON RECHERCHE GET *****************/
 	@GetMapping("/recherche")
 	public String recherche(String rechercheNom, Model model, Categorie categorie, Utilisateur utilisateur,
-	        Principal principal, String optionArticle, String ventesEnCours, String ventesTerminees, String ventesNonDebutees, String encheresEnCours,
-			String encheresOuvertes, String encheresGagnees) {
-	    model.addAttribute("listeCategorie", encheresServiceCategorie.findAllCategorie());
-	    if (principal != null) {
-	        utilisateur = encheresServiceUtilisateur.findUserByPseudo(principal.getName());
-	        List<ArticleVendu> listeArticlesVendeur = encheresServiceArticlesVendus.rechercheConnecte(rechercheNom,
-	                categorie, utilisateur, optionArticle, ventesEnCours, ventesTerminees, ventesNonDebutees,encheresEnCours, encheresOuvertes,
-					encheresGagnees);
-	        model.addAttribute("listeArticles", listeArticlesVendeur);
-	        return "index";
-	    } else {
-	        // Recherche Non connectée OK
-	        List<ArticleVendu> listeArticlesCate = encheresServiceArticlesVendus.rechercheNonConnecte(rechercheNom,
-	                categorie);
-	        model.addAttribute("listeArticles", listeArticlesCate);
-	        return "index";
-	    }
+			Principal principal, String optionArticle, String ventesEnCours, String ventesTerminees,
+			String ventesNonDebutees, String encheresEnCours, String encheresOuvertes, String encheresGagnees) {
+		model.addAttribute("listeCategorie", encheresServiceCategorie.findAllCategorie());
+		if (principal != null) {
+			utilisateur = encheresServiceUtilisateur.findUserByPseudo(principal.getName());
+			List<ArticleVendu> listeArticlesVendeur = encheresServiceArticlesVendus.rechercheConnecte(rechercheNom,
+					categorie, utilisateur, optionArticle, ventesEnCours, ventesTerminees, ventesNonDebutees,
+					encheresEnCours, encheresOuvertes, encheresGagnees);
+			model.addAttribute("listeArticles", listeArticlesVendeur);
+			return "index";
+		} else {
+			// Recherche Non connectée OK
+			List<ArticleVendu> listeArticlesCate = encheresServiceArticlesVendus.rechercheNonConnecte(rechercheNom,
+					categorie);
+			model.addAttribute("listeArticles", listeArticlesCate);
+			return "index";
+		}
 	}
 
-	
 	@GetMapping("/cloturer")
 	public String cloturerVente(Integer id, Principal principal) {
 		System.out.println("On entre dans la methode cloturer");

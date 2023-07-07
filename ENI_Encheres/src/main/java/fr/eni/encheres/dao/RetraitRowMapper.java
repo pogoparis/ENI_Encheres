@@ -8,16 +8,12 @@ import org.springframework.jdbc.core.RowMapper;
 import fr.eni.encheres.bo.Retrait;
 
 public class RetraitRowMapper implements RowMapper<Retrait> {
-	
+
 	EncheresDaoArticlesVendus encheresDaoArticlesVendus;
-	
-	
 
 	public RetraitRowMapper(EncheresDaoArticlesVendus encheresDaoArticlesVendus) {
 		this.encheresDaoArticlesVendus = encheresDaoArticlesVendus;
 	}
-
-
 
 	@Override
 	public Retrait mapRow(ResultSet rs, int rowNum) throws SQLException {
