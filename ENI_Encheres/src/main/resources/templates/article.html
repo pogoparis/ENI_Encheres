@@ -63,7 +63,11 @@
 				<input th:min="${article.getPrix_vente()+10}" th:max="${user.getCredit()}" step="10" type="number"
 					th:placeholder="${article.getPrix_vente()+10}" th:field="*{montant_enchere}">
 				<button type="submit" class="btn btn-primary">ENCHERIR</button>
+			<ul data-th-if="${param.mess}">
+			<span>Merci de renseigner une </span>
+			</ul>
 			</form>
+			
 		</div>
 	</div>
 	

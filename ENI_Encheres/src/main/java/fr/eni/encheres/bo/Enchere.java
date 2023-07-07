@@ -1,20 +1,17 @@
 package fr.eni.encheres.bo;
 
 import java.time.LocalDate;
-
 public class Enchere {
 
-	private LocalDate date_enchere ;
+	private LocalDate date_enchere;
 	private Integer montant_enchere;
 	private Utilisateur utilisateur;
 	private ArticleVendu article;
-	
-	
+
 	// Constructeur
 	public Enchere() {
 		// Pour Spring
 	}
-
 
 	public Enchere(LocalDate date_enchere, Integer montant_enchere, Utilisateur utilisateur, ArticleVendu article) {
 		super();
@@ -24,7 +21,6 @@ public class Enchere {
 		this.article = article;
 	}
 
-	
 	// GETTER SETTER
 	public LocalDate getDate_enchere() {
 		return date_enchere;
@@ -58,13 +54,10 @@ public class Enchere {
 		this.article = article;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Enchere [date_enchere=" + date_enchere + ", montant_enchere=" + montant_enchere + ", utilisateur="
 				+ utilisateur + ", article=" + article + "]";
 	}
-	
-	
-	
+
 }
