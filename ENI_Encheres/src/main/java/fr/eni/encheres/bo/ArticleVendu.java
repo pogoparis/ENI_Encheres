@@ -26,8 +26,6 @@ public class ArticleVendu {
 	private Integer prix_initial;
 	
 	private Integer prix_vente;
-	
-	@NotNull
 	private Categorie categorie;
 
 	private Utilisateur utilisateur;

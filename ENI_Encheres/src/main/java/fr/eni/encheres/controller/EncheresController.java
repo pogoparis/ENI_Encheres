@@ -67,6 +67,7 @@ public class EncheresController {
 	/************* AFFICHAGE CREATION ARTICLE ******************/
 	@GetMapping("/creerarticle")
 	public String creerArticle(@ModelAttribute ArticleVendu articleVendu, Principal principal, Model model) {
+		
 		model.addAttribute("categories", encheresServiceCategorie.findAllCategorie());
 		Retrait retrait = new Retrait();
 		encheresServiceRetrait.setRetraitParDefaut(retrait,
@@ -90,8 +91,10 @@ public class EncheresController {
 	public String creationArticle(@Valid @ModelAttribute ArticleVendu articleVendu, BindingResult result, @RequestParam("image") MultipartFile file,
 			@ModelAttribute Retrait retrait, Principal principal, Model model) throws IOException {
 	if(result.hasErrors()) {
+		model.addAttribute("categories", encheresServiceCategorie.findAllCategorie());
 		return("creerarticle");
 	}
+		
 		articleVendu.setUtilisateur(encheresServiceUtilisateur.findUserByPseudo(principal.getName()));
 		encheresServiceArticlesVendus.createArticle(articleVendu);
 		encheresServiceRetrait.createRetrait(retrait, articleVendu);
