@@ -148,6 +148,15 @@
 						</div>
 					</div>
 				</div>
+				
+				<div th:if="${utilisateur.getNo_utilisateur() != null}" hidden class="col-sm-5">
+						<div class="form-group">
+							<label for="confirmPassword" class="form-label mt-2">Confirmation Password</label>
+							<input type="password" class="form-control" id="confirmPassword" value="userconnecte" name="confirmPassword">
+							<span style="display:block; height: 40px" class="text-danger col-6">
+							</span>
+						</div>
+					</div>
 			
 				
 				<a  th:href="@{/delete(id=${utilisateur.no_utilisateur})}" data-th-if="${#authorization.expression('isAuthenticated()')}">Supprimer</a>

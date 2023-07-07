@@ -55,12 +55,18 @@ public class ConnectController {
 	public String register(@Valid @ModelAttribute Utilisateur utilisateur, BindingResult validationResult,
 			RedirectAttributes redirectAttributes, Principal principal,
 			@RequestParam("confirmPassword") String confirmation) {
+		
 
+		if(confirmation.equals("userconnecte") && principal != null) {
+		}else {
+		
 		if (!utilisateur.getMotDePasse().equals(confirmation)) {
 			validationResult.rejectValue("motDePasse", "confirmation.incorrecte",
 					"Les deux saisies doivent être identiques");
 			return "profil";
 		}
+		}
+		
 
 		if (principal != null) { // connecté
 
@@ -68,6 +74,7 @@ public class ConnectController {
 			String pseudoPrincipal = principal.getName();
 			String emailUser = utilisateur.getEmail();
 			String emailPrincipal = encheresServiceUtilisateur.findUserByPseudo(principal.getName()).getEmail();
+			
 
 			if ((!encheresServiceUtilisateur.isPseudoUnique(utilisateur.getPseudo()))
 					&& (!pseudoUser.equals(pseudoPrincipal)) && validationResult.hasErrors()) {
@@ -82,19 +89,21 @@ public class ConnectController {
 				System.out.println("if mail");
 				return "profil";
 			}
+			
 
 			encheresServiceUtilisateur.createUtilisateur(utilisateur);
 			return "redirect:/logout";
 
 		}
+		
 
 		else {
+			
 			if (!encheresServiceUtilisateur.isPseudoUnique(utilisateur.getPseudo())) {
 				validationResult.rejectValue("pseudo", "pseudo.alreadyTaken", "Le pseudo est déjà pris");
 				return "profil";
 
 			}
-
 			if (!encheresServiceUtilisateur.isMailUnique(utilisateur.getEmail())) {
 				validationResult.rejectValue("email", "email.alreadyTaken", "Ce mail est deja associé à un compte");
 				return "profil";
